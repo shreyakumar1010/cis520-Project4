@@ -1,68 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ARRAY_SIZE 8000000
-#define STRING_SIZE 16
+#define ARRAY_SIZE 1000000
 
-char char_array[ARRAY_SIZE][STRING_SIZE];
-int char_counts[26];
+const char * wiki;
 
-char getRandomChar()
+int longestline()
 {
-	int randNum = 0;
-	char randChar = ' ';
-
-	randNum = 26 * (rand() / (RAND_MAX + 1.0)); 	// pick number 0 < # < 25
-	randNum = randNum + 97;				// scale to 'a'
-	randChar = (char) randNum;
-
-	// printf("%c", randChar);
-	return randChar;
-}
-
-void init_arrays()
-{
-  int i, j, randNum; 
-  char randChar;
-
-  for ( i = 0; i < ARRAY_SIZE; i++) {
-	for ( j = 0; j < STRING_SIZE; j++ ) {
-		 char_array[i][j] = getRandomChar();
+	FILE *f = fopen("wiki_dump.txt", "r"); //open file
+	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
+	long size = ftell(f); //size is the total number of characters in the file
+	wiki = malloc(size +1); //allocating the string
+	fread(wiki, size, 1, f); //reading the file into wiki string
+	fclose(f);//closing the file
+	
+	int i = 0;
+	int temp = 0;
+	int count = 0;
+	while(i <= size) //while we aren't at the end of the string
+	{
+		temp ++; //increment the temp for each character
+		if(wiki[i] == '\n') //until you get a new line.
+		{
+			if(temp > count) //if the temp is higher than current count
+			{
+				count = temp;//set count to the temp
+			}
+			temp = 0; //since we've received a new line we need to reset temp
+		}
+		i++; //recursion
 	}
-  }
-
-  for ( i = 0; i < 26; i++ ) {
-  	char_counts[i] = 0;
-  }
+	return count;		
 }
 
-void count_array()
+
+main() 
 {
-  char theChar;
-  int i, j, charLoc;
-
-  for ( i = 0; i < ARRAY_SIZE; i++) {
-	for ( j = 0; j < STRING_SIZE; j++ ) {
-	         theChar = char_array[i][j];
-		 charLoc = ((int) theChar) - 97;
-		 char_counts[charLoc]++;
-	}
-  }
-}
-
-void print_results()
-{
-  int i, total = 0;
-
-  for ( i = 0; i < 26; i++ ) {
-     total += char_counts[i];
-     printf(" %c %d\n", (char) (i + 97), char_counts[i]);
-  }
-  printf("\nTotal characters:  %d\n", total);
-}
-
-main() {
-	init_arrays();
-	count_array();
-	print_results();
+	int num = longestline();
+	printf("%d", num);
 }
