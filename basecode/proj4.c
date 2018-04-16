@@ -3,37 +3,65 @@
 #include <string.h>
 #include <sys/time.h>
 
-
-
+#define WIKI_ARRAY_SIZE 1000000
+#define WIKI_LINE_SIZE 2003
 
 //load the lines into an array
+char wiki_array[WIKI_ARRAY_SIZE, WIKI_LINE_SIZE];
+
+struct timeval time1, time2;
+double elapsed;
+int numSlots, line_num, myVersion = 1; //what
+
+//implement main
+int main()
+{
+    //read file into mem
+    readToMemory();
+    
+    //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
+    for(int i = 0; i < WIKI_ARRAY_SIZE, i++)
+    {
+
+        gettimeofday(&time1, NULL);   
+        
+        string lognest = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
+        
+        gettimeofday(&time2, NULL);
 
 
+        elapsed = (time2.tv_sec - time1.tv_sec);
+        printf("DATA, %d, %s, %f\n", myVersion, getenv("NSLOTS"), elapsedTime); //this needs work
+    }
+    
+    
 
-//substring alg
-/*
-function LCSubstr(S[1..r], T[1..n])
-    L := array(1..r, 1..n)
-    z := 0
-    ret := {}
-    for i := 1..r
-        for j := 1..n
-            if S[i] == T[j]
-                if i == 1 or j == 1
-                    L[i,j] := 1
-                else
-                    L[i,j] := L[i-1,j-1] + 1
-                if L[i,j] > z
-                    z := L[i,j]
-                    ret := {S[i-z+1..i]}
-                else
-                if L[i,j] == z
-                    ret := ret ∪ {S[i-z+1..i]}
-            else
-                L[i,j] := 0
-    return ret
-    */
- string longestCommonSubstring(const string &str1, const string &str2)
+}
+
+void readToMemory()
+{
+    char *filename = "~dan/625/wiki_dump.txt";    
+    
+    FILE* file = fopen(fileName, "r"); /* should check the result */
+    
+
+    if(file == NULL) {
+        printf("fail");
+        return;
+      }
+
+      /* Read each wiki line into memory. */
+      int line_num = 0;
+      char * line = malloc(WIKI_STRING_SIZE);
+      while(fgets(line, WIKI_STRING_SIZE, file) != NULL) {
+          strcpy(wiki_array[line_num], line);
+          line_num++;
+      }
+      fclose(file);
+      free(line);
+}
+
+string longestCommonSubstring(const string &str1, const string &str2)
 {
   if(str1.empty() || str2.empty())
   {
@@ -84,5 +112,5 @@ function LCSubstr(S[1..r], T[1..n])
 }
     
 
-//print results
+
 
