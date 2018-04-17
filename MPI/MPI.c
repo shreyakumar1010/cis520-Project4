@@ -7,11 +7,13 @@ const char * wiki;
 
 int longestline()
 {
-	FILE *f = fopen("wiki_dump.txt", "r"); //open file
+	FILE *f = fopen("~/dan/625/wiki_dump.txt", "r"); //open file
+	printf("file opened");
 	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
 	long size = ftell(f); //size is the total number of characters in the file
 	wiki = malloc(size +1); //allocating the string
 	fread(wiki, size, 1, f); //reading the file into wiki string
+	printf("file read");
 	fclose(f);//closing the file
 	
 	int i = 0;
