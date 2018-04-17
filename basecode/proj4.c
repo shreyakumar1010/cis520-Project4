@@ -31,7 +31,7 @@ int main()
 
 
         elapsed = (time2.tv_sec - time1.tv_sec);
-        printf("DATA, %d, %s, %f\n", myVersion, getenv("NSLOTS"), elapsedTime); //this needs work
+        printf("DATA, %d, %s, %f\n", myVersion, getenv("NSLOTS"), elapsed); //this needs work
     }
     
     
