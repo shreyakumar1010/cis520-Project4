@@ -5,6 +5,7 @@
 
 int longestline()
 {
+	printf("hi");
 	FILE *f = fopen("~/dan/625/wiki_dump.txt", "r"); //open file
 	printf("file opened");
 	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
