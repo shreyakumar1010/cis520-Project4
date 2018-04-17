@@ -4,41 +4,46 @@
 #include <sys/time.h>
 
 #define WIKI_ARRAY_SIZE 1000000
-#define WIKI_LINE_SIZE 2000
+#define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
 char wiki_array[WIKI_ARRAY_SIZE, WIKI_LINE_SIZE];
 
-struct timeval time1, time2;
-double elapsed;
-int numSlots, line_num, myVersion = 1; //what
+char longestSubstring[WIKI_ARRAY_SIZE + 1, 500]; 
+
+
 
 //implement main
 int main()
 {
+    struct timeval time1, time2, time3, time4;
+    double elapsed;
+    int numSlots, line_num, myVersion = 1; //what
+    
     //read file into mem
     readToMemory();
+    gettimeofday(&time1, NULL); 
     
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     for(int i = 0; i < WIKI_ARRAY_SIZE, i++)
-    {
-
-        gettimeofday(&time1, NULL);   
+    {         
         
-        string lognest = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
+        string lognestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);        
         
-        gettimeofday(&time2, NULL);
+    }
+    
+    gettimeofday(&time2, NULL);
 
 
         elapsed = (time2.tv_sec - time1.tv_sec);
         printf("DATA, %d, %s, %f\n", myVersion, getenv("NSLOTS"), elapsed); //this needs work
-    }
+    
     
     
 
 }
 
-void readToMemory()
+bool readToMemory()
 {
     char *filename = "~dan/625/wiki_dump.txt";    
     
@@ -46,8 +51,8 @@ void readToMemory()
     
 
     if(file == NULL) {
-        printf("fail");
-        return;
+        printf("failed to open");
+        return false;
       }
 
       /* Read each wiki line into memory. */
@@ -59,7 +64,19 @@ void readToMemory()
       }
       fclose(file);
       free(line);
+    return true;
 }
+
+void printResults()
+{
+  for(int i=0; i <= 1000000, i++)
+  {
+      printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
+      printf("\n");
+  }
+}
+
+
 
 string longestCommonSubstring(const string &str1, const string &str2)
 {
