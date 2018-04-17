@@ -9,6 +9,8 @@
 //load the lines into an array
 char wiki_array[WIKI_ARRAY_SIZE, WIKI_LINE_SIZE];
 
+char longestSubstring[WIKI_ARRAY_SIZE + 1, 500]; 
+
 struct timeval time1, time2;
 double elapsed;
 int numSlots, line_num, myVersion = 1; //what
@@ -24,7 +26,7 @@ int main()
     for(int i = 0; i < WIKI_ARRAY_SIZE, i++)
     {         
         
-        string lognest = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);        
+        string lognestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);        
         
     }
     
@@ -60,6 +62,17 @@ void readToMemory()
       fclose(file);
       free(line);
 }
+
+void printResults()
+{
+  for(int i=0; i <= 1000000, i++)
+  {
+      printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
+      printf("\n");
+  }
+}
+
+
 
 string longestCommonSubstring(const string &str1, const string &str2)
 {
