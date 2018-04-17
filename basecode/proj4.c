@@ -11,13 +11,15 @@ char wiki_array[WIKI_ARRAY_SIZE, WIKI_LINE_SIZE];
 
 char longestSubstring[WIKI_ARRAY_SIZE + 1, 500]; 
 
-struct timeval time1, time2;
-double elapsed;
-int numSlots, line_num, myVersion = 1; //what
+
 
 //implement main
 int main()
 {
+    struct timeval time1, time2, time3, time4;
+    double elapsed;
+    int numSlots, line_num, myVersion = 1; //what
+    
     //read file into mem
     readToMemory();
     gettimeofday(&time1, NULL); 
@@ -37,10 +39,11 @@ int main()
         printf("DATA, %d, %s, %f\n", myVersion, getenv("NSLOTS"), elapsed); //this needs work
     
     
+    
 
 }
 
-void readToMemory()
+bool readToMemory()
 {
     char *filename = "~dan/625/wiki_dump.txt";    
     
@@ -48,8 +51,8 @@ void readToMemory()
     
 
     if(file == NULL) {
-        printf("fail");
-        return;
+        printf("failed to open");
+        return false;
       }
 
       /* Read each wiki line into memory. */
@@ -61,6 +64,7 @@ void readToMemory()
       }
       fclose(file);
       free(line);
+    return true;
 }
 
 void printResults()
