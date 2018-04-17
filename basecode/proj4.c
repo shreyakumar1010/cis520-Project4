@@ -4,7 +4,7 @@
 #include <sys/time.h>
 
 #define WIKI_ARRAY_SIZE 1000000
-#define WIKI_LINE_SIZE 2000
+#define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
 char wiki_array[WIKI_ARRAY_SIZE, WIKI_LINE_SIZE];
