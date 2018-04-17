@@ -23,7 +23,7 @@ int longestline()
 	printf("%d", size);
 	printf("\n");
 	
-	void * wiki = malloc(size +1); //allocating the string
+	char * wiki = malloc(size +1); //allocating the string
 	fread(wiki, size, 1, f); //reading the file into wiki string
 	printf("file read");
 	fclose(f);//closing the file
@@ -36,7 +36,7 @@ int longestline()
 	while(i <= size) //while we aren't at the end of the string
 	{
 		temp ++; //increment the temp for each character
-		if(wiki[i] == '\n') //until you get a new line.
+		if(&wiki[i] == '\n') //until you get a new line.
 		{
 			if(temp > count) //if the temp is higher than current count
 			{
