@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ARRAY_SIZE 8000000
+#define ARRAY_SIZE 1000000
 #define STRING_SIZE 16
 
 char char_array[ARRAY_SIZE][STRING_SIZE];

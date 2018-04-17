@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define ARRAY_SIZE 1000000
 
-const char * wiki_file;
+#define MAX_LINE_SIZE 2001 //after running the longestline function once we know this value.
+			   //we are hard coding it so we don't waste time counting again.
 
-int longestline()
+char wiki_array [ARRAY_SIZE] [MAX_LINE_SIZE];
+
+int longestline()//after using this, we know that the value is 2001. 
 {
-	printf("finding the longest line length \n");
-	FILE *f = fopen("~dan/625/wiki_dump.txt", "rb"); //open file
+	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r"); //open file
 	
 	if (f == NULL)
 	{
@@ -16,27 +19,25 @@ int longestline()
 		return -1;
 	}
 	
-	printf("file opened \n");
 	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
 	long size = ftell(f); //size is the total number of characters in the file
-	printf("total chars in file is : ");
-	printf("%d", size);
-	printf("\n");
-	
+	//printf("total chars in file is : ");
+	//printf("%d", size);
+	//printf("\n");
+	rewind(f);
+
 	char * wiki = malloc(size +1); //allocating the string
-	fread(wiki, size, 1, f); //reading the file into wiki string
-	printf("file read");
+	fread(wiki, sizeof(char), size, f); //reading the file into wiki string
+	//printf("file read \n");
 	fclose(f);//closing the file
-	
-	wiki_file = wiki;
 	
 	int i = 0;
 	int temp = 0;
 	int count = 0;
 	while(i <= size) //while we aren't at the end of the string
 	{
-		temp ++; //increment the temp for each character
-		if(&wiki[i] == '\n') //until you get a new line.
+		temp = temp +1; //increment the temp for each character
+		if((char) wiki[i] == '\n') //until you get a new line.
 		{
 			if(temp > count) //if the temp is higher than current count
 			{
@@ -49,9 +50,57 @@ int longestline()
 	return count;		
 }
 
+bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
+{
+	char c;
+	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	if(f == NULL)
+	{
+		printf("failed to open file \n");
+		return (false); 
+	}
+
+	rewind(f);
+	int i, j = 0;
+	while(!feof(f))
+	{
+		c = fgetc;
+		wiki_array[i][j]= c;
+		j++;
+		printf("%c", c);
+		if(c == '\n')
+		{
+			i++;
+			j = 0;
+		printf("newline\n");
+		}
+	}
+
+	return (true);
+}
+
+char compare_lines(int start)
+{
+	char lineA[MAX_LINE_SIZE];
+	char lineB[MAX_LINE_SIZE];
+}
+
 
 main() 
 {
-	int num = longestline();
-	printf("%d", num);
+	bool success = read_wiki();
+	
+	printf("finished reading");
+
+	int i = 0;
+	while(i<6000)
+	{
+		if(wiki_array[i] == '\n')
+			printf("\n");
+		else
+			printf("%c", wiki_array[i]);
+		i++;
+	}	
+
+	
 }
