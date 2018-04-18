@@ -12,7 +12,7 @@ char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
 char longestSubstring[WIKI_ARRAY_SIZE + 1] [500]; 
 
 bool readToMemory();
-char * longestCommonSubstring(const char * str1, const char * str2);
+char* longestCommonSubstring(char* X, char* Y)
 
 int main()
 {
