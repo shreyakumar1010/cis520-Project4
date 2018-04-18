@@ -12,37 +12,25 @@ char wiki_array [ARRAY_SIZE] [MAX_LINE_SIZE];
 int longestline()//after using this, we know that the value is 2001. 
 {
 	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r"); //open file
-	
 	if (f == NULL)
 	{
 		printf("failed to open \n");
 		return -1;
 	}
-	
 	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
 	long size = ftell(f); //size is the total number of characters in the file
-	//printf("total chars in file is : ");
-	//printf("%d", size);
-	//printf("\n");
 	rewind(f);
-
 	char * wiki = malloc(size +1); //allocating the string
 	fread(wiki, sizeof(char), size, f); //reading the file into wiki string
-	//printf("file read \n");
 	fclose(f);//closing the file
-	
-	int i = 0;
-	int temp = 0;
-	int count = 0;
+	int i, temp, count = 0;
 	while(i <= size) //while we aren't at the end of the string
 	{
 		temp = temp +1; //increment the temp for each character
 		if((char) wiki[i] == '\n') //until you get a new line.
 		{
 			if(temp > count) //if the temp is higher than current count
-			{
 				count = temp;//set count to the temp
-			}
 			temp = 0; //since we've received a new line we need to reset temp
 		}
 		i++; //recursion
@@ -59,12 +47,11 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 		printf("failed to open file \n");
 		return (false); 
 	}
-
 	rewind(f);
 	int i, j = 0;
 	while(!feof(f))
 	{
-		c = fgetc;
+		c = (char) fgetc;
 		wiki_array[i][j]= c;
 		j++;
 		printf("%c", c);
@@ -72,10 +59,9 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 		{
 			i++;
 			j = 0;
-		printf("newline\n");
+			printf("newline");
 		}
 	}
-
 	return (true);
 }
 
@@ -89,7 +75,6 @@ char compare_lines(int start)
 main() 
 {
 	bool success = read_wiki();
-	
 	printf("finished reading");
 
 	int i = 0;
