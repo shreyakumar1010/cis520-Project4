@@ -12,7 +12,7 @@ char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
 char longestSubstring[WIKI_ARRAY_SIZE + 1] [500]; 
 
 bool readToMemory();
-char * longestCommonSubstring(char * str1, char * str2);
+string longestCommonSubstring(string str1, string str2);
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     for(int i = 0; i < WIKI_ARRAY_SIZE; i++)  
     {
-         char* temp = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
+         string temp = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
          strcpy(longestSubstring[i] , temp);
     }   
      
