@@ -11,6 +11,8 @@
 char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
 char longestSubstring[WIKI_ARRAY_SIZE + 1] [500]; 
 
+bool readToMemory();
+
 int main()
 {
     struct timeval time1, time2, time3, time4;
