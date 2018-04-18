@@ -67,8 +67,7 @@ void printResults()
 
 char * longestCommonSubstring(char * str1, char * str2)
 {
-  if(str1.empty() || str2.empty())
-        return 0;
+
   int *curr = new int [str2.size()];
   int *prev = new int [str2.size()];
   int *swap = NULL;
