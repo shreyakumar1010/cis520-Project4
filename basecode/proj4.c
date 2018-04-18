@@ -38,8 +38,8 @@ bool readToMemory()
     }
     /* Read each wiki line into memory. */
     int line_num = 0;
-    char * line = malloc(WIKI_STRING_SIZE);
-    while(fgets(line, WIKI_STRING_SIZE, file) != NULL) 
+    char * line = malloc(WIKI_LINE_SIZE);
+    while(fgets(line, WIKI_LINE_SIZE, file) != NULL) 
     {
           strcpy(wiki_array[line_num], line);
           line_num++;
@@ -51,14 +51,14 @@ bool readToMemory()
 
 void printResults()
 {
-  for(int i=0; i <= 1000000, i++)
+  for(int i=0; i <= 1000000; i++)
   {
       printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
       printf("\n");
   }
 }
 
-string longestCommonSubstring(const string &str1, const string &str2)
+char * longestCommonSubstring(const char * str1, const char * str2)
 {
   if(str1.empty() || str2.empty())
         return 0;
