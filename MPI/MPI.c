@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define ARRAY_SIZE 1000000
 
@@ -52,23 +53,46 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 	while(!feof(f))
 	{
 		c = (char) fgetc;
-		wiki_array[i][j]= c;
-		j++;
-		printf("%c", c);
-		if(c == '\n')
+		if(c == '\n' || c == '\r')
 		{
 			i++;
 			j = 0;
-			printf("newline");
+			printf("\n");
 		}
+		else 
+		{
+			wiki_array[i][j] = c;
+			printf("%c", c);
+		}
+		j++;
 	}
 	return (true);
 }
 
-char compare_lines(int start)
+char * compare_lines(int start)
 {
-	char lineA[MAX_LINE_SIZE];
-	char lineB[MAX_LINE_SIZE];
+	char * lineA[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
+	char * lineB[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
+	lineA = wiki_array[start][0];
+	lineB = wiki_array[start+1][0];
+	
+	char * common[MAXLINESIZE] = malloc(MAX_LINE_SIZE);
+	
+	for(int i = 0; i < MAX_LINE_SIZE; i++)
+	{
+		int j = 0;
+		while(j < MAX_LINE_SIZE)
+		{
+			int k = 0;
+			if(lineA[i] == lineB[j])
+			{
+				common[k]= lineB[j];
+				k++;
+				printf("%c", common[k]);
+			}
+			j++;
+		}
+	}
 }
 
 
@@ -76,16 +100,6 @@ main()
 {
 	bool success = read_wiki();
 	printf("finished reading");
-
-	int i = 0;
-	while(i<6000)
-	{
-		if(wiki_array[i] == '\n')
-			printf("\n");
-		else
-			printf("%c", wiki_array[i]);
-		i++;
-	}	
 
 	
 }
