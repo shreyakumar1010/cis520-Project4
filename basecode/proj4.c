@@ -58,7 +58,7 @@ void printResults()
   }
 }
 
-char * longestCommonSubstring(const char * str1, const char * str2)
+char * longestCommonSubstring(char * str1, char * str2)
 {
   if(str1.empty() || str2.empty())
         return 0;
