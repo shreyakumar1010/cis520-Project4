@@ -65,7 +65,7 @@ void printResults()
   }
 }
 
-char * longestCommonSubstring(char * str1, char * str2)
+string longestCommonSubstring(string str1, string str2)
 {
 
   int *curr = new int [str2.size()];
