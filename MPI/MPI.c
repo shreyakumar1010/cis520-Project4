@@ -81,14 +81,18 @@ char * compare_lines(int start)
 	for(int i = 0; i < MAX_LINE_SIZE; i++)
 	{
 		int j = 0;
-		while(j < MAX_LINE_SIZE)
+		while(j < MAX_LINE_SIZE)//look at each value in lineA compared to each value in lineB
 		{
 			int k = 0;
-			if(lineA[i] == lineB[j])
+			if(lineA[i] == lineB[j])//if there's a match
 			{
-				common[k]= lineB[j];
-				k++;
+				common[k]= lineB[j];//store it
+				k++;//increment k to store next val if it matches
 				printf("%c", common[k]);
+			}
+			else//if the next char isn't a match, reset k to 0 so we can overwrite the stored val
+			{
+				k = 0;
 			}
 			j++;
 		}
