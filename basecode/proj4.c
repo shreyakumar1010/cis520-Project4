@@ -72,7 +72,7 @@ char * longestCommonSubstring(const char * str1, const char * str2)
   int *prev = new int [str2.size()];
   int *swap = NULL;
   int maxSubstr = 0;
-  string longest;
+  char * longest;
   for(unsigned int i = 0; i < str1.size(); ++i)
   {
     for(unsigned int j = 0; j < str2.size(); ++j)
