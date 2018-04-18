@@ -21,7 +21,7 @@ int main()
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     for(int i = 0; i < WIKI_ARRAY_SIZE; i++)         
-        char * longestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);          
+        longestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);          
     gettimeofday(&time2, NULL);
     elapsed = (time2.tv_sec - time1.tv_sec);
     printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
