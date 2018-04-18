@@ -17,11 +17,11 @@ int main()
     double elapsed;
     int numSlots, line_num, Version = 1; //what
     //read file into mem
-    readToMemory();
+    bool success = readToMemory();
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
-    for(int i = 0; i < WIKI_ARRAY_SIZE, i++)         
-        string lognestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);          
+    for(int i = 0; i < WIKI_ARRAY_SIZE; i++)         
+        char * longestSubString[i] = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);          
     gettimeofday(&time2, NULL);
     elapsed = (time2.tv_sec - time1.tv_sec);
     printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
@@ -29,8 +29,8 @@ int main()
 
 bool readToMemory()
 {
-    char *filename = "~dan/625/wiki_dump.txt";    
-    FILE* file = fopen(fileName, "r"); /* should check the result */
+    char * filename = "~dan/625/wiki_dump.txt";    
+    FILE * file = fopen(fileName, "r"); /* should check the result */
     if(file == NULL) 
     {
         printf("failed to open");
