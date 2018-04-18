@@ -30,7 +30,7 @@ int main()
 bool readToMemory()
 {
     char * filename = "~dan/625/wiki_dump.txt";    
-    FILE * file = fopen(fileName, "r"); /* should check the result */
+    FILE * file = fopen(filename, "r"); /* should check the result */
     if(file == NULL) 
     {
         printf("failed to open");
