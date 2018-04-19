@@ -23,7 +23,8 @@ int main()
     bool success = readToMemory();
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
-    for(int i = 0; i < WIKI_ARRAY_SIZE; i++)  
+    int i;
+    for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     {
          char * temp = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
          strcpy(longestSubstring[i] , temp);
