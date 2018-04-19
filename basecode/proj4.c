@@ -58,8 +58,8 @@ bool readToMemory()
 }
 
 void printResults()
-{
-  for(int i=0; i <= 1000000; i++)
+{ int i;
+  for(i=0; i <= 1000000; i++)
   {
       printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
       printf("\n");
@@ -88,8 +88,9 @@ char* longestCommonSubstring(char* X, char* Y)
  
     /* Following steps build LCSuff[m+1][n+1] in bottom
        up fashion. */
-    for (int i = 0; i <= m; i++) {
-        for (int j = 0; j <= n; j++) {
+    int i,j;
+    for ( i = 0; i <= m; i++) {
+        for ( j = 0; j <= n; j++) {
             if (i == 0 || j == 0)
                 LCSuff[i][j] = 0;
  
