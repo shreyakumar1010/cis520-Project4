@@ -57,26 +57,23 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 		{
 			i++;
 			j = 0;
-			printf("\n");
 		}
 		else 
 		{
 			wiki_array[i][j] = (char) c;
-			printf("%c", (char) c);
 		}
 		j++;
 	}
 	fclose(f);
 	return (true);
 }
-/*
+
 char * compare_lines(int start)
 {
-	char lineA[MAX_LINE_SIZE];
-	lineA = wiki_array [start];
-	char lineB[MAX_LINE_SIZE];
-	lineB = wiki_array [start+1];
+	char * lineA = &wiki_array [start][0];
+	char * lineB = &wiki_array [start+1][0];
 	bool matches = false;
+	int size = 0;
 	
 	char common[MAX_LINE_SIZE];
 	char longest[MAX_LINE_SIZE];
@@ -96,6 +93,7 @@ char * compare_lines(int start)
 			if(matches == true)
 			{
 				common[k] = lineB[j];
+				size ++;
 				i++;
 				k++;
 			}
@@ -103,7 +101,6 @@ char * compare_lines(int start)
 	}
 	return (&common);
 }
-*/
 
 main() 
 {
