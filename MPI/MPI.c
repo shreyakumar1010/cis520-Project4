@@ -39,7 +39,7 @@ int longestline()//after using this, we know that the value is 2001.
 	return count;		
 }
 
-bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
+bool read_wiki()
 {
 	int c;
 	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
