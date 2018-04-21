@@ -107,13 +107,17 @@ char * compare_lines(int start)
 			}
 		}
 	}
-	return (common);
+	for(i = 0; i < size2; i++)
+		printf("%c", (char) longest[i]); 
+	return (longest);
 }
 
 main() 
 {
 	bool success = read_wiki();
-	printf("finished reading");
+	printf("finished reading \n");
+	
+	comparelines(0);
 
 	
 }
