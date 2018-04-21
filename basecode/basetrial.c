@@ -69,9 +69,9 @@ void printResults()
   }
 }
 
- int **_matrix;
- int _matrix_row_size = 0;
- int _matrix_collumn_size = 0;
+ static int **_matrix;
+ static int _matrix_row_size = 0;
+ static int _matrix_collumn_size = 0;
 
 
 static void init(int s1_length, int s2_length){
