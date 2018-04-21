@@ -95,7 +95,10 @@ char * compare_lines(int start)
 						longest[l] = common[l]; //store it as our longest string
 					i = i - size1; //reset i 
 					size2 = size1; //store length of our longest string
-					
+					printf("We have found a matching string : ");
+					for(i = 0; i < size2; i++)
+						printf("%c", (char) longest[i]); 
+					printf("\n");
 				}
 			}
 			if(matches == true)
