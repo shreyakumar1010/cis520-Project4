@@ -91,7 +91,8 @@ char * compare_lines(int start)
 				k = 0; //reset k to 0 so we can overwrite the stored value
 				if(size1 > 0 && size1 > size2)//we've received a full matching string & its longer than our previous
 				{
-					longest = common; //store it as our longest string
+					for(int l = 0; l < size1; l++)
+						longest[l] = common[l]; //store it as our longest string
 					i = i - size1; //reset i 
 					size2 = size1; //store length of our longest string
 					
