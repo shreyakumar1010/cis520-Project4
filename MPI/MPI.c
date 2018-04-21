@@ -75,26 +75,30 @@ char * compare_lines(int start)
 	char * lineB[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
 	lineA = wiki_array[start][0];
 	lineB = wiki_array[start+1][0];
+	bool matches = false;
 	
-	char * common[MAXLINESIZE] = malloc(MAX_LINE_SIZE);
+	char * common[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
+	char * longest[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE];
 	
 	for(int i = 0; i < MAX_LINE_SIZE; i++)
 	{
+		int k = 0;
 		int j = 0;
-		while(j < MAX_LINE_SIZE)//look at each value in lineA compared to each value in lineB
+		for(int j = 0; < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
 		{
-			int k = 0;
 			if(lineA[i] == lineB[j])//if there's a match
+				matches = true;
+			else //if the next char isn't a match, reset k to 0 so we can overwrite the stored val
 			{
-				common[k]= lineB[j];//store it
-				k++;//increment k to store next val if it matches
-				printf("%c", common[k]);
-			}
-			else//if the next char isn't a match, reset k to 0 so we can overwrite the stored val
-			{
+				matches = false;
 				k = 0;
 			}
-			j++;
+			if(matches == true)
+			{
+				common[k] = lineB[j];
+				i++;
+				k++;
+			}
 		}
 	}
 }
