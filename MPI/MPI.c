@@ -61,11 +61,12 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 		}
 		else 
 		{
-			wiki_array[i][j] = c;
-			printf("%d", c);
+			wiki_array[i][j] = (char) c;
+			printf("%c", (char) c);
 		}
 		j++;
 	}
+	fclose(f);
 	return (true);
 }
 /*
