@@ -68,7 +68,7 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 	}
 	return (true);
 }
-
+/*
 char * compare_lines(int start)
 {
 	char lineA[MAX_LINE_SIZE];
@@ -102,7 +102,7 @@ char * compare_lines(int start)
 	}
 	return (&common);
 }
-
+*/
 
 main() 
 {
