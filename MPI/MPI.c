@@ -73,7 +73,7 @@ char * compare_lines(int start)
 	char * lineA = &wiki_array [start][0];
 	char * lineB = &wiki_array [start+1][0];
 	bool matches = false;
-	int size = 0;
+	int size1, size2 = 0;
 	
 	char common[MAX_LINE_SIZE];
 	char longest[MAX_LINE_SIZE];
@@ -85,17 +85,24 @@ char * compare_lines(int start)
 		{
 			if(lineA[i] == lineB[j])//if there's a match
 				matches = true;
-			else //if the next char isn't a match, reset k to 0 so we can overwrite the stored val
+			else //if the next char isn't a match
 			{
-				matches = false;
-				k = 0;
+				matches = false; //set flag that it doesn't match
+				k = 0; //reset k to 0 so we can overwrite the stored value
+				if(size1 > 0 && size1 > size2)//we've received a full matching string & its longer than our previous
+				{
+					longest = common; //store it as our longest string
+					i = i - size1; //reset i 
+					size2 = size1; //store length of our longest string
+					
+				}
 			}
 			if(matches == true)
 			{
-				common[k] = lineB[j];
-				size ++;
-				i++;
-				k++;
+				common[k] = lineB[j]; //store the common char
+				size1 ++; //increment the size of the current string
+				i++; //increment i so we can look at next value
+				k++; //increment k so we can store next value
 			}
 		}
 	}
