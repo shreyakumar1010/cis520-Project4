@@ -70,6 +70,12 @@ bool read_wiki()
 
 char * compare_lines(int start)
 {
+	printf("Comparing lines ");
+	printf("%d", start);
+	printf(" and ");
+	printf("%d", start+1);
+	printf("\n");
+	
 	char * lineA = &wiki_array [start][0];
 	char * lineB = &wiki_array [start+1][0];
 	bool matches = false;
@@ -86,18 +92,18 @@ char * compare_lines(int start)
 			if(lineA[i] == lineB[j])//if there's a match
 				matches = true;
 			else //if the char isn't a match
-			{
+			{ 
 				matches = false; //set flag that it doesn't match
 				k = 0; //reset k to 0 so we can overwrite the stored value
 				if(size1 > 0 && size1 > size2)//we've received a full matching string & its longer than our previous
 				{
+					printf("We have found a matching string : ");
 					for(l = 0; l < size1; l++)
 						longest[l] = common[l]; //store it as our longest string
 					i = i - size1; //reset i 
 					size2 = size1; //store length of our longest string
-					printf("We have found a matching string : ");
-					for(i = 0; i < size2; i++)
-						printf("%c", (char) longest[i]); 
+					for(l = 0; l < size2; l++)
+						printf("%c", (char) longest[l]); 
 					printf("\n");
 				}
 			}
@@ -107,12 +113,11 @@ char * compare_lines(int start)
 				size1 ++; //increment the size of the current string
 				i++; //increment i so we can look at next value
 				k++; //increment k so we can store next value
-				printf("%c", (char) common[k]);
 			}
 		}
 	}
-	for(i = 0; i < size2; i++)
-		printf("%c", (char) longest[i]); 
+	//for(i = 0; i < size2; i++)
+	//	printf("%c", (char) longest[i]); 
 	return (longest);
 }
 
