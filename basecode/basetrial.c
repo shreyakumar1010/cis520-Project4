@@ -28,9 +28,9 @@ int main()
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
-         
-          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&longestSubstring[i]);
-          //strcpy(longestSubstring[i] , temp);
+          char* temp = longestSubstring[i];
+          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
+          strcpy(longestSubstring[i] , temp);
     }   
      
     gettimeofday(&time2, NULL);
