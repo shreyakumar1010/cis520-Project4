@@ -117,7 +117,7 @@ main()
 	bool success = read_wiki();
 	printf("finished reading \n");
 	
-	comparelines(0);
+	compare_lines(0);
 
 	
 }
