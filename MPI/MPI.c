@@ -99,7 +99,7 @@ char * compare_lines(int start)
 				if(size1 > 0)//we've received a full matching substring
 				{ 
 					printf("We have found a matching substring : ");
-					for(l = 0; l < size1; l++
+					for(l = 0; l < size1; l++)
 					    printf("%c", (char) common[l]);
 					printf("\n"); 
 					    
