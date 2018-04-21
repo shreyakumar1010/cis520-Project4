@@ -9,7 +9,7 @@
 
 //load the lines into an array
  char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
- char longestSubstring[WIKI_ARRAY_SIZE + 1] [200] ; 
+ char longestSubstring[WIKI_ARRAY_SIZE + 1] [5] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
 
 bool readToMemory();
