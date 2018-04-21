@@ -68,7 +68,7 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 	return (true);
 }
 
-char compare_lines(int start)
+char * compare_lines(int start)
 {
 	char * lineA = &wiki_array [start][0];
 	char * lineB = &wiki_array [start+1][0];
