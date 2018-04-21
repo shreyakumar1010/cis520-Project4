@@ -8,7 +8,7 @@
 #define MAX_LINE_SIZE 2001 //after running the longestline function once we know this value.
 			   //we are hard coding it so we don't waste time counting again.
 
-char wiki_array [ARRAY_SIZE] [MAX_LINE_SIZE];
+char wiki_array [ARRAY_SIZE][MAX_LINE_SIZE];
 
 int longestline()//after using this, we know that the value is 2001. 
 {
@@ -72,9 +72,9 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 char * compare_lines(int start)
 {
 	char lineA[MAX_LINE_SIZE];
-	lineA = wiki_array [start][0];
+	lineA = wiki_array [start];
 	char lineB[MAX_LINE_SIZE];
-	lineB = wiki_array [start+1][0];
+	lineB = wiki_array [start+1];
 	bool matches = false;
 	
 	char common[MAX_LINE_SIZE];
