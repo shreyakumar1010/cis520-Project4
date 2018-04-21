@@ -52,7 +52,7 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 	int i, j = 0;
 	while(!feof(f))
 	{
-		c = fgetc;
+		c = fgetc(f);
 		if(c == '\n' || c == '\r')
 		{
 			i++;
