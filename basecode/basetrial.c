@@ -8,9 +8,9 @@
 #define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
-char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
-char longestSubstring[WIKI_ARRAY_SIZE + 1] [500] = { NULL }; 
-int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
+static char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
+static char longestSubstring[WIKI_ARRAY_SIZE + 1] [500] = { NULL }; 
+static int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
@@ -28,14 +28,14 @@ int main()
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
-          char* temp = longestSubstring[i];
+          char* temp;
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
           strcpy(longestSubstring[i] , temp);
     }   
      
-    gettimeofday(&time2, NULL);
-    elapsed = (time2.tv_sec - time1.tv_sec);
-    printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
+    //gettimeofday(&time2, NULL);
+    //elapsed = (time2.tv_sec - time1.tv_sec);
+    //printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
 }
 
 bool readToMemory()
