@@ -8,9 +8,9 @@
 #define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
-static char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
-static char longestSubstring[WIKI_ARRAY_SIZE + 1] [500] = { NULL }; 
-static int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
+ char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
+ char longestSubstring[WIKI_ARRAY_SIZE + 1] [500] ; 
+ int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
