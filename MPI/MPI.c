@@ -85,7 +85,7 @@ char * compare_lines(int start)
 		{
 			if(lineA[i] == lineB[j])//if there's a match
 				matches = true;
-			else //if the next char isn't a match
+			else //if the char isn't a match
 			{
 				matches = false; //set flag that it doesn't match
 				k = 0; //reset k to 0 so we can overwrite the stored value
@@ -107,6 +107,7 @@ char * compare_lines(int start)
 				size1 ++; //increment the size of the current string
 				i++; //increment i so we can look at next value
 				k++; //increment k so we can store next value
+				printf("%c", (char) common[k]);
 			}
 		}
 	}
