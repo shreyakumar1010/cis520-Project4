@@ -71,20 +71,17 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 
 char * compare_lines(int start)
 {
-	char * lineA[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
-	char * lineB[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
-	lineA = wiki_array[start][0];
-	lineB = wiki_array[start+1][0];
+	char * lineA[MAX_LINE_SIZE] = wiki_array [start][0];
+	char * lineB[MAX_LINE_SIZE] = wiki_array [start+1][0];
 	bool matches = false;
 	
-	char * common[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE);
-	char * longest[MAX_LINE_SIZE] = malloc(MAX_LINE_SIZE];
-	
-	for(int i = 0; i < MAX_LINE_SIZE; i++)
+	char * common[MAX_LINE_SIZE];
+	char * longest[MAX_LINE_SIZE];
+	int i, j, k;
+	for(i = 0; i < MAX_LINE_SIZE; i++)
 	{
-		int k = 0;
-		int j = 0;
-		for(int j = 0; < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
+		k = 0;
+		for(j = 0; j < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
 		{
 			if(lineA[i] == lineB[j])//if there's a match
 				matches = true;
