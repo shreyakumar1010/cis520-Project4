@@ -41,7 +41,7 @@ int longestline()//after using this, we know that the value is 2001.
 
 bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 {
-	char c;
+	int c;
 	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	if(f == NULL)
 	{
@@ -52,7 +52,7 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 	int i, j = 0;
 	while(!feof(f))
 	{
-		c = (char) fgetc;
+		c = fgetc;
 		if(c == '\n' || c == '\r')
 		{
 			i++;
@@ -62,7 +62,7 @@ bool read_wiki()//currently prints all ?'s. something must be wrong. duh.
 		else 
 		{
 			wiki_array[i][j] = c;
-			printf("%c", c);
+			printf("%d", c);
 		}
 		j++;
 	}
