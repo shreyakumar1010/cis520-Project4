@@ -15,16 +15,6 @@ int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
 
-int main(int argc, char *argv[]){
-    char *s1 = "abcdefg";
-    char *s2 = "cde";
-
-    char *lala;
-    printf("%d\n", LCS(s1, s2, &lala));
-
-    return 0;
-}
-
 
 int main()
 {
