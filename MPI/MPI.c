@@ -84,9 +84,10 @@ char * compare_lines(int start)
 	char common[MAX_LINE_SIZE];
 	char longest[MAX_LINE_SIZE];
 	int i, j, k, l;
+	int lasti = 0;
+	k = 0;
 	for(i = 0; i < MAX_LINE_SIZE; i++)
 	{
-		k = 0;
 		for(j = 0; j < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
 		{
 			if(lineA[i] == lineB[j])//if there's a match
@@ -95,20 +96,34 @@ char * compare_lines(int start)
 			{ 
 				matches = false; //set flag that it doesn't match
 				k = 0; //reset k to 0 so we can overwrite the stored value
-				if(size1 > 0 && size1 > size2)//we've received a full matching string & its longer than our previous
-				{
-					printf("We have found a matching string : ");
-					for(l = 0; l < size1; l++)
-						longest[l] = common[l]; //store it as our longest string
-					i = i - size1; //reset i 
-					size2 = size1; //store length of our longest string
-					for(l = 0; l < size2; l++)
-						printf("%c", (char) longest[l]); 
-					printf("\n");
+				if(size1 > 0)//we've received a full matching substring
+				{ 
+					printf("We have found a matching substring : ");
+					for(l = 0; l < size1; l++
+					    printf("%c", (char) common[l]);
+					printf("\n"); 
+					    
+					i = i - lasti; //reset i  
+					lasti = 0; //reset lasti    
+		
+					if(size1 > size2)// its longer than our previous
+					{
+						size2 = size1; //store the length of our longest string
+						printf("\n");
+						printf("WE HAVE A NEW LONGEST SUBSTRING : \n");
+						for(l = 0; l < size2; l++);
+						{
+							longest[l] = common[l];
+							printf("%c", (char) longest[l]);
+						}
+						printf("\n");printf("\n");
+					}
+					size1 = 0; //reset size 1
 				}
 			}
 			if(matches == true)
 			{
+				lasti ++; //how many times we have incremented i in a row
 				common[k] = lineB[j]; //store the common char
 				size1 ++; //increment the size of the current string
 				i++; //increment i so we can look at next value
@@ -116,6 +131,7 @@ char * compare_lines(int start)
 			}
 		}
 	}
+	printf("Finished \n");
 	//for(i = 0; i < size2; i++)
 	//	printf("%c", (char) longest[i]); 
 	return (longest);
