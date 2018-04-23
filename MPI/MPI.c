@@ -41,8 +41,8 @@ int longestline()//after using this, we know that the value is 2001.
 
 bool init_wiki_array()
 {
-	int i, int j;
-	for(i = 0; i < ARRAY_SIZE)
+	int i, j;
+	for(i = 0; i < ARRAY_SIZE; i++)
 	{
 		for(j = 0; j < MAX_LINE_SIZE; j++);
 			wiki_array[i][j] = '\0';
