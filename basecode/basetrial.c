@@ -4,12 +4,12 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
-#define WIKI_ARRAY_SIZE 1000000
+#define WIKI_ARRAY_SIZE 10
 #define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
  char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
- char longestSubstring[WIKI_ARRAY_SIZE + 1] [5] ; 
+ char longestSubstring[WIKI_ARRAY_SIZE + 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
 
 bool readToMemory();
@@ -62,7 +62,7 @@ bool readToMemory()
 
 void printResults()
 { int i;
-  for(i=0; i <= 1000000; i++)
+  for(i=0; i <= WIKI_ARRAY_SIZE + 1; i++)
   {
       printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
       printf("\n");
