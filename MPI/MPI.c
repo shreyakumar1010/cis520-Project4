@@ -47,6 +47,7 @@ bool init_wiki_array()
 		for(j = 0; j < MAX_LINE_SIZE; j++);
 			wiki_array[i][j] = '\0';
 	}
+	return true;
 }
 
 bool read_wiki()
