@@ -24,7 +24,7 @@ int main()
     printf("in main after timing vars");
     //read file into mem
     bool success = readToMemory();
-    printf("in main after Read);
+    printf("in main after Read");
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     int i;
