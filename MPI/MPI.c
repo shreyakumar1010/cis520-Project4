@@ -155,7 +155,7 @@ main()
 	printf("finished reading \n");
 	
 	
-	//compare_lines(0);
+	compare_lines(0);
 
 	
 }
