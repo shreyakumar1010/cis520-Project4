@@ -158,7 +158,7 @@ main()
 	printf("finished reading \n");
 	
 	
-	compare_lines(0);
+	char * commonstring = compare_lines(0);
 
 	
 }
