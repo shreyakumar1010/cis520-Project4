@@ -61,7 +61,7 @@ bool readToMemory()
 	  wiki_array[i] = malloc(2001);
 	}
 
-	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/basecode/sampletext.txt", "r");
 	nlines = -1;
 	do {
 	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
