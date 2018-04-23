@@ -40,7 +40,7 @@ int main()
 
 bool readToMemory()
 {
-    char * filename = "~dan/625/wiki_dump.txt";    
+    char * filename = "/homes/dan/625/wiki_dump.txt";    
     FILE * file = fopen(filename, "r"); /* should check the result */
     if(file == NULL) 
     {
