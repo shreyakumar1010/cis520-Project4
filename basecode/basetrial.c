@@ -21,8 +21,10 @@ int main()
     struct timeval time1, time2, time3, time4;
     double elapsed;
     int numSlots, line_num, Version = 1; //what
+    printf("in main after timing vars");
     //read file into mem
     bool success = readToMemory();
+    printf("in main after Read);
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     int i;
@@ -40,7 +42,8 @@ int main()
 
 bool readToMemory()
 {
-    char * filename = "/homes/dan/625/wiki_dump.txt";    
+    char * filename = "/homes/dan/625/wiki_dump.txt";  
+    printf("before fopen");
     FILE * file = fopen(filename, "r"); /* should check the result */
     if(file == NULL) 
     {
