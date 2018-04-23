@@ -8,9 +8,18 @@
 #define WIKI_LINE_SIZE 10
 
 //load the lines into an array
- char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
+ char  **wiki_array;
  char longestSubstring[WIKI_ARRAY_SIZE + 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
+ FILE *fd;
+
+//Adding malloc for space
+wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+int i;
+for (i; i < WIKI_ARRAY_SIZE; i++)
+{
+  wiki_array[i] = malloc(2001);
+}
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
