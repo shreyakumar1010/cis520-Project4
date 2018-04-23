@@ -61,68 +61,28 @@ int main()
 }
 
 bool readToMemory()
-{ /*
-    char * filename = "/homes/dan/625/wiki_dump.txt";  
-    printf("before fopen");
-    FILE * file = fopen(filename, "r");
-    if(file == NULL) 
-    {
-        printf("failed to open");
-        return false;
-    }
-     
-    int line_num = 0;
-    char * line = malloc(WIKI_LINE_SIZE);
-    while(fgets(line, WIKI_LINE_SIZE, file) != NULL) 
-    {
-          strcpy(wiki_array[line_num], line);
-          line_num++;
-    }
-    fclose(file);
-    free(line);
-	int x, y = 0;
-	for (x; x<WIKI_ARRAY_SIZE; x++)
-		for(y; y<WIKI_LINE_SIZE; y++)
-		{
-			printf("%c", wiki_array[x][y]);
-		}
-    return true;
-    */
-	int c;
-	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
-	if(f == NULL)
+{ 
+	FILE *fd;
+
+        //Adding malloc for space
+        wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+	int i;
+	for (i; i < WIKI_ARRAY_SIZE; i++)
 	{
-		printf("failed to open file \n");
-		return (false); 
+	  wiki_array[i] = malloc(2001);
 	}
-	rewind(f);
-	int i, j = 0;
-	while(!feof(f))
-	{
-		c = fgetc(f);
-		if(c == '\n' || c == '\r')
-		{
-			i++;
-			j = 0;
-		}
-		else 
-		{
-			wiki_array[i][j] = (char) c;
-		}
-		j++;
+
+	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	nlines = -1;
+	do {
+	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
+	if(wiki_array[nlines] != NULL) nchars += (double) strlen(wiki_array[nlines]);
 	}
-	fclose(f);
-	int x, y = 0;
-	for (x; x<WIKI_ARRAY_SIZE; x++)
-	{
-		for(y; y<WIKI_LINE_SIZE; y++)
-		{
-			printf("%c", wiki_array[x][y]);
-		}
-	}
-	
-        return (true);
-	
+	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
+	fclose(fd);
+
+	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
+
 }
 
 void printResults()
