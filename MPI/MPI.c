@@ -76,9 +76,9 @@ char * compare_lines(int start)
 	printf("%d", start+1);
 	printf("\n");
 	
-	char * lineA = malloc( sizeof(char) * ( MAX_LINE_SIZE + 1 ) )
+	char * lineA = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
 	lineA = &wiki_array [start][0];
-	char * lineB = malloc( sizeof(char) * ( MAX_LINE_SIZE + 1 ) )
+	char * lineB = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
 	lineB =	&wiki_array [start+1][0];
 	bool matches = false;
 	int size1, size2 = 0;
