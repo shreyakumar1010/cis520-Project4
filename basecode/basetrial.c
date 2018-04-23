@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #define WIKI_ARRAY_SIZE 10
-#define WIKI_LINE_SIZE 2001
+#define WIKI_LINE_SIZE 10
 
 //load the lines into an array
  char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
