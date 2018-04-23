@@ -74,14 +74,14 @@ char * compare_lines(int start)
 {
 	printf("Comparing lines ");printf("%d", start);printf(" and ");printf("%d", start+1);printf("\n");
 	
-	char * lineA = &wiki_array [(start*MAX_LINE_SIZE)];
-	char * lineB = &wiki_array [((start+1)*MAX_LINE_SIZE)];
+	char * lineA = &wiki_array [(start*MAX_LINE_SIZE)][0];
+	char * lineB = &wiki_array [((start+1)*MAX_LINE_SIZE)][0];
 	
 	bool matches = false;
 	int size1, size2 = 0;
 	
-	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE +1));
-	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE +1));
+	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE);
+	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE);
 	int i, j, k, l;
 	
 	int lasti = 0;
