@@ -41,16 +41,16 @@ int main()
 }
 
 bool readToMemory()
-{
+{ /*
     char * filename = "/homes/dan/625/wiki_dump.txt";  
     printf("before fopen");
-    FILE * file = fopen(filename, "r"); /* should check the result */
+    FILE * file = fopen(filename, "r");
     if(file == NULL) 
     {
         printf("failed to open");
         return false;
     }
-    /* Read each wiki line into memory. */
+     
     int line_num = 0;
     char * line = malloc(WIKI_LINE_SIZE);
     while(fgets(line, WIKI_LINE_SIZE, file) != NULL) 
@@ -67,6 +67,33 @@ bool readToMemory()
 			printf("%c", wiki_array[x][y]);
 		}
     return true;
+    */
+	int c;
+	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	if(f == NULL)
+	{
+		printf("failed to open file \n");
+		return (false); 
+	}
+	rewind(f);
+	int i, j = 0;
+	while(!feof(f))
+	{
+		c = fgetc(f);
+		if(c == '\n' || c == '\r')
+		{
+			i++;
+			j = 0;
+		}
+		else 
+		{
+			wiki_array[i][j] = (char) c;
+		}
+		j++;
+	}
+	fclose(f);
+        return (true);
+	
 }
 
 void printResults()
