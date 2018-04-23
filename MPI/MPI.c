@@ -39,26 +39,8 @@ int longestline()//after using this, we know that the value is 2001.
 	return count;		
 }
 
-bool init_wiki_array()
-{
-	int i, j;
-	for(i = 0; i < ARRAY_SIZE; i++)
-	{
-		for(j = 0; j < MAX_LINE_SIZE; j++);
-			wiki_array[i][j] = '\0';
-	}
-	return true;
-}
-
 bool read_wiki()
 {
-	bool success = init_wiki_array();
-	if(!success)
-	{
-		printf("failure initializing");
-		return false;
-	}
-	
 	int c;
 	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	if(f == NULL)
