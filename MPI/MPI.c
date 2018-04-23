@@ -89,11 +89,6 @@ char * compare_lines(int start)
 	int lasti = 0;
 	k = 0;
 	
-	if(lineA == NULL || lineB == NULL)
-	{
-		printf("Null lines \n");
-		return;
-	}
 	for(i = 0; i < MAX_LINE_SIZE; i++)
 	{
 		for(j = 0; j < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
@@ -156,7 +151,6 @@ main()
 {
 	bool success = read_wiki();
 	printf("finished reading \n");
-	
 	
 	char * commonstring = compare_lines(0);
 
