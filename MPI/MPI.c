@@ -141,8 +141,13 @@ char * compare_lines(int start)
 			}
 		}
 	}
+	printf("size of substring: ");
+	printf("%d", size2"); printf("\n");
+	       
 	for(i = 0; i < size2; i++)
 		printf("%c", (char) longest[i]); 
+	printf("\n");
+	       
 	return (longest);
 }
 
