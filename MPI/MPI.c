@@ -80,8 +80,8 @@ char * compare_lines(int start)
 	bool matches = false;
 	int size1, size2 = 0;
 	
-	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE);
-	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE);
+	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE));
+	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE));
 	int i, j, k, l;
 	
 	int lasti = 0;
