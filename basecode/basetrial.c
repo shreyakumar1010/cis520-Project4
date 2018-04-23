@@ -9,8 +9,10 @@
 
 //load the lines into an array
  char  **wiki_array;
- 
+ char **longestSub;
 
+
+ int p = 0;
 
  char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE - 1] ;
@@ -36,7 +38,7 @@ int main()
     { 
           char* temp;
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
-         // strcpy(longestSubstring[i] , temp);
+          //strcpy(longestSubstring[i] , temp);
     }   
      
     //gettimeofday(&time2, NULL);
@@ -52,15 +54,24 @@ bool readToMemory()
 	double nchars = 0;
 	//double tstart, ttotal;
 	FILE *fd;
-
-        //Adding malloc for space
-        wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 	
+	 //Adding malloc for space
+	wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
 	for (i; i < WIKI_ARRAY_SIZE; i++)
 	{
 	  wiki_array[i] = malloc(2001);
 	}
+	//saved results
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
+	for (i; i < WIKI_ARRAY_SIZE -1; i++)
+	{
+	  longestSub[i] = malloc(2001);
+	}
+
+
+       
 	fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/basecode/sampletext.txt", "r");
 	nlines = -1;
 	do {
@@ -76,8 +87,9 @@ bool readToMemory()
 
 void printResults()
 { int i;
-  for(i=0; i <= WIKI_ARRAY_SIZE + 1; i++)
-  {
+ printf("do we even get to print results");
+  for(i=0; i <= WIKI_ARRAY_SIZE - 1; i++)
+  { 
       printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
       printf("\n");
   }
@@ -141,6 +153,10 @@ int LCS(char *s1, char *s2, char **longest_common_substring){
 	*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 	strncpy(*longest_common_substring, s1+max_index_i, max_len);
 	(*longest_common_substring)[max_len] = '\0';
+	
+	strncpy(longestSub[p], *longest_common_substring);
+	    
+        p++;
 	printf("%s\n", *longest_common_substring);
     }
 
