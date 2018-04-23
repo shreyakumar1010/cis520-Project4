@@ -80,6 +80,7 @@ char * compare_lines(int start)
 	lineA = &wiki_array [start][0];
 	char * lineB = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
 	lineB =	&wiki_array [start+1][0];
+	
 	bool matches = false;
 	int size1, size2 = 0;
 	
@@ -88,6 +89,11 @@ char * compare_lines(int start)
 	int i, j, k, l;
 	int lasti = 0;
 	k = 0;
+	if(lineA == NULL || lineB == NULL)
+	{
+		printf("Null lines \n");
+		return;
+	}
 	for(i = 0; i < MAX_LINE_SIZE; i++)
 	{
 		for(j = 0; j < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
