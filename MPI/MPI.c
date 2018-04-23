@@ -141,9 +141,8 @@ char * compare_lines(int start)
 			}
 		}
 	}
-	printf("Finished \n");
-	//for(i = 0; i < size2; i++)
-	//	printf("%c", (char) longest[i]); 
+	for(i = 0; i < size2; i++)
+		printf("%c", (char) longest[i]); 
 	return (longest);
 }
 
