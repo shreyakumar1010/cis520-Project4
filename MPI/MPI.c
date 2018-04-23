@@ -39,8 +39,25 @@ int longestline()//after using this, we know that the value is 2001.
 	return count;		
 }
 
+bool init_wiki_array()
+{
+	int i, int j;
+	for(i = 0; i < ARRAY_SIZE)
+	{
+		for(j = 0; j < MAX_LINE_SIZE; j++);
+			wiki_array[i][j] = '\0';
+	}
+}
+
 bool read_wiki()
 {
+	bool success = init_wiki_array();
+	if(!success)
+	{
+		printf("failure initializing");
+		return false;
+	}
+	
 	int c;
 	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	if(f == NULL)
@@ -48,6 +65,7 @@ bool read_wiki()
 		printf("failed to open file \n");
 		return (false); 
 	}
+	
 	rewind(f);
 	int i, j = 0;
 	while(!feof(f))
@@ -64,6 +82,7 @@ bool read_wiki()
 		}
 		j++;
 	}
+	
 	fclose(f);
 	return (true);
 }
@@ -77,9 +96,9 @@ char * compare_lines(int start)
 	printf("\n");
 	
 	char * lineA = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
-	lineA = &wiki_array [start][0];
+	lineA = &wiki_array [(start*MAX_LINE_SIZE)];
 	char * lineB = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
-	lineB =	&wiki_array [start+1][0];
+	lineB =	&wiki_array [((start+1)*MAX_LINE_SIZE)];
 	
 	bool matches = false;
 	int size1, size2 = 0;
@@ -87,8 +106,10 @@ char * compare_lines(int start)
 	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE +1));
 	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE +1));
 	int i, j, k, l;
+	
 	int lasti = 0;
 	k = 0;
+	
 	if(lineA == NULL || lineB == NULL)
 	{
 		printf("Null lines \n");
@@ -150,13 +171,6 @@ main()
 	bool success = read_wiki();
 	printf("finished reading \n");
 	
-	int i, j;
-	for(j = 0; j < 10; j++)
-	{
-		for(i = 0; i < 50; i++)
-			printf("%c", (char) wiki_array[j][i]);
-		printf("\n");
-	}
 	
 	//compare_lines(0);
 
