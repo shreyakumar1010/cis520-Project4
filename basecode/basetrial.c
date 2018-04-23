@@ -9,28 +9,12 @@
 
 //load the lines into an array
  char  **wiki_array;
+ 
+
+
  char longestSubstring[WIKI_ARRAY_SIZE + 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
- FILE *fd;
-
-//Adding malloc for space
-wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-int i;
-for (i; i < WIKI_ARRAY_SIZE; i++)
-{
-  wiki_array[i] = malloc(2001);
-}
-
-fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
-nlines = -1;
-do {
-	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
-	if(wiki_array[nlines] != NULL) nchars += (double) strlen(wiki_array[nlines]);
-   }
-   while (err != EOF && nlines < WIKI_ARRAY_SIZE);
-   fclose(fd);
-
-   printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
+ 
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
@@ -62,6 +46,11 @@ int main()
 
 bool readToMemory()
 { 
+	int nlines, maxlines = 10;
+	//int nwords, maxwords = 10;
+	int i, k, n, err, *count, nthreads = 24;
+	double nchars = 0;
+	//double tstart, ttotal;
 	FILE *fd;
 
         //Adding malloc for space
