@@ -55,7 +55,7 @@ bool readToMemory()
 
         //Adding malloc for space
         wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-	int i;
+	
 	for (i; i < WIKI_ARRAY_SIZE; i++)
 	{
 	  wiki_array[i] = malloc(2001);
