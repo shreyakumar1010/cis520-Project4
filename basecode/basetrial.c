@@ -12,8 +12,8 @@
  
 
 
- char longestSubstring[WIKI_ARRAY_SIZE + 1] [10] ; 
- int lengthOfSubstring[WIKI_ARRAY_SIZE + 1] ;
+ char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
+ int lengthOfSubstring[WIKI_ARRAY_SIZE - 1] ;
  
 
 bool readToMemory();
@@ -36,7 +36,7 @@ int main()
     { 
           char* temp;
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
-          strcpy(longestSubstring[i] , temp);
+         // strcpy(longestSubstring[i] , temp);
     }   
      
     //gettimeofday(&time2, NULL);
