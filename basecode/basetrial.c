@@ -21,6 +21,17 @@ for (i; i < WIKI_ARRAY_SIZE; i++)
   wiki_array[i] = malloc(2001);
 }
 
+fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
+nlines = -1;
+do {
+	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
+	if(wiki_array[nlines] != NULL) nchars += (double) strlen(wiki_array[nlines]);
+   }
+   while (err != EOF && nlines < WIKI_ARRAY_SIZE);
+   fclose(fd);
+
+   printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
+
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
 
