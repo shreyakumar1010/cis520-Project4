@@ -150,7 +150,14 @@ main()
 	bool success = read_wiki();
 	printf("finished reading \n");
 	
-	compare_lines(0);
+	for(int j = 0; j < 10; j++)
+	{
+		for(int i = 0; i < 50; i++)
+			printf("%c", (char) wiki_array[j][i]);
+		printf("\n");
+	}
+	
+	//compare_lines(0);
 
 	
 }
