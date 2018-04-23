@@ -72,15 +72,11 @@ bool read_wiki()
 
 char * compare_lines(int start)
 {
-	printf("Comparing lines ");
-	printf("%d", start);
-	printf(" and ");
-	printf("%d", start+1);
-	printf("\n");
+	printf("Comparing lines ");printf("%d", start);printf(" and ");printf("%d", start+1);printf("\n");
 	
-	char * lineA = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
+	char * lineA = malloc(sizeof(char) * (MAX_LINE_SIZE + 1));
 	lineA = &wiki_array [(start*MAX_LINE_SIZE)];
-	char * lineB = malloc(sizeof(char) * (MAX_LINE_SIZE + 1 ));
+	char * lineB = malloc(sizeof(char) * (MAX_LINE_SIZE + 1));
 	lineB =	&wiki_array [((start+1)*MAX_LINE_SIZE)];
 	
 	bool matches = false;
@@ -104,10 +100,12 @@ char * compare_lines(int start)
 		{
 			if(lineA[i] == lineB[j])//if there's a match
 				matches = true;
+			
 			else //if the char isn't a match
 			{ 
 				matches = false; //set flag that it doesn't match
 				k = 0; //reset k to 0 so we can overwrite the stored value
+				
 				if(size1 > 0)//we've received a full matching substring
 				{ 
 					printf("We have found a matching substring : ");
@@ -120,24 +118,29 @@ char * compare_lines(int start)
 		
 					if(size1 > size2)// its longer than our previous
 					{
-						size2 = size1; //store the length of our longest string
+						size2 = size1; //store the length of our new longest string
 						printf("\n");
 						printf("WE HAVE A NEW LONGEST SUBSTRING : \n");
+						
 						for(l = 0; l < size2; l++);
 						{
-							longest[l] = common[l];
+							longest[l] = common[l]; //save it to the longest variable
 							printf("%c", (char) longest[l]);
 						}
+						
 						printf("\n");printf("\n");
 					}
-					size1 = 0; //reset size 1
+					size1 = 0; //reset size1 (temp size) 
 				}
 			}
 			if(matches == true)
 			{
-				lasti ++; //how many times we have incremented i in a row
+				lasti ++; //how many times we have incremented i in a row, 
+				//so that we can reset it via subtraction when the full matching string has been found
+				
 				common[k] = lineB[j]; //store the common char
-				size1 ++; //increment the size of the current string
+				
+				size1 ++; //increment the size of the current string each time we add a character
 				i++; //increment i so we can look at next value
 				k++; //increment k so we can store next value
 			}
