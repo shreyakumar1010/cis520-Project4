@@ -57,6 +57,12 @@ bool readToMemory()
     }
     fclose(file);
     free(line);
+	int x, y = 0;
+	for (x; x<WIKI_ARRAY_SIZE; x++)
+		for(y; y<WIKI_LINE_SIZE; y++)
+		{
+			printf(%c, wiki_array[x,y]);
+		}
     return true;
 }
 
