@@ -61,7 +61,7 @@ bool readToMemory()
 	for (x; x<WIKI_ARRAY_SIZE; x++)
 		for(y; y<WIKI_LINE_SIZE; y++)
 		{
-			printf("%a", wiki_array[x,y]);
+			printf("%c", wiki_array[x][y]);
 		}
     return true;
 }
