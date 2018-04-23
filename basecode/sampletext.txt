@@ -1,0 +1,10 @@
+This is a sample text file for Project 4 in Beaocat.
+Lorem Ipsum is a sample dummy text of the printing and typesetting 
+industry. Lorem Ipsum is the industry's standard dummy
+text ever since the 1500s, when an standard dummy took a galley
+of type and since the 1500s to make a type specimen book. It has
+survived not only five centuries, but also type specimen book electronic typesetting,
+five centuries, but unchanged. It was popularised in
+the 1960s with the release of Letraset sheets but unchanged containing Lorem Ipsum passages, 
+and more release of Letraset desktop publishing software like Aldus 
+PageMaker including publishing software like Aldus.
