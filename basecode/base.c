@@ -39,6 +39,8 @@ int main()
     //gettimeofday(&time3, NULL);	
     
     int i;
+	
+    printf("DEBUG: starting loop on %s\n", getenv("HOST"));
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 	//printf("sanity2");  
        char* temp;
