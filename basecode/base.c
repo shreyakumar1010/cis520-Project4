@@ -35,15 +35,17 @@ int main()
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
 	
     gettimeofday(&time3, NULL);	
+    printf("sanity1");
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    { 	  
+    { 	printf("sanity2");  
        char* temp;
        lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
        longestSub++;
           
     }   
-      printResults();
+    printResults();
+	printf("sanity3");
     gettimeofday(&time5, NULL);
     elapsed = (time5.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
     elapsed += (time5.tv_usec - time3.tv_usec) / 1000.0; // us to ms
