@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
@@ -18,6 +19,9 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
+//number of threads being used
+int num_threads;
+
 void readToMemory();
 void printResults();
 void printToFile();
@@ -29,7 +33,7 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     	gettimeofday(&time1, NULL);
     	readToMemory();
