@@ -94,7 +94,7 @@ bool readToMemory()
 void printResults()
 { 
   int i;
-  printf("do we even get to print results");
+  //printf("do we even get to print results");
   longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
   for(i=0; i <= WIKI_ARRAY_SIZE - 1; i++)
   { 
