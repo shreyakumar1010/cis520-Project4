@@ -35,7 +35,7 @@ int main()
     printf("Time to read full file to Memory: %f\n", elapsed);
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
 	
-    gettimeofday(&time3, NULL);	
+   // gettimeofday(&time3, NULL);	
     printf("sanity1");
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
