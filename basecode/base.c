@@ -20,11 +20,11 @@ void printResults();
 int main()
 {
     struct timeval time1;
-    //struct timeval time2;
-    //struct timeval time3;
-    //struct timeval time4;
-    //double e1, e2, e3;    
-    //int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    struct timeval time2;
+    struct timeval time3;
+    struct timeval time4;
+    double e1, e2, e3;    
+    int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     gettimeofday(&time1, NULL);
     
@@ -34,8 +34,7 @@ int main()
    // e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
     //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     // printf("Time to read full file to Memory: %f\n", e1);
-    //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
-    //printf("sanity3");	
+    //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million	
     //gettimeofday(&time3, NULL);	
     
     int i;
@@ -112,7 +111,8 @@ void printResults()
  static int _matrix_row_size = 0;
  static int _matrix_collumn_size = 0;
 
- static void init(int s1_length, int s2_length){
+ static void init(int s1_length, int s2_length)
+ {
     if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     {
 	/* free matrix */
