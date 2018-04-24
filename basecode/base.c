@@ -11,10 +11,6 @@
  char  **wiki_array;
  char **longestSub;
 
-
- //int p = 0;
-
- //char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE] ;
  
 
@@ -28,28 +24,22 @@ int main()
     struct timeval time1, time2, time3, time4;
     double elapsed;
     int numSlots, line_num, Version = 1; //what
-    //printf("in main after timing vars");
-    //read file into mem
     bool success = readToMemory();
-    //printf("in main after Read");
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    { 
-	  
-          char* temp;
-	  
-          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-         
-	  longestSub++;
-          //strcpy(longestSubstring[i] , temp);
+    { 	  
+       char* temp;
+       lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       longestSub++;
+          
     }   
       printResults();	 
      
-    //gettimeofday(&time2, NULL);
-    //elapsed = (time2.tv_sec - time1.tv_sec);
-    //printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
+    gettimeofday(&time2, NULL);
+    elapsed = (time2.tv_sec - time1.tv_sec);
+    printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
 }
 
 bool readToMemory()
@@ -94,7 +84,6 @@ bool readToMemory()
 void printResults()
 { 
   int i;
-  //printf("do we even get to print results");
   longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
   for(i=0; i <= WIKI_ARRAY_SIZE - 2; i++)
   { 
@@ -161,10 +150,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring){
 	*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 	strncpy(*longest_common_substring, s1+max_index_i, max_len);
 	(*longest_common_substring)[max_len] = '\0';
-	
-	//strncpy(longestSub[p], *longest_common_substring, 800);
-	    
-        //p++;
+
 	//printf("%s\n", *longest_common_substring);
     }
 
