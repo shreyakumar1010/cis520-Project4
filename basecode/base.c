@@ -26,17 +26,17 @@ int main()
     
     int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
-  gettimeofday(&time1, NULL);
+   //gettimeofday(&time1, NULL);
     
     bool success = readToMemory();
 	
-    gettimeofday(&time2, NULL);
-    e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-    e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    //gettimeofday(&time2, NULL);
+   // e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+    //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
      printf("Time to read full file to Memory: %f\n", e1);
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     //printf("sanity3");	
-    gettimeofday(&time3, NULL);	
+    //gettimeofday(&time3, NULL);	
     
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
@@ -48,13 +48,13 @@ int main()
     }   
     printResults();
 	//printf("sanity3");
-   gettimeofday(&time4, NULL);
-   e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
-   e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+   //gettimeofday(&time4, NULL);
+   //e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+   //e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
    printf("Time find all Substrings: %f\n", e2);
    
-    e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-    e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    //e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+   // e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e2); //this needs work
 }
 
