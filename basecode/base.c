@@ -25,7 +25,7 @@ int main()
     double e1, e2, e3;
     
     int numSlots, line_num, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
-    
+    printf("sanity1");
     gettimeofday(&time1, NULL);
     
     bool success = readToMemory();
@@ -37,7 +37,7 @@ int main()
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
 	
     gettimeofday(&time3, NULL);	
-    printf("sanity1");
+    
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 	//printf("sanity2");  
