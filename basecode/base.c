@@ -4,164 +4,161 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
-#define WIKI_ARRAY_SIZE 1000000
-#define WIKI_LINE_SIZE 2001
+#define WIKI_ARRAY_SIZE 10
+#define WIKI_LINE_SIZE 10
 
 //load the lines into an array
-char wiki_array[WIKI_ARRAY_SIZE] [WIKI_LINE_SIZE];
-char longestSubstring[WIKI_ARRAY_SIZE + 1] [500]; 
+ char  **wiki_array;
+ char **longestSub;
+
+
+ int p = 0;
+
+ char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
+ int lengthOfSubstring[WIKI_ARRAY_SIZE - 1] ;
+ 
 
 bool readToMemory();
-char* longestCommonSubstring(char* X, char* Y);
+int LCS(char *s1, char *s2, char **longest_common_substring);
+
 
 int main()
 {
     struct timeval time1, time2, time3, time4;
     double elapsed;
     int numSlots, line_num, Version = 1; //what
+    //printf("in main after timing vars");
     //read file into mem
     bool success = readToMemory();
+    //printf("in main after Read");
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
-    {
-         char * temp = longestCommonSubstring(wiki_array[i], wiki_array[i+1]);
-         strcpy(longestSubstring[i] , temp);
+    { 
+          char* temp;
+          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
+          //strcpy(longestSubstring[i] , temp);
     }   
      
-    gettimeofday(&time2, NULL);
-    elapsed = (time2.tv_sec - time1.tv_sec);
-    printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
+    //gettimeofday(&time2, NULL);
+    //elapsed = (time2.tv_sec - time1.tv_sec);
+    //printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
 }
 
 bool readToMemory()
-{
-    char * filename = "~dan/625/wiki_dump.txt";    
-    FILE * file = fopen(filename, "r"); /* should check the result */
-    if(file == NULL) 
-    {
-        printf("failed to open");
-        return false;
-    }
-    /* Read each wiki line into memory. */
-    int line_num = 0;
-    char * line = malloc(WIKI_LINE_SIZE);
-    while(fgets(line, WIKI_LINE_SIZE, file) != NULL) 
-    {
-          strcpy(wiki_array[line_num], line);
-          line_num++;
-    }
-    fclose(file);
-    free(line);
-    return true;
+{ 
+	int nlines, maxlines = 10;
+	//int nwords, maxwords = 10;
+	int i, k, n, err, *count, nthreads = 24;
+	double nchars = 0;
+	//double tstart, ttotal;
+	FILE *fd;
+	
+	 //Adding malloc for space
+	wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
+	for (i; i < WIKI_ARRAY_SIZE; i++)
+	{
+	  wiki_array[i] = malloc(2001);
+	}
+	//saved results
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
+	for (i; i < WIKI_ARRAY_SIZE -1; i++)
+	{
+	  longestSub[i] = malloc(2001);
+	}
+
+
+       
+	fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/basecode/sampletext.txt", "r");
+	nlines = -1;
+	do {
+	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
+	if(wiki_array[nlines] != NULL) nchars += (double) strlen(wiki_array[nlines]);
+	}
+	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
+	fclose(fd);
+
+	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
+
 }
 
 void printResults()
 { int i;
-  for(i=0; i <= 1000000; i++)
-  {
+ printf("do we even get to print results");
+  for(i=0; i <= WIKI_ARRAY_SIZE - 1; i++)
+  { 
       printf("%d-%d : %s", i,i+1,longestSubstring[i]); 
       printf("\n");
   }
 }
-struct substring 
-{ int length;
-  char * location;
+
+ static int **_matrix;
+ static int _matrix_row_size = 0;
+ static int _matrix_collumn_size = 0;
+
+
+static void init(int s1_length, int s2_length){
+    if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size){
+	/* free matrix */
+	int i;
+	for (i = 0; i < _matrix_row_size; i++)
+	    free(_matrix[i]);
+	free(_matrix);
+	
+	/* malloc matrix */
+	_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
+	for (i = 0; i < s1_length+1; i++)
+	    _matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
+
+	_matrix_row_size = s1_length+1;
+	_matrix_collumn_size = s2_length+1;
+    }
+    int i;
+    for (i = 0; i <= s1_length; i++)
+	_matrix[i][s2_length] = 0;
+	
+    int j;
+    for (j = 0; j <= s2_length; j++)
+	_matrix[s1_length][j] = 0;
 }
 
-substring longestCommonSubstring(char* X, char* Y)
-{   
-    int lenX = 0;
-    int lenY = 0;
-    int z = 0;
-    char * ret;
-    char * retend;
-    substring returnSubstring;
-    char* looper = X;
-    while(looper != '/n')
-    {
-        lenX++;
-        looper++;
+
+int LCS(char *s1, char *s2, char **longest_common_substring){
+    int s1_length = strlen(s1);
+    int s2_length = strlen(s2);
+
+    init(s1_length, s2_length);
+
+    int max_len = 0, max_index_i = -1;
+    int i,j;
+    for (i = s1_length-1; i >= 0; i--){
+    	for (j = s2_length-1; j >= 0; j--){
+    	    if (s1[i] != s2[j]){
+    		_matrix[i][j] = 0;
+    		continue;
+    	    }
+
+    	    _matrix[i][j] = _matrix[i+1][j+1] + 1;
+    	    if (_matrix[i][j] > max_len){
+    		max_len = _matrix[i][j];
+    		max_index_i = i;
+    	    }
+    	}
     }
-    looper = Y;
-    while(looper != '/n')
-    {
-        lenY++;
-        looper++;
+
+    if (longest_common_substring != NULL){
+	*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+	strncpy(*longest_common_substring, s1+max_index_i, max_len);
+	(*longest_common_substring)[max_len] = '\0';
+	
+	strncpy(longestSub[p], *longest_common_substring, 800);
+	    
+        p++;
+	printf("%s\n", *longest_common_substring);
     }
-    int L [ lenX + 1] [lenY + 1];
-    //initialize the array to 0s
-    int p, k;
-    for (p = 0; p < lenX + 1; p++)
-    {
-        for( k = 0; k < lenY + 1; k++)
-        { L[p, k] = 0;}
-    }
-   //made arrays of the two strings 
-    char AX[lenX + 1];
-    strcpy(AX, X);
-    char AY[lenY + 1];
-    strcpy((L + lenX +1), Y);
-    
-    //strcpy(dest, src);
-    subArray[lenX+1];
-    
-  
-        
-    //algo
-    int j, i;
-    for( i = 0; i < lenX; i++)
-    {
-        for(j = 0; j < lenY; j++)
-        {
-            if(AX[i] == AY[j])
-               {
-                   if (i == 1 || j == 1)
-                   {
-                       L[i,j] = 1;
-                   }
-                   else
-                   {
-                       L[i,j] = L[i-1, j-1] + 1;
-                   }
-                   if( L[i,j] > z)
-                   {
-                       z = L[i,j];
-                       ret = (void*) AX[i - z + 1];
-                       retend = (void*) AX[i]; 
-                   }
-                else
-                {
-                    if(L[i,j] == z)
-                    {
-                        //position of substring 
-                        int v = i - z + 1;
-                        
-                        //total string length - position of substring
-                        int u = i - v;
-                        
-                        //looping through their difference to copy the contents onto ret 
-                        for (u; u < i; u++)
-                        {
-                            
-                        }
-                    }
-                }
-                
-                else
-                {
-                    L[i, j] += 0;
-                
-               }
-        }
-    }
-    
-    // required longest common substring
-    return ret;
-    
+
+    return max_len;
 }
-    
-
-
-
