@@ -34,9 +34,9 @@ int main()
     gettimeofday(&time1, NULL); 
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
     int i;
-    for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
+    for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 
-	  if(i == WIKI_ARRAY_SIZE){return;}
+	  
           char* temp;
 	  
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
