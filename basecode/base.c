@@ -21,7 +21,10 @@ void printResults();
 
 int main()
 {
-    struct timeval time1, time2, time3, time4;
+    struct timeval time1;
+    struct timeval time2;
+    struct timeval time3;
+    struct timeval time4;
     double e1, e2, e3;    
     int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
