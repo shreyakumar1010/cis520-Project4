@@ -1,162 +1,197 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
+#include <sys/time.h>
+#include <stdbool.h>
 
-#define ARRAY_SIZE 1000000
+#define WIKI_ARRAY_SIZE 500
+#define WIKI_LINE_SIZE 2001
 
-#define MAX_LINE_SIZE 2001 //after running the longestline function once we know this value.
-			   //we are hard coding it so we don't waste time counting again.
+static int **_matrix;
+static int _matrix_row_size = 0;
+static int _matrix_collumn_size = 0;
 
-char wiki_array [ARRAY_SIZE][MAX_LINE_SIZE];
+int lengthOfSubstring [WIKI_ARRAY_SIZE];
+int LCS (char * s1, char * s2, char ** longest_common_substring);
 
-int longestline()//after using this, we know that the value is 2001. 
+//load the lines into an array
+char  **wiki_array;
+char **longestSub;
+
+void readToMemory();
+void printResults();
+void printToFile();
+
+int main()
 {
-	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r"); //open file
-	if (f == NULL)
-	{
-		printf("failed to open \n");
-		return -1;
-	}
-	fseek(f, 0, SEEK_END); //run to the end of the file to find its length
-	long size = ftell(f); //size is the total number of characters in the file
-	rewind(f);
-	char * wiki = malloc(size +1); //allocating the string
-	fread(wiki, sizeof(char), size, f); //reading the file into wiki string
-	fclose(f);//closing the file
-	int i, temp, count = 0;
-	while(i <= size) //while we aren't at the end of the string
-	{
-		temp = temp +1; //increment the temp for each character
-		if((char) wiki[i] == '\n') //until you get a new line.
-		{
-			if(temp > count) //if the temp is higher than current count
-				count = temp;//set count to the temp
-			temp = 0; //since we've received a new line we need to reset temp
-		}
-		i++; //recursion
-	}
-	return count;		
+	struct timeval time1;
+    	struct timeval time2;
+    	struct timeval time3;
+    	struct timeval time4;
+    	double e1, e2, e3;    
+    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    
+    	gettimeofday(&time1, NULL);
+    	readToMemory();
+    	gettimeofday(&time2, NULL);
+	
+    	//time to read to memory	
+    	e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
+    	e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    	printf("Time to read full file to Memory: %f\n", e1);
+	
+    	gettimeofday(&time3, NULL);	
+  
+    	int i;
+    	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
+    	{ 
+       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       		longestSub++;    
+    	}   
+	printToFile();
+	
+   	gettimeofday(&time4, NULL);
+	
+   	//time to find all longest substrings	
+   	e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+   	e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+   	printf("Time find all Substrings: %f\n", e2);
+   
+   	//total elapsed time between reading and finding all longest substrings	
+   	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+   	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+   	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 }
 
-bool read_wiki()
-{
-	int c;
-	FILE *f = fopen("/homes/dan/625/wiki_dump.txt", "r");
-	if(f == NULL)
+void readToMemory()
+{ 
+	int nlines, maxlines = 10;
+	int k, n, err, *count, nthreads = 24;
+	int i;
+	double nchars = 0;
+	FILE *fd;
+	
+	 //Adding malloc for space
+	wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
+	for (i = 0; i < WIKI_ARRAY_SIZE; i++)
 	{
-		printf("failed to open file \n");
-		return (false); 
+	  	wiki_array[i] = malloc(2001);
+	}
+	//saved results
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
+	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
+	{
+	  	longestSub[i] = malloc(2001);
+	}
+
+	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	nlines = -1;
+	do 
+	{
+		err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
+		if(wiki_array[nlines] != NULL) 
+			nchars += (double) strlen(wiki_array[nlines]);
+	}
+	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
+	
+	fclose(fd);
+	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
+}
+
+void printToFile()
+{
+	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
+	if (f == NULL)
+	{
+    		printf("Error opening LargestCommonSubstrings.txt!\n");
+    		exit(1);
 	}
 	
-	rewind(f);
-	int i, j = 0;
-	while(!feof(f))
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	int i; 
+	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
-		c = fgetc(f);
-		if(c == '\n' || c == '\r')
-		{
-			i++;
-			j = 0;
-		}
-		else 
-		{
-			wiki_array[i][j] = (char) c;
-		}
-		j++;
+		fprintf(f, "%d-%d: %s", i, i + 1,longestSub[i]);
+		fprintf(f, "\n");
 	}
 	
 	fclose(f);
-	return (true);
 }
 
-char * compare_lines(int start)
+void printResults()
+{ 
+  	int i;
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+  	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
+  	{ 
+      		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
+      		printf("\n");
+  	}
+}
+
+ static void init(int s1_length, int s2_length)
+ {
+    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
+    	{
+		/* free matrix */
+		int i;
+		for (i = 0; i < _matrix_row_size; i++)
+	    		free(_matrix[i]);
+		free(_matrix);
+	
+		/* malloc matrix */
+		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
+		for (i = 0; i < s1_length+1; i++)
+	    		_matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
+
+		_matrix_row_size = s1_length+1;
+		_matrix_collumn_size = s2_length+1;
+    	}
+    	int i;
+    	for (i = 0; i <= s1_length; i++)
+		_matrix[i][s2_length] = 0;
+	
+    	int j;
+    	for (j = 0; j <= s2_length; j++)
+		_matrix[s1_length][j] = 0;
+}
+
+int LCS(char *s1, char *s2, char **longest_common_substring)
 {
-	printf("Comparing lines ");printf("%d", start);printf(" and ");printf("%d", start+1);printf("\n");
-	
-	//char * lineA = &wiki_array [(start*MAX_LINE_SIZE)][0];
-	char * lineA = &wiki_array + start*MAX_LINE_SIZE*sizeof(char);
-	//char * lineB = &wiki_array [((start+1)*MAX_LINE_SIZE)][0];
-	char * lineB = &wiki_array + (start+1)*MAX_LINE_SIZE*sizeof(char);
-	
-	bool matches = false;
-	int size1, size2 = 0;
-	
-	char * common = malloc(sizeof(char)*(MAX_LINE_SIZE));
-	char * longest= malloc(sizeof(char)*(MAX_LINE_SIZE));
-	int i, j, k, l;
-	
-	int lasti = 0;
-	k = 0;
-	
-	for(i = 0; i < MAX_LINE_SIZE; i++)
-	{
-		for(j = 0; j < MAX_LINE_SIZE; j++)//look at each value in lineA compared to each value in lineB
+    	int s1_length = strlen(s1);
+    	int s2_length = strlen(s2);
+
+    	init(s1_length, s2_length);
+
+    	int max_len = 0, max_index_i = -1;
+    	int i,j;
+    	for (i = s1_length-1; i >= 0; i--)
+    	{
+    		for (j = s2_length-1; j >= 0; j--)
 		{
-			if(lineA[i] == lineB[j])//if there's a match
-				matches = true;
-			
-			else //if the char isn't a match
-			{ 
-				matches = false; //set flag that it doesn't match
-				k = 0; //reset k to 0 so we can overwrite the stored value
-				
-				if(size1 > 0)//we've received a full matching substring
-				{ 
-					printf("We have found a matching substring : ");
-					for(l = 0; l < size1; l++)
-					    printf("%c", (char) common[l]);
-					printf("\n"); 
-					    
-					i = i - lasti; //reset i  
-					lasti = 0; //reset lasti    
+    	    		if (s1[i] != s2[j])
+	    		{
+    				_matrix[i][j] = 0;
+    				continue;
+    	    		}
 		
-					if(size1 > size2)// its longer than our previous
-					{
-						size2 = size1; //store the length of our new longest string
-						printf("\n");
-						printf("WE HAVE A NEW LONGEST SUBSTRING : \n");
-						
-						for(l = 0; l < size2; l++);
-						{
-							longest[l] = common[l]; //save it to the longest variable
-							printf("%c", (char) longest[l]);
-						}
-						
-						printf("\n");printf("\n");
-					}
-					size1 = 0; //reset size1 (temp size) 
-				}
-			}
-			if(matches == true)
-			{
-				lasti ++; //how many times we have incremented i in a row, 
-				//so that we can reset it via subtraction when the full matching string has been found
-				
-				common[k] = lineB[j]; //store the common char
-				
-				size1 ++; //increment the size of the current string each time we add a character
-				i++; //increment i so we can look at next value
-				k++; //increment k so we can store next value
-			}
-		}
-	}
-	printf("size of substring: ");
-	printf("%d", size2); printf("\n");
-	       
-	for(i = 0; i < size2; i++)
-		printf("%c", (char) longest[i]); 
-	printf("\n");
-	       
-	return (longest);
-}
-
-main() 
-{
-	bool success = read_wiki();
-	printf("finished reading \n");
-	
-	char * commonstring = compare_lines(0);
-
-	
+    	    		_matrix[i][j] = _matrix[i+1][j+1] + 1;
+		
+    	    		if (_matrix[i][j] > max_len)
+	    		{
+    				max_len = _matrix[i][j];
+    				max_index_i = i;
+    	    		}
+    		}
+    	}
+    	if (longest_common_substring != NULL)
+    	{
+		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		strncpy(*longest_common_substring, s1+max_index_i, max_len);
+		(*longest_common_substring)[max_len] = '\0';
+		//printf("%s\n", *longest_common_substring);
+    	}
+    	return max_len;
 }
