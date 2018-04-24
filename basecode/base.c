@@ -20,6 +20,7 @@
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
+void printResults();
 
 
 int main()
