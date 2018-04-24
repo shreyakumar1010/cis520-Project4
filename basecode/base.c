@@ -37,13 +37,13 @@ int main()
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
           char* temp;
-	   printf("line 40);
+	  printf("line 40");
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-          printf("line 42);
+          printf("line 42");
 	  longestSub++;
           //strcpy(longestSubstring[i] , temp);
     }   
-      printf("line 46);	 
+      printf("line 46");	 
      
     //gettimeofday(&time2, NULL);
     //elapsed = (time2.tv_sec - time1.tv_sec);
