@@ -12,9 +12,9 @@
  char **longestSub;
 
 
- int p = 0;
+ //int p = 0;
 
- char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
+ //char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
  int lengthOfSubstring[WIKI_ARRAY_SIZE - 1] ;
  
 
@@ -37,7 +37,8 @@ int main()
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
           char* temp;
-          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1],&temp);
+          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], &longestSub);
+	  longestSub++;
           //strcpy(longestSubstring[i] , temp);
     }   
      
@@ -156,7 +157,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring){
 	
 	//strncpy(longestSub[p], *longest_common_substring, 800);
 	    
-        p++;
+        //p++;
 	printf("%s\n", *longest_common_substring);
     }
 
