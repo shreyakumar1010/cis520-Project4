@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
+#include <omp.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
@@ -45,7 +46,7 @@ int main()
     	gettimeofday(&time3, NULL);	
   
     	int i, startPos, endPos, myID;
-	
+	omp_set_num_threads(num_threads);
 	#pragma omp parallel private(myID, startPos, endPos, i)
 	{
 		myID = omp_get_thread_num();
@@ -185,7 +186,16 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 
     	int max_len = 0, max_index_i = -1;
     	int i,j, startPos, endPos, myID;
-
+        omp_set_num_threads(num_threads);
+	#pragma omp parallel private(myID, startPos, endPos, i, j)
+        {
+	    myID = omp_get_thread_num();
+	    startPos = (myID) * (s2_length-1 / num_threads);
+	    endPos = startPos + (s2_length-1 / num_threads);
+	    if(myID == num_threads-1)
+	    {
+      	      endPos = s2_length-1;
+             }
 	
           for (i = s1_length-1; i >= 0; i--)
           {
@@ -205,6 +215,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_index_i = i;
     	    		}
     		}
+	  }
     	
  }
     	if (longest_common_substring != NULL)
