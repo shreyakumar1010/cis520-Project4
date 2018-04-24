@@ -8,16 +8,14 @@
 #define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
- char  **wiki_array;
- char **longestSub;
+char  **wiki_array;
+char **longestSub;
 
- int lengthOfSubstring[WIKI_ARRAY_SIZE] ;
-
+int lengthOfSubstring [WIKI_ARRAY_SIZE];
+int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 bool readToMemory();
-int LCS(char *s1, char *s2, char **longest_common_substring);
 void printResults();
-
 
 int main()
 {
@@ -44,11 +42,10 @@ int main()
 	
     //printf("DEBUG: starting loop on %s\n", getenv("HOST"));
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    { 	//printf("sanity2");  
+    { 
        char* temp;
        lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       longestSub++;
-          
+       longestSub++;    
     }   
     printResults();
 	//printf("sanity3");
@@ -65,7 +62,6 @@ int main()
 bool readToMemory()
 { 
 	int nlines, maxlines = 10;
-	//int nwords, maxwords = 10;
 	int i, k, n, err, *count, nthreads = 24;
 	double nchars = 0;
 	//double tstart, ttotal;
@@ -86,13 +82,13 @@ bool readToMemory()
 	  longestSub[i] = malloc(2001);
 	}
 
-
-       
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
-	do {
+	do 
+	{
 	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
-	if(wiki_array[nlines] != NULL) nchars += (double) strlen(wiki_array[nlines]);
+	if(wiki_array[nlines] != NULL) 
+		nchars += (double) strlen(wiki_array[nlines]);
 	}
 	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
 	fclose(fd);
@@ -116,9 +112,9 @@ void printResults()
  static int _matrix_row_size = 0;
  static int _matrix_collumn_size = 0;
 
-
-static void init(int s1_length, int s2_length){
-    if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size){
+ static void init(int s1_length, int s2_length){
+    if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
+    {
 	/* free matrix */
 	int i;
 	for (i = 0; i < _matrix_row_size; i++)
@@ -143,7 +139,8 @@ static void init(int s1_length, int s2_length){
 }
 
 
-int LCS(char *s1, char *s2, char **longest_common_substring){
+int LCS(char *s1, char *s2, char **longest_common_substring)
+{
     int s1_length = strlen(s1);
     int s2_length = strlen(s2);
 
@@ -151,28 +148,31 @@ int LCS(char *s1, char *s2, char **longest_common_substring){
 
     int max_len = 0, max_index_i = -1;
     int i,j;
-    for (i = s1_length-1; i >= 0; i--){
-    	for (j = s2_length-1; j >= 0; j--){
-    	    if (s1[i] != s2[j]){
+    for (i = s1_length-1; i >= 0; i--)
+    {
+    	for (j = s2_length-1; j >= 0; j--)
+	{
+    	    if (s1[i] != s2[j])
+	    {
     		_matrix[i][j] = 0;
     		continue;
     	    }
-
+		
     	    _matrix[i][j] = _matrix[i+1][j+1] + 1;
-    	    if (_matrix[i][j] > max_len){
+		
+    	    if (_matrix[i][j] > max_len)
+	    {
     		max_len = _matrix[i][j];
     		max_index_i = i;
     	    }
     	}
     }
-
-    if (longest_common_substring != NULL){
+    if (longest_common_substring != NULL)
+    {
 	*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 	strncpy(*longest_common_substring, s1+max_index_i, max_len);
 	(*longest_common_substring)[max_len] = '\0';
-
 	//printf("%s\n", *longest_common_substring);
     }
-
     return max_len;
 }
