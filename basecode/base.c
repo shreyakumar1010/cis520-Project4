@@ -36,8 +36,9 @@ int main()
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
+	  if(i == WIKI_ARRAY_SIZE){return;}
           char* temp;
-	 
+	  
           lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
          
 	  longestSub++;
