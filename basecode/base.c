@@ -25,7 +25,7 @@ int main()
     double e1, e2, e3;    
     int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
-   //gettimeofday(&time1, NULL);
+    gettimeofday(&time1, NULL);
     
     bool success = readToMemory();
 	
