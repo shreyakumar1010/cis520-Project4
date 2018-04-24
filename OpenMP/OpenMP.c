@@ -85,7 +85,7 @@ int main()
 void readToMemory()
 { 
 	int nlines, maxlines = 10;
-	int k, n, err, *count, nthreads = 24;
+	int k, n, err, *count;
 	int i;
 	double nchars = 0;
 	FILE *fd;
