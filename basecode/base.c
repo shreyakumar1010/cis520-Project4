@@ -45,7 +45,7 @@ int main()
 	  longestSub++;
           //strcpy(longestSubstring[i] , temp);
     }   
-      printResults();	 
+      //printResults();	 
      
     //gettimeofday(&time2, NULL);
     //elapsed = (time2.tv_sec - time1.tv_sec);
