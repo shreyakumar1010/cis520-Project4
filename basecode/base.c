@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
-#define WIKI_ARRAY_SIZE 300
+#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
@@ -12,12 +12,6 @@
  char **longestSub;
 
  int lengthOfSubstring[WIKI_ARRAY_SIZE] ;
-
-typedef struct {
-  long tv_sec;
-  long tv_usec;
-} timeval;
- 
 
 
 bool readToMemory();
