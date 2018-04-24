@@ -36,7 +36,7 @@ int main()
     
     bool success = readToMemory();
 	
-    gettimeofday(&time2, NULL);
+    //gettimeofday(&time2, NULL);
    // e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
     //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     printf("Time to read full file to Memory: %f\n", e1);
