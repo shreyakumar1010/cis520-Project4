@@ -18,6 +18,8 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
+int num_threads = 32;
+
 void readToMemory();
 void printResults();
 void printToFile();
@@ -29,7 +31,7 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    	int numSlots, Version = 3; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     	gettimeofday(&time1, NULL);
     	readToMemory();
@@ -42,12 +44,25 @@ int main()
 	
     	gettimeofday(&time3, NULL);	
   
-    	int i;
-    	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    	{ 
-       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       		longestSub++;    
-    	}   
+    	int i, startPos, endPos, myID;
+	
+	#pragma omp parallel private(myID, startPos, endPos, i)
+	{
+		myID = omp_get_thread_num();
+                startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
+                endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+                if(myID == num_threads-1)
+                {
+                    endPos = WIKI_ARRAY_SIZE;
+                }
+	
+
+		for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
+		{ 
+			lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+			longestSub++;    
+		}  
+	}
     	//printResults();
 	printToFile();
 	
@@ -167,9 +182,19 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	init(s1_length, s2_length);
 
     	int max_len = 0, max_index_i = -1;
-    	int i,j;
-    	for (i = s1_length-1; i >= 0; i--)
-    	{
+    	int i,j, startPos, endPos, myID;
+ #pragma omp parallel private(myID, startPos, endPos, i, j)
+ {
+	 myID = omp_get_thread_num();
+	 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
+	 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	 if(myID == num_threads-1)
+	 {
+	      endPos = WIKI_ARRAY_SIZE;
+	  }
+	
+          for (i = s1_length-1; i >= 0; i--)
+          {
     		for (j = s2_length-1; j >= 0; j--)
 		{
     	    		if (s1[i] != s2[j])
@@ -187,6 +212,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	    		}
     		}
     	}
+ }
     	if (longest_common_substring != NULL)
     	{
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
