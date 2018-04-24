@@ -1,2 +1,2 @@
-all : proj4.c
+all : base.c
       
