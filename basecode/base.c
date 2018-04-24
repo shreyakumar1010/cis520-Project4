@@ -21,12 +21,20 @@ void printResults();
 
 int main()
 {
-    struct timeval time1, time2, time3, time4;
+    struct timeval time1, time2, time3, time4, time5;
     double elapsed;
-    int numSlots, line_num, Version = 1; //what
+    
+    int numSlots, line_num, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    
+    gettimeofday(&time1, NULL);
     bool success = readToMemory();
-    gettimeofday(&time1, NULL); 
+    gettimeofday(&time2, NULL);
+    elapsed = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+    elapsed += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    printf("Time to read full file to Memory: %f\n", elapsed);
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
+	
+    gettimeofday(&time3, NULL);	
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 	  
@@ -35,10 +43,12 @@ int main()
        longestSub++;
           
     }   
-      printResults();	 
-     
-    gettimeofday(&time2, NULL);
-    elapsed = (time2.tv_sec - time1.tv_sec);
+      printResults();
+    gettimeofday(&time5, NULL);
+    elapsed = (time5.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+    elapsed += (time5.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+    printf("Time find all Substrings: %f\n", elapsed);
+    
     printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), elapsed); //this needs work
 }
 
