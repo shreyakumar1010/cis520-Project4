@@ -41,8 +41,8 @@ int main()
     //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     printf("Time to read full file to Memory: %f\n", e1);
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
-    printf("sanity3");	
-    gettimeofday(&time3, NULL);	
+    //printf("sanity3");	
+    //gettimeofday(&time3, NULL);	
     
     int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
