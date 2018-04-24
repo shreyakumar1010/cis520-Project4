@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
+#include <mpi.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
@@ -13,6 +14,7 @@ static int _matrix_collumn_size = 0;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
+int NumberofThreads;
 
 //load the lines into an array
 char  **wiki_array;
@@ -22,7 +24,7 @@ void readToMemory();
 void printResults();
 void printToFile();
 
-int main()
+int main(int argc, char* argv[])
 {
 	struct timeval time1;
     	struct timeval time2;
@@ -30,6 +32,19 @@ int main()
     	struct timeval time4;
     	double e1, e2, e3;    
     	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+	
+	int rc, NumTasks, rank;
+	MPI_Status status;
+	rc = MPI_Init(&argc, &argv);
+	if(rc != MPI_SUCCESS)
+  	{
+    		printf("MPI isn't working");
+    		MPI_Abort(MPI_COMM_WORLD, rc);
+  	}
+	
+	MPI_Comm_size(MPI_COMM_WORLD, &NumTasks);
+  	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  	NumberofThreads = NumTasks;
     
     	gettimeofday(&time1, NULL);
     	readToMemory();
