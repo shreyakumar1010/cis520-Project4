@@ -163,7 +163,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring){
 	//strncpy(longestSub[p], *longest_common_substring, 800);
 	    
         //p++;
-	printf("%s\n", *longest_common_substring);
+	//printf("%s\n", *longest_common_substring);
     }
 
     return max_len;
