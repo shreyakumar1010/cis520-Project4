@@ -7,59 +7,62 @@
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
-//load the lines into an array
-char  **wiki_array;
-char **longestSub;
+static int **_matrix;
+static int _matrix_row_size = 0;
+static int _matrix_collumn_size = 0;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
-bool readToMemory();
+//load the lines into an array
+char  **wiki_array;
+char **longestSub;
+
+void readToMemory();
 void printResults();
 
 int main()
 {
-    struct timeval time1;
-    struct timeval time2;
-    struct timeval time3;
-    struct timeval time4;
-    double e1, e2, e3;    
-    int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+	struct timeval time1;
+    	struct timeval time2;
+    	struct timeval time3;
+    	struct timeval time4;
+    	double e1, e2, e3;    
+    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
-    gettimeofday(&time1, NULL);
-    readToMemory();
-    gettimeofday(&time2, NULL);
+    	gettimeofday(&time1, NULL);
+    	readToMemory();
+    	gettimeofday(&time2, NULL);
 	
-    //time to read to memory	
-    e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
-    e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-    printf("Time to read full file to Memory: %f\n", e1);
+    	//time to read to memory	
+    	e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
+    	e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    	printf("Time to read full file to Memory: %f\n", e1);
 	
-    gettimeofday(&time3, NULL);	
+    	gettimeofday(&time3, NULL);	
   
-    int i;
-    for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    { 
-       char* temp;
-       lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       longestSub++;    
-    }   
-    printResults();
+    	int i;
+    	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
+    	{ 
+       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       		longestSub++;    
+    	}   
+    	printResults();
 	
-   gettimeofday(&time4, NULL);
+   	gettimeofday(&time4, NULL);
 	
-   //time to find all longest substrings	
-   e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
-   e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
-   printf("Time find all Substrings: %f\n", e2);
+   	//time to find all longest substrings	
+   	e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+   	e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+   	printf("Time find all Substrings: %f\n", e2);
    
-   //total elapsed time between reading and finding all longest substrings	
-   e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-   e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e2); 
+   	//total elapsed time between reading and finding all longest substrings	
+   	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+   	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+   	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 }
 
-bool readToMemory()
+void readToMemory()
 { 
 	int nlines, maxlines = 10;
 	int k, n, err, *count, nthreads = 24;
@@ -72,107 +75,102 @@ bool readToMemory()
 
 	for (i = 0; i < WIKI_ARRAY_SIZE; i++)
 	{
-	  wiki_array[i] = malloc(2001);
+	  	wiki_array[i] = malloc(2001);
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
 	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
-	  longestSub[i] = malloc(2001);
+	  	longestSub[i] = malloc(2001);
 	}
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
 	do 
 	{
-	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
-	if(wiki_array[nlines] != NULL) 
-		nchars += (double) strlen(wiki_array[nlines]);
+		err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
+		if(wiki_array[nlines] != NULL) 
+			nchars += (double) strlen(wiki_array[nlines]);
 	}
 	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
+	
 	fclose(fd);
-
 	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
 }
 
 void printResults()
 { 
-  int i;
-  longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
-  for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
-  { 
-      printf("%d-%d: %s", i,i+1,longestSub[i]); 
-      printf("\n");
-  }
+  	int i;
+  	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
+  	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
+  	{ 
+      		printf("%d-%d: %s", i,i+1,longestSub[i]); 
+      		printf("\n");
+  	}
 }
-
- static int **_matrix;
- static int _matrix_row_size = 0;
- static int _matrix_collumn_size = 0;
 
  static void init(int s1_length, int s2_length)
  {
-    if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
-    {
-	/* free matrix */
-	int i;
-	for (i = 0; i < _matrix_row_size; i++)
-	    free(_matrix[i]);
-	free(_matrix);
+    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
+    	{
+		/* free matrix */
+		int i;
+		for (i = 0; i < _matrix_row_size; i++)
+	    		free(_matrix[i]);
+		free(_matrix);
 	
-	/* malloc matrix */
-	_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
-	for (i = 0; i < s1_length+1; i++)
-	    _matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
+		/* malloc matrix */
+		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
+		for (i = 0; i < s1_length+1; i++)
+	    		_matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
 
-	_matrix_row_size = s1_length+1;
-	_matrix_collumn_size = s2_length+1;
-    }
-    int i;
-    for (i = 0; i <= s1_length; i++)
-	_matrix[i][s2_length] = 0;
+		_matrix_row_size = s1_length+1;
+		_matrix_collumn_size = s2_length+1;
+    	}
+    	int i;
+    	for (i = 0; i <= s1_length; i++)
+		_matrix[i][s2_length] = 0;
 	
-    int j;
-    for (j = 0; j <= s2_length; j++)
-	_matrix[s1_length][j] = 0;
+    	int j;
+    	for (j = 0; j <= s2_length; j++)
+		_matrix[s1_length][j] = 0;
 }
-
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
 {
-    int s1_length = strlen(s1);
-    int s2_length = strlen(s2);
+    	int s1_length = strlen(s1);
+    	int s2_length = strlen(s2);
 
-    init(s1_length, s2_length);
+    	init(s1_length, s2_length);
 
-    int max_len = 0, max_index_i = -1;
-    int i,j;
-    for (i = s1_length-1; i >= 0; i--)
-    {
-    	for (j = s2_length-1; j >= 0; j--)
-	{
-    	    if (s1[i] != s2[j])
-	    {
-    		_matrix[i][j] = 0;
-    		continue;
-    	    }
+    	int max_len = 0, max_index_i = -1;
+    	int i,j;
+    	for (i = s1_length-1; i >= 0; i--)
+    	{
+    		for (j = s2_length-1; j >= 0; j--)
+		{
+    	    		if (s1[i] != s2[j])
+	    		{
+    				_matrix[i][j] = 0;
+    				continue;
+    	    		}
 		
-    	    _matrix[i][j] = _matrix[i+1][j+1] + 1;
+    	    		_matrix[i][j] = _matrix[i+1][j+1] + 1;
 		
-    	    if (_matrix[i][j] > max_len)
-	    {
-    		max_len = _matrix[i][j];
-    		max_index_i = i;
-    	    }
+    	    		if (_matrix[i][j] > max_len)
+	    		{
+    				max_len = _matrix[i][j];
+    				max_index_i = i;
+    	    		}
+    		}
     	}
-    }
-    if (longest_common_substring != NULL)
-    {
-	*longest_common_substring = malloc(sizeof(char) * (max_len+1));
-	strncpy(*longest_common_substring, s1+max_index_i, max_len);
-	(*longest_common_substring)[max_len] = '\0';
-	//printf("%s\n", *longest_common_substring);
-    }
-    return max_len;
+    	if (longest_common_substring != NULL)
+    	{
+		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		strncpy(*longest_common_substring, s1+max_index_i, max_len);
+		(*longest_common_substring)[max_len] = '\0';
+		//printf("%s\n", *longest_common_substring);
+    	}
+    	return max_len;
 }
