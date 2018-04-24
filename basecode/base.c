@@ -18,8 +18,7 @@ typedef struct {
   long tv_usec;
 } timeval;
  
-struct timeval time1, time2, time3, time4;
-double e1, e2, e3;
+
 
 bool readToMemory();
 int LCS(char *s1, char *s2, char **longest_common_substring);
@@ -28,9 +27,10 @@ void printResults();
 
 int main()
 {
+    struct timeval time1, time2, time3, time4;
+    double e1, e2, e3;
     
-    
-    int numSlots, line_num, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     //gettimeofday(&time1, NULL);
     
