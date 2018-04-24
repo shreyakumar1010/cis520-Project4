@@ -33,7 +33,7 @@ int main()
     gettimeofday(&time2, NULL);
     e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
     e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-    printf("Time to read full file to Memory: %f\n", elapsed);
+    printf("Time to read full file to Memory: %f\n", e1);
     //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million
 	
     gettimeofday(&time3, NULL);	
