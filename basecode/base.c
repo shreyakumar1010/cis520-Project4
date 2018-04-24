@@ -48,7 +48,6 @@ int main()
        		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
        		longestSub++;    
     	}   
-    	//printResults();
 	printToFile();
 	
    	gettimeofday(&time4, NULL);
