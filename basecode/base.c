@@ -20,16 +20,16 @@ void printResults();
 int main()
 {
     struct timeval time1;
-    struct timeval time2;
-    struct timeval time3;
-    struct timeval time4;
-    double e1, e2, e3;    
-    int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    //struct timeval time2;
+    //struct timeval time3;
+    //struct timeval time4;
+    //double e1, e2, e3;    
+    //int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     gettimeofday(&time1, NULL);
     
-    bool success = readToMemory();
-	
+    //bool success = readToMemory();
+	readToMemory();
     //gettimeofday(&time2, NULL);
    // e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
     //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
@@ -62,7 +62,8 @@ int main()
 bool readToMemory()
 { 
 	int nlines, maxlines = 10;
-	int i, k, n, err, *count, nthreads = 24;
+	int k, n, err, *count, nthreads = 24;
+	int i;
 	double nchars = 0;
 	//double tstart, ttotal;
 	FILE *fd;
@@ -70,14 +71,14 @@ bool readToMemory()
 	 //Adding malloc for space
 	wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
-	for (i; i < WIKI_ARRAY_SIZE; i++)
+	for (i = 0; i < WIKI_ARRAY_SIZE; i++)
 	{
 	  wiki_array[i] = malloc(2001);
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
-	for (i; i < WIKI_ARRAY_SIZE -1; i++)
+	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
 	  longestSub[i] = malloc(2001);
 	}
@@ -94,14 +95,13 @@ bool readToMemory()
 	fclose(fd);
 
 	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
-
 }
 
 void printResults()
 { 
   int i;
   longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
-  for(i=0; i <= WIKI_ARRAY_SIZE - 2; i++)
+  for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   { 
       printf("%d-%d: %s", i,i+1,longestSub[i]); 
       printf("\n");
