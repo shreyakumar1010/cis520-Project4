@@ -15,7 +15,7 @@
  //int p = 0;
 
  //char longestSubstring[WIKI_ARRAY_SIZE - 1] [10] ; 
- int lengthOfSubstring[WIKI_ARRAY_SIZE - 1] ;
+ int lengthOfSubstring[WIKI_ARRAY_SIZE] ;
  
 
 bool readToMemory();
