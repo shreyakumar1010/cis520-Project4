@@ -20,6 +20,7 @@ char **longestSub;
 
 void readToMemory();
 void printResults();
+void printToFile();
 
 int main()
 {
@@ -47,7 +48,8 @@ int main()
        		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
        		longestSub++;    
     	}   
-    	printResults();
+    	//printResults();
+	printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
@@ -99,13 +101,31 @@ void readToMemory()
 	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
 }
 
+void printToFile()
+{
+	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
+	if (f == NULL)
+	{
+    		printf("Error opening LargestCommonSubstrings.txt!\n");
+    		exit(1);
+	}
+	
+	int i; 
+	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
+	{
+		fprintf(f, "%d-%d: %s", i, i + 1,longestSub[i]);
+		fprintf(f, "\n");
+	}
+	
+	fclose(f);
+}
+
 void printResults()
 { 
   	int i;
-  	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
-      		printf("%d-%d: %s", i,i+1,longestSub[i]); 
+      		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
       		printf("\n");
   	}
 }
