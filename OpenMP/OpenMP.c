@@ -183,15 +183,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 
     	int max_len = 0, max_index_i = -1;
     	int i,j, startPos, endPos, myID;
- #pragma omp parallel private(myID, startPos, endPos, i, j)
- {
-	 myID = omp_get_thread_num();
-	 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
-	 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-	 if(myID == num_threads-1)
-	 {
-	      endPos = WIKI_ARRAY_SIZE;
-	  }
+
 	
           for (i = s1_length-1; i >= 0; i--)
           {
@@ -211,7 +203,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_index_i = i;
     	    		}
     		}
-    	}
+    	
  }
     	if (longest_common_substring != NULL)
     	{
