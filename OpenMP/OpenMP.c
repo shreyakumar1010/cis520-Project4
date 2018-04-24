@@ -38,9 +38,24 @@ int main()
     //printf("sanity3");	
     //gettimeofday(&time3, NULL);	
     
-    int i;
+    
 	
-    printf("DEBUG: starting loop on %s\n", getenv("HOST"));
+    //printf("DEBUG: starting loop on %s\n", getenv("HOST"));
+
+  int i, j, startPos, endPos, myID;
+  
+  omp_set_num_threads(num_threads);
+
+  #pragma omp parallel private(myID, startPos, endPos, i, j)
+  {
+    myID = omp_get_thread_num();
+    startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
+    endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+    if(myID == num_threads-1)
+    {
+      endPos = WIKI_ARRAY_SIZE;
+    }
+
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 	//printf("sanity2");  
        char* temp;
