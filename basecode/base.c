@@ -27,19 +27,17 @@ int main()
     int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     gettimeofday(&time1, NULL);
-    
-    //bool success = readToMemory();
-	readToMemory();
-    //gettimeofday(&time2, NULL);
-   // e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-    //e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-    // printf("Time to read full file to Memory: %f\n", e1);
-    //probably some sort of loop checking lone 0 to 1, 1 to 2, .... 999999 to million	
-    //gettimeofday(&time3, NULL);	
-    
-    int i;
+    readToMemory();
+    gettimeofday(&time2, NULL);
 	
-    //printf("DEBUG: starting loop on %s\n", getenv("HOST"));
+    //time to read to memory	
+    e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
+    e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+    printf("Time to read full file to Memory: %f\n", e1);
+	
+    gettimeofday(&time3, NULL);	
+  
+    int i;
     for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     { 
        char* temp;
@@ -47,15 +45,18 @@ int main()
        longestSub++;    
     }   
     printResults();
-	//printf("sanity3");
-   //gettimeofday(&time4, NULL);
-   //e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
-   //e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
-   //printf("Time find all Substrings: %f\n", e2);
+	
+   gettimeofday(&time4, NULL);
+	
+   //time to find all longest substrings	
+   e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+   e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+   printf("Time find all Substrings: %f\n", e2);
    
-    //e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-   // e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-    printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e2); //this needs work
+   //total elapsed time between reading and finding all longest substrings	
+   e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+   e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+   printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e2); 
 }
 
 bool readToMemory()
@@ -64,7 +65,6 @@ bool readToMemory()
 	int k, n, err, *count, nthreads = 24;
 	int i;
 	double nchars = 0;
-	//double tstart, ttotal;
 	FILE *fd;
 	
 	 //Adding malloc for space
