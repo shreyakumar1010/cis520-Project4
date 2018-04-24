@@ -96,7 +96,7 @@ void printResults()
   int i;
   //printf("do we even get to print results");
   longestSub = longestSub - (WIKI_ARRAY_SIZE - 1); 
-  for(i=0; i <= WIKI_ARRAY_SIZE - 1; i++)
+  for(i=0; i <= WIKI_ARRAY_SIZE - 2; i++)
   { 
       printf("%d-%d : %s", i,i+1,longestSub[i]); 
       printf("\n");
