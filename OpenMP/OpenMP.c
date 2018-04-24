@@ -186,7 +186,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 
     	int max_len = 0, max_index_i = -1;
     	int i,j, startPos, endPos, myID;
-        omp_set_num_threads(num_threads);
+       /* omp_set_num_threads(num_threads);
 	#pragma omp parallel private(myID, startPos, endPos, i, j)
         {
 	    myID = omp_get_thread_num();
@@ -196,6 +196,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	    {
       	      endPos = s2_length-1;
              }
+	     */
 	
           for (i = s1_length-1; i >= 0; i--)
           {
@@ -217,7 +218,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     		}
 	  }
     	
- }
+ //}
     	if (longest_common_substring != NULL)
     	{
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
