@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/time.h>
+//#include <sys/time.h>
 #include <stdbool.h>
 
 #define WIKI_ARRAY_SIZE 10
@@ -12,6 +12,11 @@
  char **longestSub;
 
  int lengthOfSubstring[WIKI_ARRAY_SIZE] ;
+
+typedef struct {
+  long tv_sec;
+  long tv_usec;
+} timeval;
  
 
 bool readToMemory();
