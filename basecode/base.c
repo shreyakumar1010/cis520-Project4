@@ -37,7 +37,7 @@ int main()
     for(i = 0; i < WIKI_ARRAY_SIZE; i++)  
     { 
           char* temp;
-          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], &longestSub);
+          lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
 	  longestSub++;
           //strcpy(longestSubstring[i] , temp);
     }   
