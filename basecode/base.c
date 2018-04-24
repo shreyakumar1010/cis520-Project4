@@ -4,8 +4,8 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
-#define WIKI_ARRAY_SIZE 10
-#define WIKI_LINE_SIZE 10
+#define WIKI_ARRAY_SIZE 300
+#define WIKI_LINE_SIZE 2001
 
 //load the lines into an array
  char  **wiki_array;
@@ -90,7 +90,7 @@ bool readToMemory()
 
 
        
-	fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/basecode/sampletext.txt", "r");
+	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
 	do {
 	err = fscanf(fd, "%[^\n]\n", wiki_array[++nlines]);
