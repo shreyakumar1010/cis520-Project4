@@ -20,7 +20,7 @@ char  **wiki_array;
 char **longestSub;
 
 //number of threads being used
-int num_threads;
+int num_threads = 32;
 
 void readToMemory();
 void printResults();
@@ -34,6 +34,41 @@ int main()
     	struct timeval time4;
     	double e1, e2, e3;    
     	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4
+	
+	pthread_t threads[num_threads];
+	pthread_attr_t attr;
+	void *status;
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+	
+	//probably needs a for loop here??
+	for(i = 0; i < num_threads; i++)
+        {
+          rc = pthread_create(&threads[i], &attr, find_word_in_wiki, (void *)i);
+          if (rc)
+        {
+	  printf("ERROR; return code from pthread_create() is %d\n", rc);
+	  exit(-1);
+        }
+		
+	/* Free attribute and wait for the other threads */
+        pthread_attr_destroy(&attr);
+        for(i=0; i<num_threads; i++)
+        {
+           rc = pthread_join(threads[i], &status);
+           if (rc)
+           {
+        	printf("ERROR; return code from pthread_join() is %d\n", rc);
+        	exit(-1);
+            }
+        }
+	//gettimeofday(&t4, NULL);
+        print_results();
+  	}
+ 	 else
+	  {
+ 	   return -1;
+	  }
     
     	gettimeofday(&time1, NULL);
     	readToMemory();
@@ -137,7 +172,7 @@ void printResults()
 }
 
  static void init(int s1_length, int s2_length)
- {
+ {	 
     	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
 		/* free matrix */
@@ -164,7 +199,13 @@ void printResults()
 }
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
-{
+{	
+	//start position in pthreads
+	int startPosition = WIKI_ARRAY_SIZE / num_threads;
+	
+	//end position in pthreads
+	int endPosition = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
 
@@ -176,6 +217,8 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	{
     		for (j = s2_length-1; j >= 0; j--)
 		{
+		   for(pt = startPos; pt < endPos; pt++)
+		   {
     	    		if (s1[i] != s2[j])
 	    		{
     				_matrix[i][j] = 0;
@@ -189,6 +232,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_len = _matrix[i][j];
     				max_index_i = i;
     	    		}
+		   }
     		}
     	}
     	if (longest_common_substring != NULL)
