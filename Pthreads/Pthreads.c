@@ -25,7 +25,7 @@ void readToMemory();
 void printResults();
 void printToFile();
 
-int main(void *myID)
+int main()
 {
 	struct timeval time1;
     	struct timeval time2;
@@ -34,7 +34,7 @@ int main(void *myID)
     	double e1, e2, e3;    
     	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int k, rc;
+	int myID, k, rc;
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
