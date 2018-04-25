@@ -56,14 +56,25 @@ int main()
        
 	for ( i = 0; i < num_threads; i++)
 	{
-	  rc = pthread_create(&threads[i], &attr, loopingFunc, (void *)i); 
-		if(rc)
-		{
+	      rc = pthread_create(&threads[i], &attr, loopingFunc, (void *)i); 
+              if(rc)
+	      {
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
 	            exit(-1);	
-		}
-		
+	       }		
 	}
+	
+	pthread_attr_destroy(&attr);
+	
+        for(i=0; i<num_threads; i++)
+        {
+             rc = pthread_join(threads[i], &status);
+             if (rc)
+             {
+	        printf("ERROR; return code from pthread_join() is %d\n", rc);
+	        exit(-1);
+              }
+       }
 	
 	
     	//printResults();
