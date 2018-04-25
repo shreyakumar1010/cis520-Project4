@@ -20,7 +20,7 @@ char  **wiki_array;
 char **longestSub;
 
 //number of threads being used
-int num_threads = 32;
+int num_threads = 2;
 int rc;
 
 void readToMemory();
@@ -50,8 +50,8 @@ int main()
           rc = pthread_create(&threads[loopinv], &attr, LCS, (void *)loopinv);
           if (rc)
            {
-	  printf("ERROR; return code from pthread_create() is %d\n", rc);
-	  exit(-1);
+	      printf("ERROR; return code from pthread_create() is %d\n", rc);
+	      exit(-1);
             }
 		
 	/* Free attribute and wait for the other threads */
@@ -73,7 +73,6 @@ int main()
  	      return -1;
 	   }
 		
-	}
 	}
     	gettimeofday(&time1, NULL);
     	readToMemory();
