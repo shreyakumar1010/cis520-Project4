@@ -33,6 +33,16 @@ int main(void *myID)
     	struct timeval time4;
     	double e1, e2, e3;    
     	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4    
+	
+	int k, rc;
+	pthread_t threads[num_threads];
+	pthread_attr_t attr;
+	void *status;
+	
+	/* Initialize and set thread detached attribute */
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+	
     	gettimeofday(&time1, NULL);
     	readToMemory();
     	gettimeofday(&time2, NULL);
