@@ -43,10 +43,10 @@ int main()
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	
 	//probably needs a for loop here??
-	int loopinv
+	int loopinv;
 	for(loopinv = 0; loopinv < num_threads; loopinv++)
         {
-          rc = pthread_create(&threads[i], &attr, LCS, (void *)i);
+          rc = pthread_create(&threads[loopinv], &attr, LCS, (void *)loopinv);
           if (rc)
         {
 	  printf("ERROR; return code from pthread_create() is %d\n", rc);
