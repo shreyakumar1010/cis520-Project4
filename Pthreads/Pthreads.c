@@ -103,7 +103,7 @@ void loopingFunc(void *myID)
 	
 	//end position of the array
 	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-	longestSub = longestSub + starPos;
+	longestSub = longestSub + startPos;
 	
 	if((int)myID == num_threads -1)
 	{
