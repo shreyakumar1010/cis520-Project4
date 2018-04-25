@@ -42,6 +42,7 @@ int main()
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	
+	
 	//probably needs a for loop here??
 	int loopinv;
 	for(loopinv = 0; loopinv < num_threads; loopinv++)
@@ -64,10 +65,10 @@ int main()
         	printf("ERROR; return code from pthread_join() is %d\n", rc);
         	exit(-1);
             }
-		
+	}
 	   //gettimeofday(&t4, NULL);
            print_results();
- 	   else
+ 	   if(read_to_memory() != 0)
 	   {
  	      return -1;
 	   }
