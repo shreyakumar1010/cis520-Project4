@@ -59,8 +59,8 @@ int main()
                 }
 	
 
-		//for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
-		//{ 
+		for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
+		{ 
 			//lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
                         // longestSub++; 
 			
@@ -73,7 +73,7 @@ int main()
 			
 			} 
 			
-		//}  
+		}  
 	}
     	printResults();
 	//printToFile();
