@@ -64,13 +64,15 @@ int main()
         	printf("ERROR; return code from pthread_join() is %d\n", rc);
         	exit(-1);
             }
-	//gettimeofday(&t4, NULL);
-        print_results();
-  	}
- 	 else
-	  {
- 	   return -1;
-	  }
+		
+	   //gettimeofday(&t4, NULL);
+           print_results();
+ 	   else
+	   {
+ 	      return -1;
+	   }
+		
+	}
     
     	gettimeofday(&time1, NULL);
     	readToMemory();
