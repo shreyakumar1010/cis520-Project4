@@ -21,7 +21,6 @@ int num_threads = 2;
 char  **wiki_array;
 char **longestSub;
 
-{
 void readToMemory();
 void printResults();
 void printToFile();
