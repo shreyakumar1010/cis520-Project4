@@ -55,9 +55,10 @@ int main()
 		
 	/* Free attribute and wait for the other threads */
         pthread_attr_destroy(&attr);
-        for(i=0; i<num_threads; i++)
+	int in;
+        for(in=0; in<num_threads; in++)
         {
-           rc = pthread_join(threads[i], &status);
+           rc = pthread_join(threads[in], &status);
            if (rc)
            {
         	printf("ERROR; return code from pthread_join() is %d\n", rc);
@@ -205,7 +206,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	int startPosition = WIKI_ARRAY_SIZE / num_threads;
 	
 	//end position in pthreads
-	int endPosition = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	int endPosition = startPosition + (WIKI_ARRAY_SIZE / num_threads);
 	
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
@@ -219,7 +220,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     		for (j = s2_length-1; j >= 0; j--)
 		{
 		   int pt;
-		   for(pt = startPos; pt < endPos; pt++)
+		   for(pt = startPosition; pt < endPosition; pt++)
 		   {
     	    		if (s1[i] != s2[j])
 	    		{
@@ -245,4 +246,5 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		//printf("%s\n", *longest_common_substring);
     	}
     	return max_len;
+}
 }
