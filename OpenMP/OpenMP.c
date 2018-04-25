@@ -19,7 +19,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
-int num_threads = 2;
+int num_threads = 1;
 
 void readToMemory();
 void printResults();
