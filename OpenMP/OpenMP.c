@@ -68,7 +68,7 @@ int main()
 			for (j = startPos; j< endPos; j++)
 			{
 				
-				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], &longestSub[j]);
+				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
 			
 			} 
