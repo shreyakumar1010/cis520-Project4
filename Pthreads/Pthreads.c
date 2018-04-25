@@ -21,6 +21,7 @@ char **longestSub;
 
 //number of threads being used
 int num_threads = 32;
+int rc;
 
 void readToMemory();
 void printResults();
@@ -42,9 +43,10 @@ int main()
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	
 	//probably needs a for loop here??
-	for(i = 0; i < num_threads; i++)
+	int loopinv
+	for(loopinv = 0; loopinv < num_threads; loopinv++)
         {
-          rc = pthread_create(&threads[i], &attr, find_word_in_wiki, (void *)i);
+          rc = pthread_create(&threads[i], &attr, LCS, (void *)i);
           if (rc)
         {
 	  printf("ERROR; return code from pthread_create() is %d\n", rc);
@@ -61,7 +63,6 @@ int main()
         	printf("ERROR; return code from pthread_join() is %d\n", rc);
         	exit(-1);
             }
-        }
 	//gettimeofday(&t4, NULL);
         print_results();
   	}
@@ -217,6 +218,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	{
     		for (j = s2_length-1; j >= 0; j--)
 		{
+		   int pt;
 		   for(pt = startPos; pt < endPos; pt++)
 		   {
     	    		if (s1[i] != s2[j])
