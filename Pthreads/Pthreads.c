@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
