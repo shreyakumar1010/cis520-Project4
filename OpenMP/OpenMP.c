@@ -45,9 +45,9 @@ int main()
 	
     	gettimeofday(&time3, NULL);	
   
-    	int i, startPos, endPos, myID;
+    	int i,j, startPos, endPos, myID;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i)
+	#pragma omp parallel private(myID, startPos, endPos, i, j)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
@@ -58,12 +58,18 @@ int main()
                 }
 	
 
-		for(i = 0; i < WIKI_ARRAY_SIZE ; i++)  
+		for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
 		{ 
-			if(i == WIKI_ARRAY_SIZE -1){break;}
+			longestSub = longestSub + startPos;
 			
-			lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-			longestSub++;    
+			for (j = startPos; j< endPos; j++)
+			{
+				
+				lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+				longestSub++;   
+			
+			}
+			
 		}  
 	}
     	printResults();
