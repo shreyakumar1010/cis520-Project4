@@ -14,6 +14,7 @@ static int _matrix_collumn_size = 0;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
+void loopingFunc(void *myID);
 
 int num_threads = 2;
 
@@ -34,7 +35,7 @@ int main()
     	double e1, e2, e3;    
     	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int myID, k, rc i;
+	int myID, k, rc, i;
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
@@ -94,6 +95,7 @@ int main()
 	
 	
 }
+
 void loopingFunc(void *myID)
 {
 	//start position of the array
