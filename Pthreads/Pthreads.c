@@ -21,19 +21,19 @@ int num_threads = 2;
 char  **wiki_array;
 char **longestSub;
 
+{
 void readToMemory();
 void printResults();
 void printToFile();
 
-int main()
+int main(void *myID)
 {
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
-    
+    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4    
     	gettimeofday(&time1, NULL);
     	readToMemory();
     	gettimeofday(&time2, NULL);
@@ -45,11 +45,26 @@ int main()
 	
     	gettimeofday(&time3, NULL);	
   
-    	int i;
+	//start position of the array
+	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
+	
+	//end position of the array
+	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	
+	if((int)myID == num_threads -1)
+	{
+           endPos = WIKI_ARRAY_SIZE;
+	}
+	
+    	int i, j;
+	
     	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     	{ 
+	   for(j = startPos; j < endPos; j++)
+	   {
        		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
        		longestSub++;    
+	   }
     	}   
     	//printResults();
 	printToFile();
@@ -65,6 +80,8 @@ int main()
    	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
+	
+	pthread_exit(NULL);
 }
 
 void readToMemory()
