@@ -3,7 +3,6 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
-#include <pthread.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
@@ -19,10 +18,6 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
-//number of threads being used
-int num_threads = 2;
-int rc;
-
 void readToMemory();
 void printResults();
 void printToFile();
@@ -34,46 +29,8 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4
-	
-	pthread_t threads[num_threads];
-	pthread_attr_t attr;
-	void *status;
-	pthread_attr_init(&attr);
-	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-	
-	
-	//probably needs a for loop here??
-	int loopinv;
-	for(loopinv = 0; loopinv < num_threads; loopinv++)
-        {
-          rc = pthread_create(&threads[loopinv], &attr, LCS, (void *)loopinv);
-          if (rc)
-           {
-	      printf("ERROR; return code from pthread_create() is %d\n", rc);
-	      exit(-1);
-            }
-		
-	/* Free attribute and wait for the other threads */
-        pthread_attr_destroy(&attr);
-	int in;
-        for(in=0; in<num_threads; in++)
-        {
-           rc = pthread_join(threads[in], &status);
-           if (rc)
-           {
-        	printf("ERROR; return code from pthread_join() is %d\n", rc);
-        	exit(-1);
-            }
-	}
-	   //gettimeofday(&t4, NULL);
-           print_results();
- 	   if(read_to_memory() != 0)
-	   {
- 	      return -1;
-	   }
-		
-	}
+    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+    
     	gettimeofday(&time1, NULL);
     	readToMemory();
     	gettimeofday(&time2, NULL);
@@ -176,7 +133,7 @@ void printResults()
 }
 
  static void init(int s1_length, int s2_length)
- {	 
+ {
     	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
 		/* free matrix */
@@ -203,13 +160,7 @@ void printResults()
 }
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
-{	
-	//start position in pthreads
-	int startPosition = WIKI_ARRAY_SIZE / num_threads;
-	
-	//end position in pthreads
-	int endPosition = startPosition + (WIKI_ARRAY_SIZE / num_threads);
-	
+{
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
 
@@ -221,9 +172,6 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	{
     		for (j = s2_length-1; j >= 0; j--)
 		{
-		   int pt;
-		   for(pt = startPosition; pt < endPosition; pt++)
-		   {
     	    		if (s1[i] != s2[j])
 	    		{
     				_matrix[i][j] = 0;
@@ -237,7 +185,6 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_len = _matrix[i][j];
     				max_index_i = i;
     	    		}
-		   }
     		}
     	}
     	if (longest_common_substring != NULL)
