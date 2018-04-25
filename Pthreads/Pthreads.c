@@ -115,7 +115,7 @@ void loopingFunc(void *myID)
     	//{ 
 	   for(j = startPos; j < endPos; j++)
 	   {
-       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       		lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
        		longestSub++;    
 	   }
     	//}  
