@@ -32,9 +32,9 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4    
+    	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int myID, k, rc;
+	int myID, k, rc i;
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
@@ -53,28 +53,19 @@ int main()
     	printf("Time to read full file to Memory: %f\n", e1);
 	
     	gettimeofday(&time3, NULL);	
-  
-	//start position of the array
-	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
-	
-	//end position of the array
-	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-	
-	if((int)myID == num_threads -1)
+       
+	for ( i = 0; i < num_threads; i++)
 	{
-           endPos = WIKI_ARRAY_SIZE;
+	  rc = pthread_create(&threads[i], &attr, loopingFunc, (void *)i); 
+		if(rc)
+		{
+		    printf("ERROR; return code from pthread_create() is %d\n", rc);
+	            exit(-1);	
+		}
+		
 	}
 	
-    	int i, j;
 	
-    	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    	{ 
-	   for(j = startPos; j < endPos; j++)
-	   {
-       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       		longestSub++;    
-	   }
-    	}   
     	//printResults();
 	printToFile();
 	
@@ -90,8 +81,33 @@ int main()
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 	
-	pthread_exit(NULL);
+	
 }
+void loopingFunc(void *myID)
+{
+	//start position of the array
+	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
+	
+	//end position of the array
+	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	
+	if((int)myID == num_threads -1)
+	{
+           endPos = WIKI_ARRAY_SIZE;
+	}
+	
+    	int i, j;
+	
+    	//for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
+    	//{ 
+	   for(j = startPos; j < endPos; j++)
+	   {
+       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       		longestSub++;    
+	   }
+    	//}  
+	pthread_exit(NULL);
+} 
 
 void readToMemory()
 { 
