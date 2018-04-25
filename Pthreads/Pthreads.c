@@ -125,7 +125,7 @@ void loopingFunc(void *myID)
 void readToMemory()
 { 
 	int nlines, maxlines = 10;
-	int k, n, err, *count, nthreads = 24;
+	int k, n, err;
 	int i;
 	double nchars = 0;
 	FILE *fd;
@@ -135,14 +135,14 @@ void readToMemory()
 
 	for (i = 0; i < WIKI_ARRAY_SIZE; i++)
 	{
-	  	wiki_array[i] = malloc(2001);
+	  	wiki_array[i] = malloc(2001 * sizeof(char));
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
 	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
-	  	longestSub[i] = malloc(2001);
+	  	longestSub[i] = malloc(2001 * sizeof(char));
 	}
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
