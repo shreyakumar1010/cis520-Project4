@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
@@ -47,10 +48,10 @@ int main()
         {
           rc = pthread_create(&threads[loopinv], &attr, LCS, (void *)loopinv);
           if (rc)
-        {
+           {
 	  printf("ERROR; return code from pthread_create() is %d\n", rc);
 	  exit(-1);
-        }
+            }
 		
 	/* Free attribute and wait for the other threads */
         pthread_attr_destroy(&attr);
@@ -72,7 +73,7 @@ int main()
 	   }
 		
 	}
-    
+	}
     	gettimeofday(&time1, NULL);
     	readToMemory();
     	gettimeofday(&time2, NULL);
@@ -247,5 +248,4 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		//printf("%s\n", *longest_common_substring);
     	}
     	return max_len;
-}
 }
