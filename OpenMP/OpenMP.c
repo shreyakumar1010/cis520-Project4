@@ -55,7 +55,7 @@ int main()
 		longestSub = longestSub + startPos;
                 if(myID == num_threads-1)
                 {
-                    endPos = WIKI_ARRAY_SIZE - 1 ;
+                    endPos = WIKI_ARRAY_SIZE ;
                 }
 	
 
