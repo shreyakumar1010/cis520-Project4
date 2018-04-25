@@ -47,7 +47,7 @@ int main()
   
     	int i,j, startPos, endPos, myID;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
+	#pragma omp parallel(myID, startPos, endPos, i, j)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
@@ -55,12 +55,12 @@ int main()
 		longestSub = longestSub + startPos;
                 if(myID == num_threads-1)
                 {
-                    endPos = WIKI_ARRAY_SIZE;
+                    endPos = WIKI_ARRAY_SIZE - 1 ;
                 }
 	
 
-		for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
-		{ 
+		//for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
+		//{ 
 			//lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
                         // longestSub++; 
 			
@@ -73,7 +73,7 @@ int main()
 			
 			} 
 			
-		}  
+		//}  
 	}
     	printResults();
 	//printToFile();
