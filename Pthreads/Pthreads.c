@@ -15,6 +15,8 @@ static int _matrix_collumn_size = 0;
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
+int num_threads = 2;
+
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
