@@ -47,7 +47,7 @@ int main()
   
     	int i,j, startPos, endPos, myID;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
+	#pragma omp parallel private(myID, startPos, endPos, longestSub, j)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
