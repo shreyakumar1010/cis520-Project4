@@ -57,12 +57,13 @@ int main(int argc, char* argv[])
     	gettimeofday(&time3, NULL);	
 	MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 	findem(&rank);  
-	if(rank == 0)
+	if(rank == MASTER)
 	{
-		printToFile();
 	//=================FINAL TIMING===================
    		gettimeofday(&time4, NULL);
-   		//time to find all longest substrings	
+		MPI_Reduce(longestSub, longestSub, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, MPI_SUM, 0, MPI_COMM_WORLD);
+   		printToFile();
+		//time to find all longest substrings	
    		e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
    		e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
    		printf("Time find all Substrings: %f\n", e2);
