@@ -13,7 +13,6 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-//char *original = longestSub;
 
 int num_threads = 1;
 
@@ -148,12 +147,10 @@ void printResults()
 { 
   	int i;
 	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
-	//longestSub = original;
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
-      		printf("%d-%d: %s", i , i + 1 ,longestSub); 
+      		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
       		printf("\n");
-		longestSub++;
   	}
 }
 
