@@ -18,7 +18,7 @@ char  ** wiki_array; //array that the wiki_dump file is stored into once read in
 //char ** longestSub;
 char ** longestSubChunk[num_threads];
 
-omp_lock_t theLock;//locking to avoid race conditions
+//omp_lock_t theLock;//locking to avoid race conditions
 
 
 
@@ -28,7 +28,7 @@ void printToFile();
 
 int main()
 {
-	omp_init_lock(&theLock);//init lock
+	//omp_init_lock(&theLock);//init lock
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
@@ -133,7 +133,7 @@ void printToFile()
     		printf("Error opening LargestCommonSubstrings.txt!\n");
     		exit(1);
 	}
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -146,10 +146,10 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
-  	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+  	for(i = 0; i <= num_threads; i++)
   	{ 
-      		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
+      		printf("%d-%d: %s", i , i + 1 ,longestSubChunk[myID]); 
       		printf("\n");
   	}
 }
@@ -201,11 +201,11 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	 }
     	if (longest_common_substring != NULL)
     	{
-		omp_set_lock(&theLock);
+		//omp_set_lock(&theLock);
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-		omp_unset_lock(&theLock);
+		//omp_unset_lock(&theLock);
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
 	for (i = 0; i < _matrix_row_size; i++)
