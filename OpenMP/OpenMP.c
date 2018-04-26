@@ -8,9 +8,7 @@
 #define WIKI_ARRAY_SIZE 100
 #define WIKI_LINE_SIZE 2001
 
-static int **_matrix;
-static int _matrix_row_size = 0;
-static int _matrix_collumn_size = 0;
+
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
@@ -161,7 +159,19 @@ void printResults()
 
  static void init(int s1_length, int s2_length)
  {
-    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
+    	
+}
+
+int LCS(char *s1, char *s2, char **longest_common_substring)
+{
+	int **_matrix;
+        int _matrix_row_size = 0;
+        int _matrix_collumn_size = 0;
+    	int s1_length = strlen(s1);
+    	int s2_length = strlen(s2);
+
+    	//init(s1_length, s2_length);
+	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
 		/* free matrix */
 		int i;
@@ -184,14 +194,9 @@ void printResults()
     	int j;
     	for (j = 0; j <= s2_length; j++)
 		_matrix[s1_length][j] = 0;
-}
-
-int LCS(char *s1, char *s2, char **longest_common_substring)
-{
-    	int s1_length = strlen(s1);
-    	int s2_length = strlen(s2);
-
-    	init(s1_length, s2_length);
+	
+	
+	 
 
     	int max_len = 0, max_index_i = -1;
     	int i,j, startPos, endPos, myID;
