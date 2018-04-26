@@ -4,10 +4,10 @@
 #include <sys/time.h>
 #include <stdbool.h>
 #include <omp.h>
-//#include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 500
-#define WIKI_LINE_SIZE 2001
+#define WIKI_ARRAY_SIZE 500 //How many lines are in the array (For testing we use 500, for final, we use 1M)
+#define WIKI_LINE_SIZE 2001 //How many maximum characters there are per line
+			    //We found this value via a function written in a previous commit
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -17,7 +17,7 @@ char **longestSub;
 
 omp_lock_t theLock;
 
-int num_threads = 2;
+int num_threads = 1;
 
 void readToMemory();
 void printResults();
