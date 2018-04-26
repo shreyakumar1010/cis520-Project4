@@ -7,9 +7,6 @@
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
-
-
-
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -45,7 +42,7 @@ int main()
   
     	int i,j, startPos, endPos, myID;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
+	#pragma omp parallel private(myID, startPos, endPos, j)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
@@ -157,23 +154,18 @@ void printResults()
   	}
 }
 
-
-
 int LCS(char *s1, char *s2, char **longest_common_substring)
 {
-	int **_matrix;
-        int _matrix_row_size = 0;
-        int _matrix_collumn_size = 0;
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
-	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
+
+	int **_matrix;
+	int _matrix_row_size = 0;
+	int _matrix_collumn_size = 0;
+
+    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
-		/* free matrix */
 		int i;
-		for (i = 0; i < _matrix_row_size; i++)
-	    		free(_matrix[i]);
-		free(_matrix);
-	
 		/* malloc matrix */
 		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
 		for (i = 0; i < s1_length+1; i++)
@@ -182,7 +174,8 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		_matrix_row_size = s1_length+1;
 		_matrix_collumn_size = s2_length+1;
     	}
-    	int i;
+
+	int i;
     	for (i = 0; i <= s1_length; i++)
 		_matrix[i][s2_length] = 0;
 	
@@ -190,10 +183,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	for (j = 0; j <= s2_length; j++)
 		_matrix[s1_length][j] = 0;
 
-    	//init(s1_length, s2_length);
-
     	int max_len = 0, max_index_i = -1;
-    	int  startPos, endPos, myID;
        /* omp_set_num_threads(num_threads);
 	#pragma omp parallel private(myID, startPos, endPos, i, j)
         {
@@ -233,6 +223,11 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
 		//printf("%s\n", *longest_common_substring);
-    	}
+    	}		/* free matrix */
+
+	for (i = 0; i < _matrix_row_size; i++)
+    		free(_matrix[i]);
+	free(_matrix);
+	
     	return max_len;
 }
