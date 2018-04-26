@@ -32,7 +32,11 @@ int main(int argc, char* argv[])
     	struct timeval time4;
     	double e1, e2, e3;    
     	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *)); //saved results
+	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)//initializing saved results
+	  	longestSub[i] = malloc(2001);
 	
+	//===================INIT MPI=======================
 	int rc, NumTasks, rank;
 	MPI_Status status;
 	rc = MPI_Init(&argc, &argv);
@@ -41,22 +45,20 @@ int main(int argc, char* argv[])
     		printf("MPI isn't working");
     		MPI_Abort(MPI_COMM_WORLD, rc);
   	}
-	
 	MPI_Comm_size(MPI_COMM_WORLD, &NumTasks);
   	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   	NumberofThreads = NumTasks;
-    
-    	gettimeofday(&time1, NULL);
-    	readToMemory();
-    	gettimeofday(&time2, NULL);
 	
-    	//time to read to memory	
+    	//==================READ TO MEMORY==================
+    	gettimeofday(&time1, NULL);
+    	readToMemory(); //reading
+    	gettimeofday(&time2, NULL);//time to read to memory	
     	e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
     	e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     	printf("Time to read full file to Memory: %f\n", e1);
 	
+	//====FINDING LONGEST CMN SUBSTR. & PARALLELIZING====
     	gettimeofday(&time3, NULL);	
-  
     	int i;
     	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     	{ 
@@ -65,13 +67,12 @@ int main(int argc, char* argv[])
     	}   
 	printToFile();
 	
+	//=================FINAL TIMING===================
    	gettimeofday(&time4, NULL);
-	
    	//time to find all longest substrings	
    	e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
    	e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
    	printf("Time find all Substrings: %f\n", e2);
-   
    	//total elapsed time between reading and finding all longest substrings	
    	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
@@ -85,22 +86,12 @@ void readToMemory()
 	int i;
 	double nchars = 0;
 	FILE *fd;
-	
-	 //Adding malloc for space
 	wiki_array = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-
-	for (i = 0; i < WIKI_ARRAY_SIZE; i++)
+	for (i = 0; i < WIKI_ARRAY_SIZE; i++)//initializing the array
 	{
 	  	wiki_array[i] = malloc(2001);
 	}
-	//saved results
-	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
-	{
-	  	longestSub[i] = malloc(2001);
-	}
-
+	//==================READING FILE=================
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
 	do 
@@ -110,20 +101,18 @@ void readToMemory()
 			nchars += (double) strlen(wiki_array[nlines]);
 	}
 	while (err != EOF && nlines < WIKI_ARRAY_SIZE);
-	
 	fclose(fd);
 	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
 }
 
-void printToFile()
+void printToFile()//self-explanitory. Prints the substrings found to a file for processing
 {
 	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
-	if (f == NULL)
+	if (f == NULL)//if there's a problem with the file error handling
 	{
     		printf("Error opening LargestCommonSubstrings.txt!\n");
     		exit(1);
 	}
-	
 	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
@@ -131,11 +120,10 @@ void printToFile()
 		fprintf(f, "%d-%d: %s", i, i + 1,longestSub[i]);
 		fprintf(f, "\n");
 	}
-	
 	fclose(f);
 }
 
-void printResults()
+void printResults()//printing to console for debugging
 { 
   	int i;
 	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
@@ -174,12 +162,11 @@ void printResults()
 }
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
+//function to find the LCS
 {
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
-
     	init(s1_length, s2_length);
-
     	int max_len = 0, max_index_i = -1;
     	int i,j;
     	for (i = s1_length-1; i >= 0; i--)
@@ -191,9 +178,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				_matrix[i][j] = 0;
     				continue;
     	    		}
-		
     	    		_matrix[i][j] = _matrix[i+1][j+1] + 1;
-		
     	    		if (_matrix[i][j] > max_len)
 	    		{
     				max_len = _matrix[i][j];
