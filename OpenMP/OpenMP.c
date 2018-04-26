@@ -13,7 +13,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-char **original = longestSub;
+void *original = longestSub;
 
 int num_threads = 8;
 
