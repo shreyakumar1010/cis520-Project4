@@ -8,9 +8,6 @@
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
-static int **_matrix;
-static int _matrix_row_size = 0;
-static int _matrix_collumn_size = 0;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
@@ -191,44 +188,37 @@ void printResults()
   	}
 }
 
- static void init(int s1_length, int s2_length)
- {
-    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
-    	{
-		/* free matrix */
-		int i;
-		for (i = 0; i < _matrix_row_size; i++)
-	    		free(_matrix[i]);
-		free(_matrix);
-	
-		/* malloc matrix */
-		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
-		for (i = 0; i < s1_length+1; i++)
-	    		_matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
-
-		_matrix_row_size = s1_length+1;
-		_matrix_collumn_size = s2_length+1;
-    	}
-    	int i;
-    	for (i = 0; i <= s1_length; i++)
-		_matrix[i][s2_length] = 0;
-	
-    	int j;
-    	for (j = 0; j <= s2_length; j++)
-		_matrix[s1_length][j] = 0;
-}
+ 
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
 {
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
+	
+	int ** _matrix;
+	int _matrix_row_size = 0;
+	int _matrix_collumn_size = 0;
 
-    	init(s1_length, s2_length);
-
-    	int max_len = 0, max_index_i = -1;
-    	int i,j;
-    	for (i = s1_length-1; i >= 0; i--)
+    	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
+		int i;
+		/* malloc matrix */
+		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
+		for (i = 0; i < s1_length+1; i++)
+	    		_matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
+		_matrix_row_size = s1_length+1;
+		_matrix_collumn_size = s2_length+1;
+    	}
+
+	int i;
+    	for (i = 0; i <= s1_length; i++)
+		_matrix[i][s2_length] = 0;
+    	int j;
+    	for (j = 0; j <= s2_length; j++)
+		_matrix[s1_length][j] = 0;
+    	int max_len = 0, max_index_i = -1;
+        for (i = s1_length-1; i >= 0; i--)
+        {
     		for (j = s2_length-1; j >= 0; j--)
 		{
     	    		if (s1[i] != s2[j])
@@ -245,13 +235,19 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_index_i = i;
     	    		}
     		}
-    	}
+	 }
     	if (longest_common_substring != NULL)
     	{
+		//omp_set_lock(&theLock);
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
+		//omp_unset_lock(&theLock);
 		//printf("%s\n", *longest_common_substring);
-    	}
+    	}		/* free matrix */
+	for (i = 0; i < _matrix_row_size; i++)
+    		free(_matrix[i]);
+	free(_matrix);
     	return max_len;
+
 }
