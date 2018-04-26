@@ -70,8 +70,8 @@ int main()
 			
 		//}  
 	}
-    	printResults();
-	//printToFile();
+    	//printResults();
+	printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
@@ -125,7 +125,7 @@ void readToMemory()
 
 void printToFile()
 {
-	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
+	FILE *f = fopen("LargestCommonSubstringsONETHREAD.txt", "w");
 	if (f == NULL)
 	{
     		printf("Error opening LargestCommonSubstrings.txt!\n");
