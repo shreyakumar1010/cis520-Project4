@@ -15,7 +15,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 char  ** wiki_array; //array that the wiki_dump file is stored into once read in
 //char ** longestSub;
-char ** longestSubChunk[numthreads];
+char ** longestSubChunk[num_threads];
 
 omp_lock_t theLock;//locking to avoid race conditions
 
@@ -105,12 +105,12 @@ void readToMemory()
 	  	wiki_array[i] = malloc(2001);
 	}
 	//saved results
-	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+	//longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
+	/*for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
 	  	longestSub[i] = malloc(2001);
-	}
+	}*/
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
 	do 
