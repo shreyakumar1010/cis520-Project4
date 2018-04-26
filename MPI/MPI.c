@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
   	}
 	MPI_Comm_size(MPI_COMM_WORLD, &NumTasks);
   	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  	NumberofThreads = NumTasks;
+  	NumThreads = NumTasks;
 	
     	//==================READ TO MEMORY==================
     	gettimeofday(&time1, NULL);
