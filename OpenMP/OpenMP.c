@@ -11,7 +11,7 @@
 
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
-char* LCS (char * s1, char * s2, char ** longest_common_substring);
+int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 //load the lines into an array
 char  **wiki_array;
@@ -66,7 +66,7 @@ int main()
 			for (j = startPos; j< endPos; j++)
 			{
 				
-				longestSub[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
+				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
 			
 			} 
@@ -159,7 +159,7 @@ void printResults()
 
 
 
-char* LCS(char *s1, char *s2, char **longest_common_substring)
+int LCS(char *s1, char *s2, char **longest_common_substring)
 {
 	int **_matrix;
         int _matrix_row_size = 0;
@@ -234,5 +234,5 @@ char* LCS(char *s1, char *s2, char **longest_common_substring)
 		(*longest_common_substring)[max_len] = '\0';
 		//printf("%s\n", *longest_common_substring);
     	}
-    	return s1+max_index_i;
+    	return max_len;
 }
