@@ -70,8 +70,8 @@ int main()
 			
 		//}  
 	}
-    	//printResults();
-	printToFile();
+    	printResults();
+	//printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
