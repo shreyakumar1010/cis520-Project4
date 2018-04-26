@@ -46,21 +46,33 @@ int main()
 	//==========Finding Longest Substrings & Parallelizing==========
     	gettimeofday(&time3, NULL);	
     	int i,j, startPos, endPos, myID;
+	char ** longestSubChunk[numthreads];
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j)
-	{
+	#pragma omp parallel private(myID, startPos, endPos, j, longestSubChunk)
+	{     //allocate the chunk of answer array 
+		//saved results
+		
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
                 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-		longestSub = longestSub + startPos;
-                if(myID == num_threads-1)
+		if(myID == num_threads-1)
                 {
                     endPos = WIKI_ARRAY_SIZE - 1 ;
                 }
+		
+		longestSubChunk = (char **) malloc( (endPos - startPos)  * sizeof(char *));
+
+		for (i = 0; i < (endPos - startPos) -1; i++)
+		{
+			longestSubChunk[i] = malloc(2001);
+		}
+		
+		//longestSub = longestSub + startPos;
+                
 			for (j = startPos; j< endPos; j++)
 			{
-				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
-				longestSub++;   
+				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubChunk);
+				longestSubChunk++;   
 			} 
 	}
     	printResults();
