@@ -147,7 +147,7 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	//longestSub = original;
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
