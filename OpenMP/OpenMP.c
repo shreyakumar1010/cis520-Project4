@@ -159,7 +159,7 @@ void printResults()
 		{
 			printf("%d-%d: %s",lineNumber  ,lineNumberPlusOne  ,longestSubChunk[i]); 
 			printf("\n");
-			longSubChunk[i]++;
+			longestSubChunk[i]++;
 			lineNumber++;
 			lineNumberPlusOne++;
 		}
@@ -223,4 +223,5 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     		free(_matrix[i]);
 	free(_matrix);
     	return max_len;
+}
 }
