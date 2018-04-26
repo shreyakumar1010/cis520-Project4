@@ -11,6 +11,7 @@
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int num_threads = 1;
+int myID;
 
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -47,7 +48,7 @@ int main()
 	
 	//==========Finding Longest Substrings & Parallelizing==========
     	gettimeofday(&time3, NULL);	
-    	int i,j, startPos, endPos, myID;
+    	int i,j, startPos, endPos;
 	
 	omp_set_num_threads(num_threads);
 	#pragma omp parallel private(myID, startPos, endPos, j)
