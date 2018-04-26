@@ -17,8 +17,6 @@ char **longestSub;
 
 omp_lock_t theLock;
 
-omp_init_lock(&theLock);
-
 int num_threads = 2;
 
 void readToMemory();
@@ -27,6 +25,8 @@ void printToFile();
 
 int main()
 {
+	omp_init_lock(&theLock);
+	
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
