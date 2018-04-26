@@ -16,6 +16,7 @@ char  **wiki_array;
 char **longestSub;
 
 omp_lock_t theLock;
+
 omp_init_lock(&theLock);
 
 int num_threads = 2;
