@@ -16,9 +16,8 @@ int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 int NumberofThreads;
 
-//load the lines into an array
-char  **wiki_array;
-char **longestSub;
+char  ** wiki_array;
+char ** longestSub;
 
 void readToMemory();
 void printResults();
