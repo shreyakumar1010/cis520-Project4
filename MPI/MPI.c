@@ -8,10 +8,6 @@
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
-static int **_matrix;
-static int _matrix_row_size = 0;
-static int _matrix_collumn_size = 0;
-
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 int NumberofThreads;
@@ -58,24 +54,41 @@ int main(int argc, char* argv[])
 	
 	//====FINDING LONGEST CMN SUBSTR. & PARALLELIZING====
     	gettimeofday(&time3, NULL);	
-    	int i;
+	MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+	findem(&rank);  
+	if(rank == 0)
+	{
+		printToFile();
+	//=================FINAL TIMING===================
+   		gettimeofday(&time4, NULL);
+   		//time to find all longest substrings	
+   		e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+   		e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+   		printf("Time find all Substrings: %f\n", e2);
+   		//total elapsed time between reading and finding all longest substrings	
+   		e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+   		e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+   		printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
+	}
+	MPI_Finalize();
+}
+
+void findem(void * rank)
+{
+	int myID = *((int *) rank);
+	int startPos = ((long) myID) * (WIKI_ARRAY_SIZE / NumThreads);
+  	int endPos = startPos + (WIKI_ARRAY_SIZE / NumThreads);
+	if(myID == NumThreads - 1)
+		endPos = WIKI_ARRAY_SIZE;
+    	int i, j;
     	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     	{ 
-       		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       		longestSub++;    
-    	}   
-	printToFile();
-	
-	//=================FINAL TIMING===================
-   	gettimeofday(&time4, NULL);
-   	//time to find all longest substrings	
-   	e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
-   	e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
-   	printf("Time find all Substrings: %f\n", e2);
-   	//total elapsed time between reading and finding all longest substrings	
-   	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-   	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
+		for(j = startPos; j < endPos; j++)
+		{
+       			lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
+       			longestSub++; 
+		}
+    	} 
 }
 
 void readToMemory()
@@ -133,43 +146,32 @@ void printResults()//printing to console for debugging
   	}
 }
 
- static void init(int s1_length, int s2_length)
- {
+int LCS(char *s1, char *s2, char **longest_common_substring)
+{
+    	int s1_length = strlen(s1);
+    	int s2_length = strlen(s2);
+	int ** _matrix;
+	int _matrix_row_size = 0;
+	int _matrix_collumn_size = 0;
     	if (s1_length+1 > _matrix_row_size || s2_length+1 > _matrix_collumn_size)
     	{
-		/* free matrix */
 		int i;
-		for (i = 0; i < _matrix_row_size; i++)
-	    		free(_matrix[i]);
-		free(_matrix);
-	
 		/* malloc matrix */
 		_matrix = (int **)malloc((s1_length+1) * sizeof(int*));
 		for (i = 0; i < s1_length+1; i++)
 	    		_matrix[i] = (int *)malloc((s2_length+1) * sizeof(int));
-
 		_matrix_row_size = s1_length+1;
 		_matrix_collumn_size = s2_length+1;
     	}
-    	int i;
+	int i;
     	for (i = 0; i <= s1_length; i++)
 		_matrix[i][s2_length] = 0;
-	
     	int j;
     	for (j = 0; j <= s2_length; j++)
 		_matrix[s1_length][j] = 0;
-}
-
-int LCS(char *s1, char *s2, char **longest_common_substring)
-//function to find the LCS
-{
-    	int s1_length = strlen(s1);
-    	int s2_length = strlen(s2);
-    	init(s1_length, s2_length);
     	int max_len = 0, max_index_i = -1;
-    	int i,j;
-    	for (i = s1_length-1; i >= 0; i--)
-    	{
+        for (i = s1_length-1; i >= 0; i--)
+        {
     		for (j = s2_length-1; j >= 0; j--)
 		{
     	    		if (s1[i] != s2[j])
@@ -184,13 +186,15 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     				max_index_i = i;
     	    		}
     		}
-    	}
+	 }
     	if (longest_common_substring != NULL)
     	{
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-		//printf("%s\n", *longest_common_substring);
-    	}
+    	}		/* free matrix */
+	for (i = 0; i < _matrix_row_size; i++)
+    		free(_matrix[i]);
+	free(_matrix);
     	return max_len;
 }
