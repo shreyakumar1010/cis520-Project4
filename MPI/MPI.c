@@ -18,6 +18,7 @@ char ** longestSub;
 void readToMemory();
 void printResults();
 void printToFile();
+void * findem(void * rank);
 
 int main(int argc, char* argv[])
 {
@@ -73,7 +74,7 @@ int main(int argc, char* argv[])
 	MPI_Finalize();
 }
 
-void findem(void * rank)
+void * findem(void * rank)
 {
 	int myID = *((int *) rank);
 	int startPos = ((long) myID) * (WIKI_ARRAY_SIZE / NumThreads);
