@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 500
+#define WIKI_ARRAY_SIZE 20
 #define WIKI_LINE_SIZE 2001
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
@@ -14,7 +14,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
-int num_threads = 2;
+int num_threads = 1;
 
 void readToMemory();
 void printResults();
