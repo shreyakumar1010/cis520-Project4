@@ -199,7 +199,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	 
 
     	int max_len = 0, max_index_i = -1;
-    	int i,j, startPos, endPos, myID;
+    	int  startPos, endPos, myID;
        /* omp_set_num_threads(num_threads);
 	#pragma omp parallel private(myID, startPos, endPos, i, j)
         {
