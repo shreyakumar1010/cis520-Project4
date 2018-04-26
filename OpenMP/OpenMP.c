@@ -11,7 +11,7 @@
 
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
-int LCS (char * s1, char * s2, char ** longest_common_substring);
+char* LCS (char * s1, char * s2, char ** longest_common_substring);
 
 //load the lines into an array
 char  **wiki_array;
