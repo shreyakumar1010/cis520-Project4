@@ -126,6 +126,7 @@ void readToMemory()
 	printf("Read in %d lines averaging %.01f chars/line\n", nlines, nchars / nlines);
 }
 
+/*
 void printToFile()
 {
 	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
@@ -143,15 +144,34 @@ void printToFile()
 	}
 	fclose(f);
 }
+*/
 
 void printResults()
 { 
-  	int i;
+  	int i, j;
 	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
-  	for(i = 0; i <= num_threads; i++)
-  	{ 
-      		printf("%d-%d: %s", i , i + 1 ,longestSubChunk[myID]); 
-      		printf("\n");
+	int chunksize = WIKI_ARRAY_SIZE / num_threads;
+	int lineNumber = 0;
+	int lineNumberPlusOne = 1;
+	for ( i = 0; i < num_threads; i++)
+	{
+		for  (j = 0; j < chunksize; j++)
+		{
+			printf("%d-%d: %s",lineNumber  ,lineNumberPlusOne  ,longestSubChunk[i]); 
+			printf("\n");
+			longSubChunk[i]++;
+			lineNumber++;
+			lineNumberPlusOne++;
+		}
+	
+	
+  	for(i = 0; i <= (WIKI_ARRAY_SIZE - 2); i++)
+  	{       
+		for(j = 0; j < num_threads; j++)
+	         {
+			printf("%d-%d: %s", i + j , i + j + 1 ,longestSubChunk[myID]); 
+			printf("\n");
+	         }
   	}
 }
 
