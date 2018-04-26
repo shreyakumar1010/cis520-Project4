@@ -7,10 +7,11 @@
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
+#define MASTER 0
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
-int NumberofThreads;
+int NumThreads;
 
 char  ** wiki_array;
 char ** longestSub;
@@ -29,6 +30,7 @@ int main(int argc, char* argv[])
     	double e1, e2, e3;    
     	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *)); //saved results
+	int i;
 	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)//initializing saved results
 	  	longestSub[i] = malloc(2001);
 	
