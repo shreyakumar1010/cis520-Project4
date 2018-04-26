@@ -14,7 +14,8 @@ int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 char  ** wiki_array; //array that the wiki_dump file is stored into once read in
-char ** longestSub;
+//char ** longestSub;
+char ** longestSubChunk[numthreads];
 
 omp_lock_t theLock;//locking to avoid race conditions
 
@@ -46,9 +47,9 @@ int main()
 	//==========Finding Longest Substrings & Parallelizing==========
     	gettimeofday(&time3, NULL);	
     	int i,j, startPos, endPos, myID;
-	char ** longestSubChunk[numthreads];
+	
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j, longestSubChunk)
+	#pragma omp parallel private(myID, startPos, endPos, j, longestSubChunk[myID])
 	{     //allocate the chunk of answer array 
 		//saved results
 		
@@ -60,19 +61,19 @@ int main()
                     endPos = WIKI_ARRAY_SIZE - 1 ;
                 }
 		
-		longestSubChunk = (char **) malloc( (endPos - startPos)  * sizeof(char *));
+		longestSubChunk[myID] = (char **) malloc( (endPos - startPos)  * sizeof(char *));
 
 		for (i = 0; i < (endPos - startPos) -1; i++)
 		{
-			longestSubChunk[i] = malloc(2001);
+			longestSubChunk[myID][i] = malloc(2001);
 		}
 		
 		//longestSub = longestSub + startPos;
                 
 			for (j = startPos; j< endPos; j++)
 			{
-				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubChunk);
-				longestSubChunk++;   
+				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubChunk[myID]);
+				longestSubChunk[myID]++;   
 			} 
 	}
     	printResults();
