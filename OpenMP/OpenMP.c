@@ -163,16 +163,6 @@ void printResults()
 			lineNumber++;
 			lineNumberPlusOne++;
 		}
-	
-	
-  	for(i = 0; i <= (WIKI_ARRAY_SIZE - 2); i++)
-  	{       
-		for(j = 0; j < num_threads; j++)
-	         {
-			printf("%d-%d: %s", i + j , i + j + 1 ,longestSubChunk[myID]); 
-			printf("\n");
-	         }
-  	}
 }
 
 int LCS(char *s1, char *s2, char **longest_common_substring)
