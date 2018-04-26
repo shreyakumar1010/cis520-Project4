@@ -151,7 +151,7 @@ void printResults()
 	//longestSub = original;
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
-      		printf("%d-%d: %s", i , i + 1 ,&longestSub); 
+      		printf("%d-%d: %s", i , i + 1 ,longestSub); 
       		printf("\n");
 		longestSub++;
   	}
