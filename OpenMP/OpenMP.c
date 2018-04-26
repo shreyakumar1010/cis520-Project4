@@ -10,6 +10,7 @@
 			    //We found this value via a function written in a previous commit
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
+int num_threads = 1;
 
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -19,7 +20,7 @@ char ** longestSubChunk[num_threads];
 
 omp_lock_t theLock;//locking to avoid race conditions
 
-int num_threads = 1;
+
 
 void readToMemory();
 void printResults();
