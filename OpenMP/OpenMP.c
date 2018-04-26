@@ -14,7 +14,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 char  **wiki_array;
 char **longestSub;
 
-int num_threads = 1;
+int num_threads = 2;
 
 void readToMemory();
 void printResults();
@@ -125,7 +125,7 @@ void readToMemory()
 
 void printToFile()
 {
-	FILE *f = fopen("LargestCommonSubstringsONETHREAD.txt", "w");
+	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
 	if (f == NULL)
 	{
     		printf("Error opening LargestCommonSubstrings.txt!\n");
@@ -184,17 +184,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		_matrix[s1_length][j] = 0;
 
     	int max_len = 0, max_index_i = -1;
-       /* omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
-        {
-	    myID = omp_get_thread_num();
-	    startPos = (myID) * (s2_length-1 / num_threads);
-	    endPos = startPos + (s2_length-1 / num_threads);
-	    if(myID == num_threads-1)
-	    {
-      	      endPos = s2_length-1;
-             }
-	     */
+   
 	
           for (i = s1_length-1; i >= 0; i--)
           {
