@@ -7,7 +7,7 @@
 
 #define WIKI_ARRAY_SIZE 500 //How many lines are in the array (For testing we use 500, for final, we use 1M)
 #define WIKI_LINE_SIZE 2001 //How many maximum characters there are per line
-#define num_threads 1			    //We found this value via a function written in a previous commit
+#define num_threads 4			    //We found this value via a function written in a previous commit
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 
