@@ -223,5 +223,5 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     		free(_matrix[i]);
 	free(_matrix);
     	return max_len;
-}
+
 }
