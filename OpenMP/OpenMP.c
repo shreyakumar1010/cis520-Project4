@@ -50,7 +50,7 @@ int main()
     	int i,j, startPos, endPos, myID;
 	
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j, longestSubChunk[myID])
+	#pragma omp parallel private(myID, startPos, endPos, j, longestSubChunk)
 	{     //allocate the chunk of answer array 
 		//saved results
 		
