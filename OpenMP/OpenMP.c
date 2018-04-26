@@ -47,7 +47,7 @@ int main()
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
                 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-		longestSub[startPos];
+		longestSub = longestSub + startPos;
                 if(myID == num_threads-1)
                 {
                     endPos = WIKI_ARRAY_SIZE - 1 ;
