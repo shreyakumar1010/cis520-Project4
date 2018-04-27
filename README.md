@@ -1,7 +1,7 @@
 # cis520-Project4
 
 Compiling pthreads
-gcc pthreads.c -lpthread
+gcc -lpthread Pthreads.c
 
 Compiling openMP
 gcc -fopenmp OpenMP.c
