@@ -1,7 +1,7 @@
 all: Pthreads.c
       gcc -Wall -Wextra -lpthread Pthreads.c -o Pthreads
  
-run: Pthreads
+run: Pthread
       ./Pthreads
        
 schedule:
