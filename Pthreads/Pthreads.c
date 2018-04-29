@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 10000
+#define WIKI_ARRAY_SIZE 100000
 #define WIKI_LINE_SIZE 2001
 
 
@@ -13,7 +13,7 @@ int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 void loopingFunc(void *myID);
 
-int num_threads = 4;
+int num_threads = 8;
 
 //load the lines into an array
 char  **wiki_array;
