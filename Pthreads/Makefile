@@ -3,9 +3,5 @@ all: Pthreads.c
 
 run: Pthreads
 	./Pthreads
-
-:wq
-:q
-
-
+	
 	srun -N4 ./Pthreads
