@@ -1,5 +1,5 @@
 all: Pthreads.c
-	gcc -Wall -Wextra -lpthread Pthreads.c -o Pthreads
+	gcc -pthread -o Pthreads Pthreads.c
 
 run: Pthreads
 	./Pthreads
