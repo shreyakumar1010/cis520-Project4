@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 1000
+#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
 
