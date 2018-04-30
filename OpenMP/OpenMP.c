@@ -9,7 +9,7 @@
 #define WIKI_LINE_SIZE 2001
 #define num_threads 8
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
-int LCS (char * s1, char * s2, char ** longest_common_substring);
+int LCS (char * s1, char * s2, char ** longest_common_substring, int index);
 
 //load the lines into an array
 char  **wiki_array;
@@ -43,14 +43,15 @@ int main()
 	
     	gettimeofday(&time3, NULL);	
   
-    	int i,j, startPos, endPos, myID;
+    	int i,j, startPos, endPos, myID, index;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j)
+	#pragma omp parallel private(myID, startPos, endPos, j, index)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
                 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
 		longestSub = longestSub + startPos;
+		index = startPos;
                 if(myID == num_threads-1)
                 {
                     endPos = WIKI_ARRAY_SIZE - 1 ;
@@ -68,7 +69,8 @@ int main()
 				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
 				printf("\n");
 				if(j < 20000 ) {
-				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
+				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub, index);
+				index++;
 				longestSub++;   
 				}
 			
@@ -160,7 +162,7 @@ void printResults()
   	}
 }
 
-int LCS(char *s1, char *s2, char **longest_common_substring)
+int LCS(char *s1, char *s2, char **longest_common_substring, int index)
 {
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
@@ -190,17 +192,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		_matrix[s1_length][j] = 0;
 
     	int max_len = 0, max_index_i = -1;
-       /* omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
-        {
-	    myID = omp_get_thread_num();
-	    startPos = (myID) * (s2_length-1 / num_threads);
-	    endPos = startPos + (s2_length-1 / num_threads);
-	    if(myID == num_threads-1)
-	    {
-      	      endPos = s2_length-1;
-             }
-	     */
+   
 	
           for (i = s1_length-1; i >= 0; i--)
           {
@@ -226,13 +218,13 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	if (longest_common_substring != NULL)
     	{
 		omp_set_lock(&my_lock);
-		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		longest_common_substring[index] = malloc(sizeof(char) * (max_len+1));
 		if(*longest_common_substring == NULL) {
 			perror("Could not allocate memory");
 			exit(0);
 		}
-		strncpy(*longest_common_substring, s1+max_index_i, max_len);
-		(*longest_common_substring)[max_len] = '\0';
+		strncpy(longest_common_substring[index], s1+max_index_i, max_len);
+		(longest_common_substring)[index][max_len] = '\0';
 		omp_unset_lock(&my_lock);
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
