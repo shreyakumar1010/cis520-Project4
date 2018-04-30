@@ -13,7 +13,7 @@ pthread_mutex_t lock;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
-void loopingFunc(void *myID);
+void * loopingFunc(void * tid);
 
 //load the lines into an array
 char  **wiki_array;
@@ -55,7 +55,7 @@ int main()
        
 	for ( i = 0; i < num_threads; i++)
 	{
-		rc = pthread_create(&threads[i], &attr, loopingFunc, (void *) &tids[i]);
+		rc = pthread_create(&threads[i], &attr, loopingFunc(), (void *) &tids[i]);
               	if(rc)
 	      	{
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
@@ -91,7 +91,7 @@ int main()
 	
 }
 
-void * loopingFunc()
+void * loopingFunc(void * tid)
 {
 	int * myID = (int *) tid;
 	//start position of the array
@@ -227,7 +227,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	if (longest_common_substring != NULL)
     	{
 		pthread_mutex_lock(&lock)
-		*longest_common_substring = malloc(sizeof(char) * (max_len + 1));
+		*longest_common_substring = malloc(sizeof(char)*(max_len + 1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
 		pthread_mutex_unlock(&lock);
