@@ -100,7 +100,7 @@ void loopingFunc(void *myID)
 {
 	//start position of the array
 	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
-	char ** threadLongestSub = longestSub + startPos;
+	char **threadLongestSub = longestSub + startPos;
 	//end position of the array
 	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
 	//longestSub = longestSub + startPos;
