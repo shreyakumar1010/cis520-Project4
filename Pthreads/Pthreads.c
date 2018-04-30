@@ -169,7 +169,7 @@ void printToFile()
 	
 	fclose(f);
 }
-
+//
 void printResults()
 { 
   	int i;
