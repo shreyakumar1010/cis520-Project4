@@ -4,4 +4,4 @@ all: OpenMP.c
 run: OpenMP
 	./OpenMP
 	
-	#srun -N4 ./OpenMP
+	
