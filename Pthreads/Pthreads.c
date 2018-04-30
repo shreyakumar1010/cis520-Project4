@@ -54,7 +54,7 @@ int main()
        
 	for ( i = 0; i < num_threads; i++)
 	{
-	      rc = pthread_create(&threads[i], &attr, loopingFunc, (void *)i); 
+	      rc = pthread_create(&threads[i], &attr, loopingFunc, i); 
               if(rc)
 	      {
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
