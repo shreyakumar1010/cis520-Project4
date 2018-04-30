@@ -66,9 +66,10 @@ int main()
 			{
 				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
 				printf("/n");
-				
+				if(j < 20000 ) {
 				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
+				}
 			
 			} 
 			
