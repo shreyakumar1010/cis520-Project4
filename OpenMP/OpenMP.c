@@ -66,8 +66,8 @@ int main()
 			
 			for (j = startPos; j< endPos; j++)
 			{
-				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
-				printf("\n");
+				//printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+				//printf("\n");
 				//if(j < 20000 ) {
 				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubPointer);
 				longestSubPointer++;   
@@ -77,8 +77,8 @@ int main()
 			
 		//}  
 	}
-    	printResults();
-	//printToFile();
+    	//printResults();
+	printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
@@ -141,7 +141,7 @@ void printToFile()
     		exit(1);
 	}
 	
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
