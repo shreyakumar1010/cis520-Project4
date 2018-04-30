@@ -4,18 +4,16 @@
 #include <sys/time.h>
 #include <stdbool.h>
 #include <pthread.h>
-//This is the seg faulty one
 
-
-#define WIKI_ARRAY_SIZE 50000
+#define WIKI_ARRAY_SIZE 15000
 #define WIKI_LINE_SIZE 2001
-#define num_threads 32
 
-pthread_mutex_t lock;
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
-void * loopingFunc(void * tid);
+void loopingFunc(void *myID);
+
+int num_threads = 32;
 
 //load the lines into an array
 char  **wiki_array;
@@ -32,15 +30,14 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
+    	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int rc, i, tids[num_threads];
+	int myID, k, rc, i;
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
 	
 	/* Initialize and set thread detached attribute */
-	pthread_mutex_init(&lock, NULL);
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	
@@ -57,13 +54,15 @@ int main()
        
 	for ( i = 0; i < num_threads; i++)
 	{
-		rc = pthread_create(&threads[i], &attr, loopingFunc, (void *) &tids[i]);
-              	if(rc)
-	      	{
+	      rc = pthread_create(&threads[i], &attr, loopingFunc, (void *)i); 
+              if(rc)
+	      {
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
 	            exit(-1);	
-	     	}		
+	       }		
 	}
+	
+	pthread_attr_destroy(&attr);
 	
         for(i=0; i<num_threads; i++)
         {
@@ -74,7 +73,11 @@ int main()
 	        exit(-1);
               }
        }
+	
+	
     	printResults();
+	//printToFile();
+	
    	gettimeofday(&time4, NULL);
 	
    	//time to find all longest substrings	
@@ -87,42 +90,40 @@ int main()
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 	
-	pthread_attr_destroy(&attr);
-	pthread_mutex_destroy(&lock);
-	pthread_exit(NULL);
 	
 }
 
-void * loopingFunc(void * tid)
+void loopingFunc(void *myID)
 {
-	int * myID = (int *) tid;
 	//start position of the array
 	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
-	char **threadLongestSub = longestSub + startPos;
+	
 	//end position of the array
 	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	longestSub = longestSub + startPos;
 	
 	if((int)myID == num_threads -1)
 	{
            endPos = WIKI_ARRAY_SIZE - 1 ;
 	}
 	
-    	int j;
+    	int i, j;
 	
+    	//for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
+    	//{ 
 	   for(j = startPos; j < endPos; j++)
 	   {
-		   printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
-				printf("\n");
-       		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], threadLongestSub);
-       		threadLongestSub++;    
-	   } 
+       		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
+       		longestSub++;    
+	   }
+    	//}  
 	pthread_exit(NULL);
 } 
 
 void readToMemory()
 { 
-	int nlines = 10;
-	int err;
+	int nlines, maxlines = 10;
+	int k, n, err;
 	int i;
 	double nchars = 0;
 	FILE *fd;
@@ -136,6 +137,11 @@ void readToMemory()
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+
+	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
+	{
+	  	longestSub[i] = malloc(2001 * sizeof(char));
+	}
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
@@ -160,6 +166,7 @@ void printToFile()
     		exit(1);
 	}
 	
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -169,10 +176,11 @@ void printToFile()
 	
 	fclose(f);
 }
-//
+
 void printResults()
 { 
   	int i;
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
@@ -230,12 +238,12 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	 }
     	if (longest_common_substring != NULL)
     	{
-		pthread_mutex_lock(&lock);
-		//int theInt = (int) sizeof(char) * (int) (max_len + 1);
-		*longest_common_substring = malloc(sizeof(char) * (max_len + 1));
+		//omp_set_lock(&theLock);
+		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-		pthread_mutex_unlock(&lock);
+		//omp_unset_lock(&theLock);
+		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
