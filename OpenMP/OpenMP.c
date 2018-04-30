@@ -227,8 +227,9 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	{
 		omp_set_lock(&my_lock);
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
-		strncpy(*longest_common_substring, s1+max_index_i, max_len);
-		(*longest_common_substring)[max_len] = '\0';
+		//strncpy(*longest_common_substring, s1+max_index_i, max_len);
+		strcpy(*longest_common_substring, "this is the substring");
+		//(*longest_common_substring)[max_len] = '\0';
 		omp_unset_lock(&my_lock);
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
