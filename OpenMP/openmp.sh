@@ -21,9 +21,9 @@ echo '=====================JOB STARTING=========================='
 
 ### CHANGE THE LINES BELOW TO SELECT DIFFERENT MPI CODES AND/OR COMPILERS
 #Compile an exercise code
-gcc -fopenmp OpenMP.c
+gcc -fopenmp OpenMP.c -o OpenMP
 #Run the code
-srun -N4 ./a.out
+srun -N4 ./OpenMP
 
 ### Issue the sleep so we have time to see the job actually running
 sleep 120
