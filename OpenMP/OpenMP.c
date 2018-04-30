@@ -17,8 +17,8 @@ char  **wiki_array;
 char **longestSub;
 
 void omp_init_lock(omp_lock_t *lock);
-omp_lock_t *lock;
-omp_init_lock(&lock);
+omp_lock_t lock;
+
 
 int num_threads = 4;
 
@@ -29,7 +29,7 @@ void printToFile();
 
 int main()
 {
-	
+	omp_init_lock(&lock);
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
