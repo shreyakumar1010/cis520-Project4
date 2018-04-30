@@ -153,7 +153,7 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
