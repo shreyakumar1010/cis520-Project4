@@ -116,7 +116,9 @@ void readToMemory()
 	  	longestSub[i] = malloc(2001);
 	}
 
-	fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/wiki_dump.txt", "r");
+	//fd = fopen("/homes/coreyvessar/cis520/cis520-Project4/wiki_dump.txt", "r");
+	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
+	//"/homes/dan/625/wiki_dump.txt"
 	nlines = -1;
 	do 
 	{
