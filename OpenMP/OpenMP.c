@@ -15,7 +15,7 @@ char  **wiki_array;
 char **longestSub;
 omp_lock_t my_lock;
 
-int num_threads = 16;
+int num_threads = 1;
 
 void readToMemory();
 void printResults();
