@@ -4,6 +4,8 @@
 #include <sys/time.h>
 #include <stdbool.h>
 #include <pthread.h>
+//This is the seg faulty one
+
 
 #define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
