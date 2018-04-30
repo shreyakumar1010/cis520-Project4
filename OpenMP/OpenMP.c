@@ -15,9 +15,9 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-omp_lock_t *writelock;
+omp_lock_t writelock;
 
-omp_init_lock(&writelock);
+omp_init_lock(*writelock);
 
 int num_threads = 4;
 
