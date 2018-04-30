@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 40000
+#define WIKI_ARRAY_SIZE 100000
 #define WIKI_LINE_SIZE 2001
 #define num_threads 8
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
