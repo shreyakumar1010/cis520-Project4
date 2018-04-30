@@ -15,7 +15,7 @@ char  **wiki_array;
 char **longestSub;
 char **originalLongestSub; 
 
-int num_threads = 1;
+int num_threads = 4;
 
 void readToMemory();
 void printResults();
