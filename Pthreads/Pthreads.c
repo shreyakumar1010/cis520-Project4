@@ -30,9 +30,9 @@ int main()
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
+    	int Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int myID, k, rc, i;
+	int rc, i;
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
@@ -88,7 +88,6 @@ int main()
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 	
-	
 }
 
 void loopingFunc(void *myID)
@@ -104,7 +103,7 @@ void loopingFunc(void *myID)
            endPos = WIKI_ARRAY_SIZE - 1 ;
 	}
 	
-    	int i, j;
+    	int j;
 	
 	   for(j = startPos; j < endPos; j++)
 	   {
@@ -116,8 +115,8 @@ void loopingFunc(void *myID)
 
 void readToMemory()
 { 
-	int nlines, maxlines = 10;
-	int k, n, err;
+	int nlines = 10;
+	int err;
 	int i;
 	double nchars = 0;
 	FILE *fd;
