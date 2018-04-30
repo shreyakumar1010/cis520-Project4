@@ -1,5 +1,5 @@
 ##### These lines are for Slurm
-#SBATCH -N 2                      #Number of nodes to use
+#SBATCH -N 4                      #Number of nodes to use
 #SBATCH -p pReserved              #Workshop queue
 #SBATCH -t 5:00                   #Maximum time required
 #SBATCH -o output.%j              #Output file name
@@ -23,7 +23,7 @@ echo '=====================JOB STARTING=========================='
 #Compile an exercise code
 gcc -fopenmp OpenMP.c
 #Run the code
-srun -N2 ./a.out
+srun -N4 ./a.out
 
 ### Issue the sleep so we have time to see the job actually running
 sleep 120
