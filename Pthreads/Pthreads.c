@@ -227,8 +227,8 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	if (longest_common_substring != NULL)
     	{
 		pthread_mutex_lock(&lock)
-		int theInt = (int) sizeof(char) * (int) (max_len + 1);
-		*longest_common_substring = malloc(theInt);
+		//int theInt = (int) sizeof(char) * (int) (max_len + 1);
+		longest_common_substring = malloc(sizeof(char) * (max_len + 1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
 		pthread_mutex_unlock(&lock);
