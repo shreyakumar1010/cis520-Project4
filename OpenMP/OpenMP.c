@@ -7,7 +7,7 @@
 
 #define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
-#deine num_threads 2
+#define num_threads 2
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
