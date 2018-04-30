@@ -18,7 +18,7 @@ char **longestSub;
 
 void omp_init_lock(omp_lock_t *lock);
 omp_lock_t *lock;
-//omp_init_lock(writelock*);
+omp_init_lock(writelock*);
 
 int num_threads = 4;
 
