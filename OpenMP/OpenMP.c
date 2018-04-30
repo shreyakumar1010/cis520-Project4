@@ -104,12 +104,12 @@ void readToMemory()
 	  	wiki_array[i] = malloc(2001);
 	}
 	//saved results
-	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+	longestSub = (char **) malloc( (WIKI_ARRAY_SIZE - 1 )* sizeof(char *));
 
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
+	/*for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
 	  	longestSub[i] = malloc(2001);
-	}
+	}*/
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
