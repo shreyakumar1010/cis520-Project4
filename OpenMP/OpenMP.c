@@ -8,6 +8,8 @@
 #define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
 #define num_threads 32
+char * numCores = "4";
+
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -90,7 +92,7 @@ int main()
    	//total elapsed time between reading and finding all longest substrings	
    	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   	printf("DATA, %d, %s, %f, %d\n", myVersion, getenv("NSLOTS"), e3, num_threads);
+   	printf("DATA, %d, %s, %f, %d, %d, %s\n", myVersion, getenv("NSLOTS"), e3, num_threads,WIKI_ARRAY_SIZE, numCores);
 }
 
 void readToMemory()
