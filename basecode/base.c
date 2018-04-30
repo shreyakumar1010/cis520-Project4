@@ -45,7 +45,7 @@ int main()
     	int i;
     	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
     	{ 
-		printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+		printf("%d-%d: %s", i ,i + 1 ,"lines submitted to LCS");
                 printf("\n");
        		lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
        		longestSub++;    
