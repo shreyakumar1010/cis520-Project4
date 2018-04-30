@@ -13,6 +13,7 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
+omp_lock_t my_lock;
 
 int num_threads = 16;
 
@@ -22,6 +23,7 @@ void printToFile();
 
 int main()
 {
+	omp_init_lock(&my_lock);
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
@@ -219,9 +221,11 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
  //}
     	if (longest_common_substring != NULL)
     	{
+		omp_set_lock(&my_lock);
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
+		omp_unset_lock(&my_lock);
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
 
