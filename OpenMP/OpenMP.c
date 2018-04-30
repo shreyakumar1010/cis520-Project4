@@ -7,6 +7,7 @@
 
 #define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
+#deine num_threads 2
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -15,7 +16,7 @@ char  **wiki_array;
 char **longestSub;
 omp_lock_t my_lock;
 
-int num_threads = 2;
+//int num_threads = 2;
 
 void readToMemory();
 void printResults();
