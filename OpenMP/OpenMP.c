@@ -224,10 +224,10 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		(*longest_common_substring)[max_len] = '\0';
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
-/*
+
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
-	free(_matrix); */
+	free(_matrix); 
 	
     	return max_len;
 }
