@@ -5,8 +5,9 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 20000
+#define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
+#define num_threads 32
 
 pthread_mutex_t lock;
 
@@ -15,7 +16,7 @@ int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 void loopingFunc(void *myID);
 
-int num_threads = 32;
+//int num_threads = 32;
 
 //load the lines into an array
 char  **wiki_array;
