@@ -5,20 +5,14 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 500
+#define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
-
-
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-
-void omp_init_lock(omp_lock_t *lock);
-omp_lock_t lock;
-
 
 int num_threads = 4;
 
@@ -26,10 +20,8 @@ void readToMemory();
 void printResults();
 void printToFile();
 
-
 int main()
 {
-	omp_init_lock(&lock);
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
@@ -225,20 +217,17 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	  }
     	
  //}
-	
     	if (longest_common_substring != NULL)
-    	{       omp_set_lock(&lock);
+    	{
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-	        omp_unset_lock(&lock);
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
-     
+
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
 	free(_matrix);
-	
 	
     	return max_len;
 }
