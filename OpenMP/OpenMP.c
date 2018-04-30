@@ -64,6 +64,8 @@ int main()
 			
 			for (j = startPos; j< endPos; j++)
 			{
+				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+				printf("/n");
 				
 				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
