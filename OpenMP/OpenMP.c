@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 10000
+#define WIKI_ARRAY_SIZE 10002
 #define WIKI_LINE_SIZE 2001
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
