@@ -13,9 +13,8 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-char **originalLongestSub; 
 
-int num_threads = 4;
+int num_threads = 1;
 
 void readToMemory();
 void printResults();
@@ -109,7 +108,6 @@ void readToMemory()
 	{
 	  	longestSub[i] = malloc(2001);
 	}
-	originalLongestSub = longestSub;
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
@@ -134,7 +132,7 @@ void printToFile()
     		exit(1);
 	}
 	
-	longestSub = originalLongestSub;
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -148,7 +146,7 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	longestSub = originalLongestSub;
+	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
