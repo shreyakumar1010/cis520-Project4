@@ -11,12 +11,9 @@
 
 pthread_mutex_t lock;
 
-
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 void loopingFunc(void *myID);
-
-//int num_threads = 32;
 
 //load the lines into an array
 char  **wiki_array;
@@ -76,10 +73,8 @@ int main()
 	        exit(-1);
               }
        }
-	
-	
+
     	printResults();
-	//printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
@@ -103,7 +98,6 @@ void loopingFunc(void *myID)
 	char **threadLongestSub = longestSub + startPos;
 	//end position of the array
 	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-	//longestSub = longestSub + startPos;
 	
 	if((int)myID == num_threads -1)
 	{
@@ -112,14 +106,11 @@ void loopingFunc(void *myID)
 	
     	int i, j;
 	
-    	//for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    	//{ 
 	   for(j = startPos; j < endPos; j++)
 	   {
        		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], threadLongestSub);
        		threadLongestSub++;    
-	   }
-    	//}  
+	   } 
 	pthread_exit(NULL);
 } 
 
@@ -140,11 +131,6 @@ void readToMemory()
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-/*
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
-	{
-	  	longestSub[i] = malloc(2001 * sizeof(char));
-	} */
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
@@ -169,7 +155,6 @@ void printToFile()
     		exit(1);
 	}
 	
-	//ongestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -183,7 +168,6 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
@@ -241,14 +225,11 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	 }
     	if (longest_common_substring != NULL)
     	{
-		//omp_set_lock(&theLock);
 		pthread_mutex_lock(&lock)
-		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		*longest_common_substring = malloc(sizeof(char) * (max_len + 1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
 		pthread_mutex_unlock(&lock);
-		//omp_unset_lock(&theLock);
-		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
