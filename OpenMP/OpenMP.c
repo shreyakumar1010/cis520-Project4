@@ -71,7 +71,7 @@ int main()
 				if(j < 20000 ) {
 				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub, index);
 				index++;
-				longestSub++;   
+				//longestSub++;   
 				}
 			
 			} 
