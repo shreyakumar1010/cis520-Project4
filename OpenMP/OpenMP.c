@@ -227,6 +227,10 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
     	{
 		omp_set_lock(&my_lock);
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		if(*longest_common_substring == NULL) {
+			perror("Could not allocate memory");
+			exit(0);
+		}
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
 		omp_unset_lock(&my_lock);
