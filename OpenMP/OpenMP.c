@@ -7,7 +7,7 @@
 
 #define WIKI_ARRAY_SIZE 10000
 #define WIKI_LINE_SIZE 2001
-int lengthOfSubstring [WIKI_ARRAY_SIZE];
+//int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 //load the lines into an array
@@ -63,7 +63,7 @@ int main()
 			for (j = startPos; j< endPos; j++)
 			{
 				
-				lengthOfSubstring[j]= LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
+				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
 			
 			} 
