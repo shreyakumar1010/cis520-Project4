@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
-#define WIKI_ARRAY_SIZE 500
+#define WIKI_ARRAY_SIZE 100000
 #define WIKI_LINE_SIZE 2001
 
 static int **_matrix;
