@@ -219,20 +219,20 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 	  }
     	
  //}
-    	if (longest_common_substring != NULL)
-    	{
+    	//if (longest_common_substring != NULL)
+    	//{
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		omp_set_lock(&my_lock);
 		
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-		omp_unset_lock(&my_lock);
+		
 		//printf("%s\n", *longest_common_substring);
-    	}		/* free matrix */
+    	//}		/* free matrix */
 
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
 	free(_matrix); 
-	
+	omp_unset_lock(&my_lock);
     	return max_len;
 }
