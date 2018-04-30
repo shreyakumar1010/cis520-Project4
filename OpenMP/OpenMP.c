@@ -44,13 +44,14 @@ int main()
     	gettimeofday(&time3, NULL);	
   
     	int i,j, startPos, endPos, myID;
+	char** longestSubPointer;
 	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j, longestSub)
+	#pragma omp parallel private(myID, startPos, endPos, j, longestSubPointer)
 	{
 		myID = omp_get_thread_num();
                 startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
                 endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-		longestSub = longestSub + startPos;
+		longestSubPointer = longestSub + startPos;
                 if(myID == num_threads-1)
                 {
                     endPos = WIKI_ARRAY_SIZE - 1 ;
@@ -68,8 +69,8 @@ int main()
 				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
 				printf("\n");
 				if(j < 20000 ) {
-				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
-				longestSub++;   
+				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubPointer);
+				longestSubPointer++;   
 				}
 			
 			} 
