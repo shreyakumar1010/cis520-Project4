@@ -117,7 +117,7 @@ void loopingFunc(void *myID)
 	   for(j = startPos; j < endPos; j++)
 	   {
        		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], threadLongestSub);
-       		threadlongestSub++;    
+       		threadLongestSub++;    
 	   }
     	//}  
 	pthread_exit(NULL);
@@ -140,11 +140,11 @@ void readToMemory()
 	}
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
-
+/*
 	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
 	  	longestSub[i] = malloc(2001 * sizeof(char));
-	}
+	} */
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
