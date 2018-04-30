@@ -221,7 +221,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
  //}
     	//if (longest_common_substring != NULL)
     	//{
-		//*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		omp_set_lock(&my_lock);
 		
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
