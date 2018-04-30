@@ -4,4 +4,4 @@ all: Pthreads.c
 run: Pthreads
 	./Pthreads
 	
-	srun -N4 ./Pthreads
+	srun -N16 ./Pthreads
