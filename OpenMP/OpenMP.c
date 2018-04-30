@@ -5,10 +5,10 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 500
+#define WIKI_ARRAY_SIZE 50000
 #define WIKI_LINE_SIZE 2001
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
-int LCS (char * s1, char * s2, char * longest_common_substring);
+int LCS (char * s1, char * s2, char ** longest_common_substring);
 
 //load the lines into an array
 char  **wiki_array;
@@ -65,10 +65,8 @@ int main()
 			for (j = startPos; j< endPos; j++)
 			{
 				
-				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], *longestSub);
+				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
 				longestSub++;   
-				printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
-				printf("/n");
 			
 			} 
 			
@@ -106,7 +104,7 @@ void readToMemory()
 	  	wiki_array[i] = malloc(2001);
 	}
 	//saved results
-	longestSub = (char **) malloc( (WIKI_ARRAY_SIZE - 1 )* sizeof(char *));
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
 	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
@@ -158,7 +156,7 @@ void printResults()
   	}
 }
 
-int LCS(char *s1, char *s2, char *longest_common_substring)
+int LCS(char *s1, char *s2, char **longest_common_substring)
 {
     	int s1_length = strlen(s1);
     	int s2_length = strlen(s2);
@@ -221,20 +219,19 @@ int LCS(char *s1, char *s2, char *longest_common_substring)
 	  }
     	
  //}
-    	//if (longest_common_substring != NULL)
-    	//{
-		//longest_common_substring = malloc(sizeof(char) * (max_len+1));
+    	if (longest_common_substring != NULL)
+    	{
 		omp_set_lock(&my_lock);
-		
-		strncpy(longest_common_substring, s1+max_index_i, max_len);
-		(longest_common_substring)[max_len] = '\0';
-		
+		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
+		strncpy(*longest_common_substring, s1+max_index_i, max_len);
+		(*longest_common_substring)[max_len] = '\0';
+		omp_unset_lock(&my_lock);
 		//printf("%s\n", *longest_common_substring);
-    	//}		/* free matrix */
+    	}		/* free matrix */
 
 	for (i = 0; i < _matrix_row_size; i++)
     		free(_matrix[i]);
 	free(_matrix); 
-	omp_unset_lock(&my_lock);
+	
     	return max_len;
 }
