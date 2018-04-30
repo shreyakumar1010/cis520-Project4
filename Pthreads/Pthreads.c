@@ -32,12 +32,13 @@ int main()
     	double e1, e2, e3;    
     	int Version = 2; //base = 1, pthread = 2, openmp = 3, mpi = 4    
 	
-	int rc, i;
+	int rc, i, tids[num_threads];
 	pthread_t threads[num_threads];
 	pthread_attr_t attr;
 	void *status;
 	
 	/* Initialize and set thread detached attribute */
+	pthread_mutex_init(&lock, NULL);
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	
@@ -54,15 +55,13 @@ int main()
        
 	for ( i = 0; i < num_threads; i++)
 	{
-	      rc = pthread_create(&threads[i], &attr, loopingFunc, i); 
-              if(rc)
-	      {
+		rc = pthread_create(&threads[i], &attr, loopingFunc, (void *) &tids[i]);
+              	if(rc)
+	      	{
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
 	            exit(-1);	
-	       }		
+	     	}		
 	}
-	
-	pthread_attr_destroy(&attr);
 	
         for(i=0; i<num_threads; i++)
         {
@@ -73,9 +72,7 @@ int main()
 	        exit(-1);
               }
        }
-
     	printResults();
-	
    	gettimeofday(&time4, NULL);
 	
    	//time to find all longest substrings	
@@ -88,10 +85,15 @@ int main()
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
 	
+	pthread_attr_destroy(&attr);
+	pthread_mutex_destroy(&lock);
+	pthread_exit(NULL);
+	
 }
 
-void loopingFunc(void *myID)
+void * loopingFunc()
 {
+	int * myID = (int *) tid;
 	//start position of the array
 	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
 	char **threadLongestSub = longestSub + startPos;
