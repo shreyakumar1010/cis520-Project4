@@ -111,7 +111,7 @@ void printToFile()
     		exit(1);
 	}
 	
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
