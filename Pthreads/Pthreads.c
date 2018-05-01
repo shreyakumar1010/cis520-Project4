@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 1000
+#define WIKI_ARRAY_SIZE 20000
 #define WIKI_LINE_SIZE 2001
 
 
@@ -113,6 +113,8 @@ void loopingFunc(void *myID)
     	//{ 
 	   for(j = startPos; j < endPos; j++)
 	   {
+		   printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+		   printf("\n");
        		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], tempPos);
        		tempPos++;    
 	   }
