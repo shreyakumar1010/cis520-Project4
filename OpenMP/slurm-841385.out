@@ -1,0 +1,40 @@
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 713.051000
+Time find all Substrings: 418260.825000
+DATA, 3, (null), 418973.877000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 709.595000
+Time find all Substrings: 418347.793000
+DATA, 3, (null), 419057.389000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 721.068000
+Time find all Substrings: 418798.315000
+DATA, 3, (null), 419519.385000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 701.725000
+Time find all Substrings: 415112.540000
+DATA, 3, (null), 415814.267000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 674.651000
+Time find all Substrings: 417453.236000
+DATA, 3, (null), 418127.889000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 678.494000
+Time find all Substrings: 416216.813000
+DATA, 3, (null), 416895.309000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 678.237000
+Time find all Substrings: 416950.063000
+DATA, 3, (null), 417628.302000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 688.666000
+Time find all Substrings: 419002.062000
+DATA, 3, (null), 419690.730000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 717.710000
+Time find all Substrings: 419309.953000
+DATA, 3, (null), 420027.665000, 4, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 690.079000
+Time find all Substrings: 418877.054000
+DATA, 3, (null), 419567.135000, 4, 100000

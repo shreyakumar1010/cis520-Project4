@@ -30,3 +30,11 @@ Read in 10000 lines averaging 1690.6 chars/line
 Time to read full file to Memory: 148.324000
 Time find all Substrings: 23100.678000
 DATA, 3, (null), 23249.005000, 8, 10000
+Read in 10000 lines averaging 1690.6 chars/line
+Time to read full file to Memory: 148.497000
+Time find all Substrings: 26979.666000
+DATA, 3, (null), 27128.166000, 8, 10000
+Read in 10000 lines averaging 1690.6 chars/line
+Time to read full file to Memory: 147.344000
+Time find all Substrings: 23004.388000
+DATA, 3, (null), 23151.736000, 8, 10000

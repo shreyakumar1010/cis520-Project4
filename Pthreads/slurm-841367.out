@@ -1,0 +1,4 @@
+Read in 1000000 lines averaging 1707.5 chars/line
+Time to read full file to Memory: 12719.936000
+Time find all Substrings: 3624984.827000
+DATA, 2, (null), 3637704.765000, 4, 1000000
