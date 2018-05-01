@@ -21,7 +21,7 @@ char **longestSub;
 char** longestSubPointer;
 
 
-int num_threads = 32;
+int num_threads = 2;
 
 void readToMemory();
 void printResults();
