@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 50000
+#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 #define num_threads 32
 char * numCores = "4";
@@ -136,7 +136,7 @@ void readToMemory()
 
 void printToFile()
 {
-	FILE *f = fopen("LargestCommonSubstringsONETHREAD.txt", "w");
+	FILE *f = fopen("OpenMPCommonSubstringsONETHREAD.txt", "w");
 	if (f == NULL)
 	{
     		printf("Error opening LargestCommonSubstrings.txt!\n");
