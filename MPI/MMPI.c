@@ -5,13 +5,13 @@
 #include <stdbool.h>
 #include <mpi.h>
 
-//#define WIKI_ARRAY_SIZE 500
-//#define WIKI_LINE_SIZE 2001
-//#define num_threads 32
+#define WIKI_ARRAY_SIZE 500
+#define WIKI_LINE_SIZE 2001
+#define num_threads 32
 char * numCores;
 
-int WIKI_ARRAY_SIZE;
-int WIKI_LINE_SIZE;
+//int WIKI_ARRAY_SIZE;
+//int WIKI_LINE_SIZE;
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -21,7 +21,7 @@ char **longestSub;
 char** longestSubPointer;
 
 
-int num_threads;
+//int num_threads;
 
 void readToMemory();
 void printResults();
