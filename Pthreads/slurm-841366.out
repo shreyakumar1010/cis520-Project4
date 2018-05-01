@@ -2,3 +2,4 @@ Read in 1000000 lines averaging 1707.5 chars/line
 Time to read full file to Memory: 13315.769000
 Time find all Substrings: 7068471.405000
 DATA, 2, (null), 7081787.175000, 2, 1000000
+slurmstepd: error: *** JOB 841366 ON dwarf61 CANCELLED AT 2018-05-01T14:29:46 DUE TO TIME LIMIT ***
