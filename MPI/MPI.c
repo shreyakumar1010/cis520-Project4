@@ -13,7 +13,7 @@
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 int num_threads = 2;
 char * numCores = "1";
-int WIKI_ARRAY_SIZE;
+//int WIKI_ARRAY_SIZE;
 char  ** wiki_array;
 char ** longestSub;
 char ** localLongestSub;
