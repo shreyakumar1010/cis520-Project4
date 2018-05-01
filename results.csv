@@ -21,7 +21,14 @@ OpenMP/slurm-841384.out:DATA, 3, (null), 903526.501000, 2, 100000
 OpenMP/slurm-841384.out:DATA, 3, (null), 941373.966000, 2, 100000
 OpenMP/slurm-841392.out:DATA, 3, (null), 1174446.778000, 8, 500000
 OpenMP/slurm-841392.out:DATA, 3, (null), 1165895.058000, 8, 500000
+OpenMP/slurm-841392.out:DATA, 3, (null), 1132969.252000, 8, 500000
+OpenMP/slurm-841392.out:DATA, 3, (null), 1133110.599000, 8, 500000
+OpenMP/slurm-841392.out:DATA, 3, (null), 1137492.549000, 8, 500000
+OpenMP/slurm-841392.out:DATA, 3, (null), 1148957.054000, 8, 500000
 Binary file OpenMP/slurm-841377.out matches
+OpenMP/slurm-841383.out:DATA, 3, (null), 1373300.683000, 1, 100000
+OpenMP/slurm-841383.out:DATA, 3, (null), 1360089.857000, 1, 100000
+OpenMP/slurm-841383.out:DATA, 3, (null), 1367060.070000, 1, 100000
 OpenMP/slurm-841382.out:DATA, 3, (null), 8098.100000, 32, 10000
 OpenMP/slurm-841382.out:DATA, 3, (null), 8889.509000, 32, 10000
 OpenMP/slurm-841382.out:DATA, 3, (null), 8268.085000, 32, 10000
@@ -54,6 +61,9 @@ OpenMP/slurm-841379.out:DATA, 3, (null), 43999.811000, 4, 10000
 OpenMP/slurm-841379.out:DATA, 3, (null), 44262.573000, 4, 10000
 OpenMP/slurm-841379.out:DATA, 3, (null), 43678.350000, 4, 10000
 OpenMP/slurm-841398.out:DATA, 3, (null), 2270278.210000, 8, 1000000
+OpenMP/slurm-841398.out:DATA, 3, (null), 2297267.736000, 8, 1000000
+OpenMP/slurm-841398.out:DATA, 3, (null), 2340611.178000, 8, 1000000
+OpenMP/slurm-841390.out:DATA, 3, (null), 3563331.758000, 2, 500000
 Binary file OpenMP/slurm-841393.out matches
 OpenMP/slurm-841386.out:DATA, 3, (null), 241850.421000, 8, 100000
 OpenMP/slurm-841386.out:DATA, 3, (null), 247706.730000, 8, 100000
@@ -66,6 +76,8 @@ OpenMP/slurm-841386.out:DATA, 3, (null), 247575.154000, 8, 100000
 OpenMP/slurm-841386.out:DATA, 3, (null), 247556.258000, 8, 100000
 OpenMP/slurm-841386.out:DATA, 3, (null), 247660.986000, 8, 100000
 OpenMP/slurm-841391.out:DATA, 3, (null), 1889758.020000, 4, 500000
+OpenMP/slurm-841391.out:DATA, 3, (null), 1886184.961000, 4, 500000
+OpenMP/slurm-841391.out:DATA, 3, (null), 1862425.059000, 4, 500000
 OpenMP/slurm-841372.out:DATA, 3, (null), 10609.375000, 2, 1000
 OpenMP/slurm-841372.out:DATA, 3, (null), 11057.781000, 2, 1000
 OpenMP/slurm-841372.out:DATA, 3, (null), 9567.839000, 2, 1000
@@ -137,6 +149,7 @@ OpenMP/slurm-841375.out:DATA, 3, (null), 1480.356000, 16, 1000
 OpenMP/slurm-841375.out:DATA, 3, (null), 1824.148000, 16, 1000
 OpenMP/slurm-841375.out:DATA, 3, (null), 1486.410000, 16, 1000
 OpenMP/slurm-841375.out:DATA, 3, (null), 1496.513000, 16, 1000
+OpenMP/slurm-841397.out:DATA, 3, (null), 4499732.148000, 4, 1000000
 OpenMP/slurm-841374.out:DATA, 3, (null), 3599.507000, 8, 1000
 OpenMP/slurm-841374.out:DATA, 3, (null), 3861.276000, 8, 1000
 OpenMP/slurm-841374.out:DATA, 3, (null), 3266.045000, 8, 1000
@@ -150,8 +163,13 @@ OpenMP/slurm-841374.out:DATA, 3, (null), 4145.988000, 8, 1000
 Binary file Pthreads/slurm-841361.out matches
 Pthreads/slurm-841353.out:DATA, 2, (null), 1551852.414000, 1, 100000
 Pthreads/slurm-841353.out:DATA, 2, (null), 1468958.330000, 1, 100000
+Pthreads/slurm-841353.out:DATA, 2, (null), 1538987.227000, 1, 100000
+Pthreads/slurm-841353.out:DATA, 2, (null), 1434815.791000, 1, 100000
 Pthreads/slurm-841362.out:DATA, 2, (null), 1354220.176000, 8, 500000
 Pthreads/slurm-841362.out:DATA, 2, (null), 1314773.748000, 8, 500000
+Pthreads/slurm-841362.out:DATA, 2, (null), 1171393.607000, 8, 500000
+Pthreads/slurm-841362.out:DATA, 2, (null), 1122558.075000, 8, 500000
+Pthreads/slurm-841362.out:DATA, 2, (null), 1105656.058000, 8, 500000
 Pthreads/slurm-841342.out:DATA, 2, (null), 8015.704000, 2, 1000
 Pthreads/slurm-841342.out:DATA, 2, (null), 8000.501000, 2, 1000
 Pthreads/slurm-841342.out:DATA, 2, (null), 8493.575000, 2, 1000
@@ -164,6 +182,7 @@ Pthreads/slurm-841342.out:DATA, 2, (null), 8436.497000, 2, 1000
 Pthreads/slurm-841342.out:DATA, 2, (null), 8461.545000, 2, 1000
 Pthreads/slurm-841367.out:DATA, 2, (null), 3637704.765000, 4, 1000000
 Pthreads/slurm-841367.out:DATA, 2, (null), 3619966.635000, 4, 1000000
+Pthreads/slurm-841328.out:DATA, 2, (null), 5502505.555000, 2, 500000
 Pthreads/slurm-841343.out:DATA, 2, (null), 4559.878000, 4, 1000
 Pthreads/slurm-841343.out:DATA, 2, (null), 6092.226000, 4, 1000
 Pthreads/slurm-841343.out:DATA, 2, (null), 5700.374000, 4, 1000
@@ -210,6 +229,8 @@ Binary file Pthreads/slurm-841354.out matches
 Binary file Pthreads/slurm-841358.out matches
 Pthreads/slurm-841337.out:DATA, 2, (null), 1335745.736000, 16, 1000000
 Pthreads/slurm-841337.out:DATA, 2, (null), 1756426.578000, 16, 1000000
+Pthreads/slurm-841337.out:DATA, 2, (null), 1434721.693000, 16, 1000000
+Pthreads/slurm-841337.out:DATA, 2, (null), 1375904.276000, 16, 1000000
 Pthreads/slurm-841352.out:DATA, 2, (null), 8363.628000, 32, 10000
 Pthreads/slurm-841352.out:DATA, 2, (null), 7280.808000, 32, 10000
 Pthreads/slurm-841352.out:DATA, 2, (null), 7243.547000, 32, 10000
@@ -264,6 +285,8 @@ Pthreads/slurm-841345.out:DATA, 2, (null), 1492.657000, 16, 1000
 Pthreads/slurm-841345.out:DATA, 2, (null), 1746.563000, 16, 1000
 Pthreads/slurm-841345.out:DATA, 2, (null), 1660.103000, 16, 1000
 Pthreads/slurm-841368.out:DATA, 2, (null), 2153653.143000, 8, 1000000
+Pthreads/slurm-841368.out:DATA, 2, (null), 2172324.852000, 8, 1000000
+Pthreads/slurm-841368.out:DATA, 2, (null), 2203298.081000, 8, 1000000
 Pthreads/slurm-841344.out:DATA, 2, (null), 3123.155000, 8, 1000
 Pthreads/slurm-841344.out:DATA, 2, (null), 3101.508000, 8, 1000
 Pthreads/slurm-841344.out:DATA, 2, (null), 4233.242000, 8, 1000
@@ -277,6 +300,7 @@ Pthreads/slurm-841344.out:DATA, 2, (null), 2539.514000, 8, 1000
 Binary file Pthreads/slurm-841356.out matches
 Binary file Pthreads/slurm-841349.out matches
 Pthreads/slurm-841336.out:DATA, 2, (null), 2698547.329000, 8, 1000000
+Pthreads/slurm-841336.out:DATA, 2, (null), 2838249.272000, 8, 1000000
 Binary file Pthreads/slurm-841369.out matches
 Binary file Pthreads/slurm-841370.out matches
 Pthreads/slurm-841364.out:DATA, 2, (null), 335719.383000, 32, 500000
@@ -292,8 +316,13 @@ Pthreads/slurm-841364.out:DATA, 2, (null), 333351.074000, 32, 500000
 Binary file ./Pthreads/slurm-841361.out matches
 ./Pthreads/slurm-841353.out:DATA, 2, (null), 1551852.414000, 1, 100000
 ./Pthreads/slurm-841353.out:DATA, 2, (null), 1468958.330000, 1, 100000
+./Pthreads/slurm-841353.out:DATA, 2, (null), 1538987.227000, 1, 100000
+./Pthreads/slurm-841353.out:DATA, 2, (null), 1434815.791000, 1, 100000
 ./Pthreads/slurm-841362.out:DATA, 2, (null), 1354220.176000, 8, 500000
 ./Pthreads/slurm-841362.out:DATA, 2, (null), 1314773.748000, 8, 500000
+./Pthreads/slurm-841362.out:DATA, 2, (null), 1171393.607000, 8, 500000
+./Pthreads/slurm-841362.out:DATA, 2, (null), 1122558.075000, 8, 500000
+./Pthreads/slurm-841362.out:DATA, 2, (null), 1105656.058000, 8, 500000
 ./Pthreads/slurm-841342.out:DATA, 2, (null), 8015.704000, 2, 1000
 ./Pthreads/slurm-841342.out:DATA, 2, (null), 8000.501000, 2, 1000
 ./Pthreads/slurm-841342.out:DATA, 2, (null), 8493.575000, 2, 1000
@@ -306,6 +335,7 @@ Binary file ./Pthreads/slurm-841361.out matches
 ./Pthreads/slurm-841342.out:DATA, 2, (null), 8461.545000, 2, 1000
 ./Pthreads/slurm-841367.out:DATA, 2, (null), 3637704.765000, 4, 1000000
 ./Pthreads/slurm-841367.out:DATA, 2, (null), 3619966.635000, 4, 1000000
+./Pthreads/slurm-841328.out:DATA, 2, (null), 5502505.555000, 2, 500000
 ./Pthreads/slurm-841343.out:DATA, 2, (null), 4559.878000, 4, 1000
 ./Pthreads/slurm-841343.out:DATA, 2, (null), 6092.226000, 4, 1000
 ./Pthreads/slurm-841343.out:DATA, 2, (null), 5700.374000, 4, 1000
@@ -352,6 +382,8 @@ Binary file ./Pthreads/slurm-841354.out matches
 Binary file ./Pthreads/slurm-841358.out matches
 ./Pthreads/slurm-841337.out:DATA, 2, (null), 1335745.736000, 16, 1000000
 ./Pthreads/slurm-841337.out:DATA, 2, (null), 1756426.578000, 16, 1000000
+./Pthreads/slurm-841337.out:DATA, 2, (null), 1434721.693000, 16, 1000000
+./Pthreads/slurm-841337.out:DATA, 2, (null), 1375904.276000, 16, 1000000
 ./Pthreads/slurm-841352.out:DATA, 2, (null), 8363.628000, 32, 10000
 ./Pthreads/slurm-841352.out:DATA, 2, (null), 7280.808000, 32, 10000
 ./Pthreads/slurm-841352.out:DATA, 2, (null), 7243.547000, 32, 10000
@@ -406,6 +438,8 @@ Binary file ./Pthreads/slurm-841360.out matches
 ./Pthreads/slurm-841345.out:DATA, 2, (null), 1746.563000, 16, 1000
 ./Pthreads/slurm-841345.out:DATA, 2, (null), 1660.103000, 16, 1000
 ./Pthreads/slurm-841368.out:DATA, 2, (null), 2153653.143000, 8, 1000000
+./Pthreads/slurm-841368.out:DATA, 2, (null), 2172324.852000, 8, 1000000
+./Pthreads/slurm-841368.out:DATA, 2, (null), 2203298.081000, 8, 1000000
 ./Pthreads/slurm-841344.out:DATA, 2, (null), 3123.155000, 8, 1000
 ./Pthreads/slurm-841344.out:DATA, 2, (null), 3101.508000, 8, 1000
 ./Pthreads/slurm-841344.out:DATA, 2, (null), 4233.242000, 8, 1000
@@ -419,6 +453,7 @@ Binary file ./Pthreads/slurm-841360.out matches
 Binary file ./Pthreads/slurm-841356.out matches
 Binary file ./Pthreads/slurm-841349.out matches
 ./Pthreads/slurm-841336.out:DATA, 2, (null), 2698547.329000, 8, 1000000
+./Pthreads/slurm-841336.out:DATA, 2, (null), 2838249.272000, 8, 1000000
 Binary file ./Pthreads/slurm-841369.out matches
 Binary file ./Pthreads/slurm-841370.out matches
 ./Pthreads/slurm-841364.out:DATA, 2, (null), 335719.383000, 32, 500000
@@ -454,7 +489,14 @@ Binary file ./OpenMP/slurm-841399.out matches
 ./OpenMP/slurm-841384.out:DATA, 3, (null), 941373.966000, 2, 100000
 ./OpenMP/slurm-841392.out:DATA, 3, (null), 1174446.778000, 8, 500000
 ./OpenMP/slurm-841392.out:DATA, 3, (null), 1165895.058000, 8, 500000
+./OpenMP/slurm-841392.out:DATA, 3, (null), 1132969.252000, 8, 500000
+./OpenMP/slurm-841392.out:DATA, 3, (null), 1133110.599000, 8, 500000
+./OpenMP/slurm-841392.out:DATA, 3, (null), 1137492.549000, 8, 500000
+./OpenMP/slurm-841392.out:DATA, 3, (null), 1148957.054000, 8, 500000
 Binary file ./OpenMP/slurm-841377.out matches
+./OpenMP/slurm-841383.out:DATA, 3, (null), 1373300.683000, 1, 100000
+./OpenMP/slurm-841383.out:DATA, 3, (null), 1360089.857000, 1, 100000
+./OpenMP/slurm-841383.out:DATA, 3, (null), 1367060.070000, 1, 100000
 ./OpenMP/slurm-841382.out:DATA, 3, (null), 8098.100000, 32, 10000
 ./OpenMP/slurm-841382.out:DATA, 3, (null), 8889.509000, 32, 10000
 ./OpenMP/slurm-841382.out:DATA, 3, (null), 8268.085000, 32, 10000
@@ -487,6 +529,9 @@ Binary file ./OpenMP/slurm-841387.out matches
 ./OpenMP/slurm-841379.out:DATA, 3, (null), 44262.573000, 4, 10000
 ./OpenMP/slurm-841379.out:DATA, 3, (null), 43678.350000, 4, 10000
 ./OpenMP/slurm-841398.out:DATA, 3, (null), 2270278.210000, 8, 1000000
+./OpenMP/slurm-841398.out:DATA, 3, (null), 2297267.736000, 8, 1000000
+./OpenMP/slurm-841398.out:DATA, 3, (null), 2340611.178000, 8, 1000000
+./OpenMP/slurm-841390.out:DATA, 3, (null), 3563331.758000, 2, 500000
 Binary file ./OpenMP/slurm-841393.out matches
 ./OpenMP/slurm-841386.out:DATA, 3, (null), 241850.421000, 8, 100000
 ./OpenMP/slurm-841386.out:DATA, 3, (null), 247706.730000, 8, 100000
@@ -499,6 +544,8 @@ Binary file ./OpenMP/slurm-841393.out matches
 ./OpenMP/slurm-841386.out:DATA, 3, (null), 247556.258000, 8, 100000
 ./OpenMP/slurm-841386.out:DATA, 3, (null), 247660.986000, 8, 100000
 ./OpenMP/slurm-841391.out:DATA, 3, (null), 1889758.020000, 4, 500000
+./OpenMP/slurm-841391.out:DATA, 3, (null), 1886184.961000, 4, 500000
+./OpenMP/slurm-841391.out:DATA, 3, (null), 1862425.059000, 4, 500000
 ./OpenMP/slurm-841372.out:DATA, 3, (null), 10609.375000, 2, 1000
 ./OpenMP/slurm-841372.out:DATA, 3, (null), 11057.781000, 2, 1000
 ./OpenMP/slurm-841372.out:DATA, 3, (null), 9567.839000, 2, 1000
@@ -570,6 +617,7 @@ Binary file ./OpenMP/slurm-841378.out matches
 ./OpenMP/slurm-841375.out:DATA, 3, (null), 1824.148000, 16, 1000
 ./OpenMP/slurm-841375.out:DATA, 3, (null), 1486.410000, 16, 1000
 ./OpenMP/slurm-841375.out:DATA, 3, (null), 1496.513000, 16, 1000
+./OpenMP/slurm-841397.out:DATA, 3, (null), 4499732.148000, 4, 1000000
 ./OpenMP/slurm-841374.out:DATA, 3, (null), 3599.507000, 8, 1000
 ./OpenMP/slurm-841374.out:DATA, 3, (null), 3861.276000, 8, 1000
 ./OpenMP/slurm-841374.out:DATA, 3, (null), 3266.045000, 8, 1000
@@ -583,8 +631,13 @@ Binary file ./OpenMP/slurm-841378.out matches
 Binary file ../cis520-Project4/Pthreads/slurm-841361.out matches
 ../cis520-Project4/Pthreads/slurm-841353.out:DATA, 2, (null), 1551852.414000, 1, 100000
 ../cis520-Project4/Pthreads/slurm-841353.out:DATA, 2, (null), 1468958.330000, 1, 100000
+../cis520-Project4/Pthreads/slurm-841353.out:DATA, 2, (null), 1538987.227000, 1, 100000
+../cis520-Project4/Pthreads/slurm-841353.out:DATA, 2, (null), 1434815.791000, 1, 100000
 ../cis520-Project4/Pthreads/slurm-841362.out:DATA, 2, (null), 1354220.176000, 8, 500000
 ../cis520-Project4/Pthreads/slurm-841362.out:DATA, 2, (null), 1314773.748000, 8, 500000
+../cis520-Project4/Pthreads/slurm-841362.out:DATA, 2, (null), 1171393.607000, 8, 500000
+../cis520-Project4/Pthreads/slurm-841362.out:DATA, 2, (null), 1122558.075000, 8, 500000
+../cis520-Project4/Pthreads/slurm-841362.out:DATA, 2, (null), 1105656.058000, 8, 500000
 ../cis520-Project4/Pthreads/slurm-841342.out:DATA, 2, (null), 8015.704000, 2, 1000
 ../cis520-Project4/Pthreads/slurm-841342.out:DATA, 2, (null), 8000.501000, 2, 1000
 ../cis520-Project4/Pthreads/slurm-841342.out:DATA, 2, (null), 8493.575000, 2, 1000
@@ -597,6 +650,7 @@ Binary file ../cis520-Project4/Pthreads/slurm-841361.out matches
 ../cis520-Project4/Pthreads/slurm-841342.out:DATA, 2, (null), 8461.545000, 2, 1000
 ../cis520-Project4/Pthreads/slurm-841367.out:DATA, 2, (null), 3637704.765000, 4, 1000000
 ../cis520-Project4/Pthreads/slurm-841367.out:DATA, 2, (null), 3619966.635000, 4, 1000000
+../cis520-Project4/Pthreads/slurm-841328.out:DATA, 2, (null), 5502505.555000, 2, 500000
 ../cis520-Project4/Pthreads/slurm-841343.out:DATA, 2, (null), 4559.878000, 4, 1000
 ../cis520-Project4/Pthreads/slurm-841343.out:DATA, 2, (null), 6092.226000, 4, 1000
 ../cis520-Project4/Pthreads/slurm-841343.out:DATA, 2, (null), 5700.374000, 4, 1000
@@ -643,6 +697,8 @@ Binary file ../cis520-Project4/Pthreads/slurm-841354.out matches
 Binary file ../cis520-Project4/Pthreads/slurm-841358.out matches
 ../cis520-Project4/Pthreads/slurm-841337.out:DATA, 2, (null), 1335745.736000, 16, 1000000
 ../cis520-Project4/Pthreads/slurm-841337.out:DATA, 2, (null), 1756426.578000, 16, 1000000
+../cis520-Project4/Pthreads/slurm-841337.out:DATA, 2, (null), 1434721.693000, 16, 1000000
+../cis520-Project4/Pthreads/slurm-841337.out:DATA, 2, (null), 1375904.276000, 16, 1000000
 ../cis520-Project4/Pthreads/slurm-841352.out:DATA, 2, (null), 8363.628000, 32, 10000
 ../cis520-Project4/Pthreads/slurm-841352.out:DATA, 2, (null), 7280.808000, 32, 10000
 ../cis520-Project4/Pthreads/slurm-841352.out:DATA, 2, (null), 7243.547000, 32, 10000
@@ -697,6 +753,8 @@ Binary file ../cis520-Project4/Pthreads/slurm-841360.out matches
 ../cis520-Project4/Pthreads/slurm-841345.out:DATA, 2, (null), 1746.563000, 16, 1000
 ../cis520-Project4/Pthreads/slurm-841345.out:DATA, 2, (null), 1660.103000, 16, 1000
 ../cis520-Project4/Pthreads/slurm-841368.out:DATA, 2, (null), 2153653.143000, 8, 1000000
+../cis520-Project4/Pthreads/slurm-841368.out:DATA, 2, (null), 2172324.852000, 8, 1000000
+../cis520-Project4/Pthreads/slurm-841368.out:DATA, 2, (null), 2203298.081000, 8, 1000000
 ../cis520-Project4/Pthreads/slurm-841344.out:DATA, 2, (null), 3123.155000, 8, 1000
 ../cis520-Project4/Pthreads/slurm-841344.out:DATA, 2, (null), 3101.508000, 8, 1000
 ../cis520-Project4/Pthreads/slurm-841344.out:DATA, 2, (null), 4233.242000, 8, 1000
@@ -710,6 +768,7 @@ Binary file ../cis520-Project4/Pthreads/slurm-841360.out matches
 Binary file ../cis520-Project4/Pthreads/slurm-841356.out matches
 Binary file ../cis520-Project4/Pthreads/slurm-841349.out matches
 ../cis520-Project4/Pthreads/slurm-841336.out:DATA, 2, (null), 2698547.329000, 8, 1000000
+../cis520-Project4/Pthreads/slurm-841336.out:DATA, 2, (null), 2838249.272000, 8, 1000000
 Binary file ../cis520-Project4/Pthreads/slurm-841369.out matches
 Binary file ../cis520-Project4/Pthreads/slurm-841370.out matches
 ../cis520-Project4/Pthreads/slurm-841364.out:DATA, 2, (null), 335719.383000, 32, 500000
@@ -745,7 +804,14 @@ Binary file ../cis520-Project4/OpenMP/slurm-841399.out matches
 ../cis520-Project4/OpenMP/slurm-841384.out:DATA, 3, (null), 941373.966000, 2, 100000
 ../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1174446.778000, 8, 500000
 ../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1165895.058000, 8, 500000
+../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1132969.252000, 8, 500000
+../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1133110.599000, 8, 500000
+../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1137492.549000, 8, 500000
+../cis520-Project4/OpenMP/slurm-841392.out:DATA, 3, (null), 1148957.054000, 8, 500000
 Binary file ../cis520-Project4/OpenMP/slurm-841377.out matches
+../cis520-Project4/OpenMP/slurm-841383.out:DATA, 3, (null), 1373300.683000, 1, 100000
+../cis520-Project4/OpenMP/slurm-841383.out:DATA, 3, (null), 1360089.857000, 1, 100000
+../cis520-Project4/OpenMP/slurm-841383.out:DATA, 3, (null), 1367060.070000, 1, 100000
 ../cis520-Project4/OpenMP/slurm-841382.out:DATA, 3, (null), 8098.100000, 32, 10000
 ../cis520-Project4/OpenMP/slurm-841382.out:DATA, 3, (null), 8889.509000, 32, 10000
 ../cis520-Project4/OpenMP/slurm-841382.out:DATA, 3, (null), 8268.085000, 32, 10000
@@ -778,6 +844,9 @@ Binary file ../cis520-Project4/OpenMP/slurm-841387.out matches
 ../cis520-Project4/OpenMP/slurm-841379.out:DATA, 3, (null), 44262.573000, 4, 10000
 ../cis520-Project4/OpenMP/slurm-841379.out:DATA, 3, (null), 43678.350000, 4, 10000
 ../cis520-Project4/OpenMP/slurm-841398.out:DATA, 3, (null), 2270278.210000, 8, 1000000
+../cis520-Project4/OpenMP/slurm-841398.out:DATA, 3, (null), 2297267.736000, 8, 1000000
+../cis520-Project4/OpenMP/slurm-841398.out:DATA, 3, (null), 2340611.178000, 8, 1000000
+../cis520-Project4/OpenMP/slurm-841390.out:DATA, 3, (null), 3563331.758000, 2, 500000
 Binary file ../cis520-Project4/OpenMP/slurm-841393.out matches
 ../cis520-Project4/OpenMP/slurm-841386.out:DATA, 3, (null), 241850.421000, 8, 100000
 ../cis520-Project4/OpenMP/slurm-841386.out:DATA, 3, (null), 247706.730000, 8, 100000
@@ -790,6 +859,8 @@ Binary file ../cis520-Project4/OpenMP/slurm-841393.out matches
 ../cis520-Project4/OpenMP/slurm-841386.out:DATA, 3, (null), 247556.258000, 8, 100000
 ../cis520-Project4/OpenMP/slurm-841386.out:DATA, 3, (null), 247660.986000, 8, 100000
 ../cis520-Project4/OpenMP/slurm-841391.out:DATA, 3, (null), 1889758.020000, 4, 500000
+../cis520-Project4/OpenMP/slurm-841391.out:DATA, 3, (null), 1886184.961000, 4, 500000
+../cis520-Project4/OpenMP/slurm-841391.out:DATA, 3, (null), 1862425.059000, 4, 500000
 ../cis520-Project4/OpenMP/slurm-841372.out:DATA, 3, (null), 10609.375000, 2, 1000
 ../cis520-Project4/OpenMP/slurm-841372.out:DATA, 3, (null), 11057.781000, 2, 1000
 ../cis520-Project4/OpenMP/slurm-841372.out:DATA, 3, (null), 9567.839000, 2, 1000
@@ -861,6 +932,7 @@ Binary file ../cis520-Project4/OpenMP/slurm-841378.out matches
 ../cis520-Project4/OpenMP/slurm-841375.out:DATA, 3, (null), 1824.148000, 16, 1000
 ../cis520-Project4/OpenMP/slurm-841375.out:DATA, 3, (null), 1486.410000, 16, 1000
 ../cis520-Project4/OpenMP/slurm-841375.out:DATA, 3, (null), 1496.513000, 16, 1000
+../cis520-Project4/OpenMP/slurm-841397.out:DATA, 3, (null), 4499732.148000, 4, 1000000
 ../cis520-Project4/OpenMP/slurm-841374.out:DATA, 3, (null), 3599.507000, 8, 1000
 ../cis520-Project4/OpenMP/slurm-841374.out:DATA, 3, (null), 3861.276000, 8, 1000
 ../cis520-Project4/OpenMP/slurm-841374.out:DATA, 3, (null), 3266.045000, 8, 1000
