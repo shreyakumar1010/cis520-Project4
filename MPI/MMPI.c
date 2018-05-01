@@ -32,6 +32,7 @@ int main(int argc, char** argv)
 {
 	int rank, rc, num_tasks;
 	num_threads = num_tasks;
+	
 	//WIKI_ARRAY_SIZE = atoi(argv[1]);
 	//num_threads = atoi(argv[2]);
 	
@@ -79,7 +80,7 @@ int main(int argc, char** argv)
         MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE -1 , MPI_CHAR, 0, MPI_COMM_WORLD);
 	loopingFunc(&rank);
         
-	MPI_Reduce(longestSubPointer,longestSub, WIKI_ARRAY_SIZE - 1, MPI_CHAR*, MPI_SUM, 0, MPI_COMM_WORLD);
+	MPI_Reduce(longestSubPointer,longestSub, WIKI_ARRAY_SIZE - 1, MPI_CHAR, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == 0)
 	{
 		//printResults();
