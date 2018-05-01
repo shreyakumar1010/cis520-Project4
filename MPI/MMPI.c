@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdbool.h>
-#include <omp.h>
+#include <mpi.h>
 
 //#define WIKI_ARRAY_SIZE 500
 //#define WIKI_LINE_SIZE 2001
@@ -18,21 +18,35 @@ int LCS (char * s1, char * s2, char ** longest_common_substring);
 //load the lines into an array
 char  **wiki_array;
 char **longestSub;
-omp_lock_t my_lock;
+char** longestSubPointer;
+
 
 int num_threads;
 
 void readToMemory();
 void printResults();
 void printToFile();
+void *loopingFunc(void *rank);
 
 int main(int argc, char** argv)
 {
-	WIKI_ARRAY_SIZE = atoi(argv[1]);
-	num_threads = atoi(argv[2]);
+	//WIKI_ARRAY_SIZE = atoi(argv[1]);
+	//num_threads = atoi(argv[2]);
+	int rank, rc, num_tasks;
+	rc = MPI_Init(&argc, &argv);
 	
+	if(rc != MPI_SUCCESS)
+	  {
+	    printf("error starting MPI program.");
+	    MPI_Abort(MPI_COMM_WORLD, rc);
+	  }
+       MPI_Comm_size(MPI_COMM_WORLD, &num_tasks);
+
+       MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+       num_threads = num_tasks;
 		
-	omp_init_lock(&my_lock);
+	
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
@@ -41,7 +55,10 @@ int main(int argc, char** argv)
     	int numSlots, Version = 3; //base = 1, pthread = 2, openmp = 3, mpi = 4
     
     	gettimeofday(&time1, NULL);
-    	readToMemory();
+	if (rank == 0)
+	{
+    	    readToMemory();
+	}
     	gettimeofday(&time2, NULL);
 	
     	//time to read to memory	
@@ -51,42 +68,21 @@ int main(int argc, char** argv)
 	
     	gettimeofday(&time3, NULL);	
   
-    	int i,j, startPos, endPos, myID;
-	char** longestSubPointer;
-	omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, j, longestSubPointer)
-	{
-		myID = omp_get_thread_num();
-                startPos = (myID) * (WIKI_ARRAY_SIZE / num_threads);
-                endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-		longestSubPointer = longestSub + startPos;
-                if(myID == num_threads-1)
-                {
-                    endPos = WIKI_ARRAY_SIZE - 1 ;
-                }
+    	
+	
 	
 
-		//for(i = 0; i < WIKI_ARRAY_SIZE -1 ; i++)  
-		//{ 
-			//lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-                        // longestSub++; 
-			
-			
-			for (j = startPos; j< endPos; j++)
-			{
-				//printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
-				//printf("\n");
-				//if(j < 20000 ) {
-				LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubPointer);
-				longestSubPointer++;   
-				//}
-			
-			} 
-			
-		//}  
+	
+
+        MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE*WIKI_STRING_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+	loopingFunc();
+        
+	MPI_Reduce(longestSubPointer,longestSub, WIKI_ARRAY_SIZE - 1, MPI_CHAR, MPI_SUM, 0, MPI_COMM_WORLD);
+	if(rank == 0)
+	{
+		//printResults();
+		printToFile();
 	}
-    	//printResults();
-	printToFile();
 	
    	gettimeofday(&time4, NULL);
 	
@@ -100,6 +96,30 @@ int main(int argc, char** argv)
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    	printf("DATA, %d, %s, %f, %d, %d\n", Version, getenv("NSLOTS"), e3, num_threads, WIKI_ARRAY_SIZE);
 }
+void *loopingFunc(void *rank)
+{
+	int i,j, startPos, endPos;
+	int myID = *((int*) rank);
+	
+	startPos = ((long) myID) * (WIKI_ARRAY_SIZE / num_threads);
+	endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	longestSubPointer = longestSub + startPos;
+	if(myID == num_threads-1)
+	{
+	    endPos = WIKI_ARRAY_SIZE - 1 ;
+	}
+	for (j = startPos; j< endPos; j++)
+	{
+		//printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+		//printf("\n");
+		
+		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSubPointer);
+		longestSubPointer++;   		
+		  
+	}
+	
+}
+
 
 void readToMemory()
 { 
@@ -201,17 +221,7 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
 		_matrix[s1_length][j] = 0;
 
     	int max_len = 0, max_index_i = -1;
-       /* omp_set_num_threads(num_threads);
-	#pragma omp parallel private(myID, startPos, endPos, i, j)
-        {
-	    myID = omp_get_thread_num();
-	    startPos = (myID) * (s2_length-1 / num_threads);
-	    endPos = startPos + (s2_length-1 / num_threads);
-	    if(myID == num_threads-1)
-	    {
-      	      endPos = s2_length-1;
-             }
-	     */
+       
 	
           for (i = s1_length-1; i >= 0; i--)
           {
@@ -236,11 +246,11 @@ int LCS(char *s1, char *s2, char **longest_common_substring)
  //}
     	if (longest_common_substring != NULL)
     	{
-		omp_set_lock(&my_lock);
+		
 		*longest_common_substring = malloc(sizeof(char) * (max_len+1));
 		strncpy(*longest_common_substring, s1+max_index_i, max_len);
 		(*longest_common_substring)[max_len] = '\0';
-		omp_unset_lock(&my_lock);
+		
 		//printf("%s\n", *longest_common_substring);
     	}		/* free matrix */
 
