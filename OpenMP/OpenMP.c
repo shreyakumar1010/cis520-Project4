@@ -5,11 +5,13 @@
 #include <stdbool.h>
 #include <omp.h>
 
-#define WIKI_ARRAY_SIZE 500
-#define WIKI_LINE_SIZE 2001
-#define num_threads 32
-char * numCores = "4";
+//#define WIKI_ARRAY_SIZE 500
+//#define WIKI_LINE_SIZE 2001
+//#define num_threads 32
+char * numCores;
 
+int WIKI_ARRAY_SIZE;
+int WIKI_LINE_SIZE;
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 
@@ -18,14 +20,18 @@ char  **wiki_array;
 char **longestSub;
 omp_lock_t my_lock;
 
-//int num_threads = 2;
+int num_threads;
 
 void readToMemory();
 void printResults();
 void printToFile();
 
-int main()
+int main(int argc, char** argv)
 {
+	WIKI_ARRAY_SIZE = atoi(argv[1]);
+	num_threads = atoi(argv[2]);
+	
+		
 	omp_init_lock(&my_lock);
 	struct timeval time1;
     	struct timeval time2;
@@ -92,7 +98,7 @@ int main()
    	//total elapsed time between reading and finding all longest substrings	
    	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
    	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   	printf("DATA, %d, %s, %f, %d, %d, %s\n", Version, getenv("NSLOTS"), e3, num_threads,WIKI_ARRAY_SIZE, numCores);
+   	printf("DATA, %d, %s, %f, %d, %d\n", Version, getenv("NSLOTS"), e3, num_threads, WIKI_ARRAY_SIZE);
 }
 
 void readToMemory()
