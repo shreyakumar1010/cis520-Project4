@@ -1,7 +1,7 @@
 all: MPI.c
-	mpicc MPI.c -o mpi
+	mpicc MPI.c -o MPI
 
-run: mpi
-	./mpi
+#run: mpi
+	#./mpi
 	
 	#srun -N4 ./mpi
