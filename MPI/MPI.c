@@ -11,10 +11,12 @@
 
 int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
-int NumThreads;
+int num_threads;
+char * numCore = "1";
 
 char  ** wiki_array;
 char ** longestSub;
+char ** localLongestSub;
 
 void readToMemory();
 void printResults();
@@ -28,11 +30,11 @@ int main(int argc, char* argv[])
     	struct timeval time3;
     	struct timeval time4;
     	double e1, e2, e3;    
-    	int numSlots, Version = 1; //base = 1, pthread = 2, openmp = 3, mpi = 4
-	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *)); //saved results
+    	int numSlots, Version = 4; //base = 1, pthread = 2, openmp = 3, mpi = 4
+	//longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *)); //saved results
 	int i;
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)//initializing saved results
-	  	longestSub[i] = malloc(2001);
+	//for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)//initializing saved results
+	  //	longestSub[i] = malloc(2001);
 	
 	//===================INIT MPI=======================
 	int rc, NumTasks, rank;
@@ -45,25 +47,31 @@ int main(int argc, char* argv[])
   	}
 	MPI_Comm_size(MPI_COMM_WORLD, &NumTasks);
   	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  	NumThreads = NumTasks;
+  	num_threads = NumTasks;
 	
     	//==================READ TO MEMORY==================
     	gettimeofday(&time1, NULL);
+	
+	<<<<<<< HEAD
     	readToMemory(); //reading
+	=======
     	gettimeofday(&time2, NULL);//time to read to memory	
     	e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
     	e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     	printf("Time to read full file to Memory: %f\n", e1);
 	
 	//====FINDING LONGEST CMN SUBSTR. & PARALLELIZING====
+>>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560
     	gettimeofday(&time3, NULL);	
 	MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 	findem(&rank);  
+	
+	MPI_Reduce(localLongestSub, longestSub, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == MASTER)
 	{
 	//=================FINAL TIMING===================
    		gettimeofday(&time4, NULL);
-		MPI_Reduce(longestSub, longestSub, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, MPI_SUM, 0, MPI_COMM_WORLD);
+		
    		printToFile();
 		//time to find all longest substrings	
    		e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
@@ -72,9 +80,19 @@ int main(int argc, char* argv[])
    		//total elapsed time between reading and finding all longest substrings	
    		e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
    		e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   		printf("DATA, %d, %s, %f\n", Version, getenv("NSLOTS"), e3); 
+   		printf("DATA, %d, %s, %f, %d\n", Version, getenv("NSLOTS"),  e3, num_threads, probSize, numCore); 
 	}
+	<<<<<<< HEAD
+	else {
+	       MPI_Finalize();
+	       return -1;
+	     }
+	
 	MPI_Finalize();
+	return 0;
+=======	
+	MPI_Finalize();
+>>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560	
 }
 
 void * findem(void * rank)
@@ -107,6 +125,8 @@ void readToMemory()
 	{
 	  	wiki_array[i] = malloc(2001);
 	}
+	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
+	localLongestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 	//==================READING FILE=================
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
@@ -129,7 +149,7 @@ void printToFile()//self-explanitory. Prints the substrings found to a file for 
     		printf("Error opening LargestCommonSubstrings.txt!\n");
     		exit(1);
 	}
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -142,7 +162,7 @@ void printToFile()//self-explanitory. Prints the substrings found to a file for 
 void printResults()//printing to console for debugging
 { 
   	int i;
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
