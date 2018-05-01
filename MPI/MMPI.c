@@ -30,10 +30,11 @@ void *loopingFunc(void *rank);
 
 int main(int argc, char** argv)
 {
+	int rank, rc, num_tasks;
 	num_threads = num_tasks;
 	//WIKI_ARRAY_SIZE = atoi(argv[1]);
 	//num_threads = atoi(argv[2]);
-	int rank, rc, num_tasks;
+	
 	rc = MPI_Init(&argc, &argv);
 	
 	if(rc != MPI_SUCCESS)
