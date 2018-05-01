@@ -54,14 +54,14 @@ int main(int argc, char* argv[])
 	
 	<<<<<<< HEAD
     	readToMemory(); //reading
-	=======
+	//=======
     	gettimeofday(&time2, NULL);//time to read to memory	
     	e1 = (time2.tv_sec - time1.tv_sec) * 1000.0; //sec to ms 
     	e1 += (time2.tv_usec - time1.tv_usec) / 1000.0; // us to ms
     	printf("Time to read full file to Memory: %f\n", e1);
 	
 	//====FINDING LONGEST CMN SUBSTR. & PARALLELIZING====
->>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560
+//>>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560
     	gettimeofday(&time3, NULL);	
 	MPI_Bcast(wiki_array, WIKI_ARRAY_SIZE * WIKI_LINE_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 	findem(&rank);  
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
    		e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
    		printf("DATA, %d, %s, %f, %d, %d, %s\n", Version, getenv("NSLOTS"), e3, num_threads, WIKI_ARRAY_SIZE, numCores); 
 	}
-	<<<<<<< HEAD
+	//<<<<<<< HEAD
 	else {
 	       MPI_Finalize();
 	       return -1;
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 	return 0;
 =======	
 	MPI_Finalize();
->>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560	
+//>>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560	
 }
 
 void * findem(void * rank)
