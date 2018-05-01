@@ -6,6 +6,6 @@ do
   do
     corestring="_$j"
     job_name="pthreads$corestring" 
-    sbatch --mem-per-cpu=4G  --time=03:00:00  --partition=killable.q --nodes=1 --ntasks-per-node=$j --constraint=dwarves --job-name=$job_name pthreads.sh $j $i 
+    sbatch --mem-per-cpu=4G  --time=03:00:00  --partition=killable.q --nodes=1 --ntasks-per-node=$j --constraint=dwarves --job-name=$job_name pthreads.sh $i $j 
     done
 done
