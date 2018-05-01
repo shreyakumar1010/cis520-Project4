@@ -1,5 +1,5 @@
 all: MPI.c
-	mpicc MPI.c
+	mpicc -o MPI MPI.c
 
 #run: mpi
 	#./mpi
