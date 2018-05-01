@@ -30,6 +30,7 @@ void *loopingFunc(void *rank);
 
 int main(int argc, char** argv)
 {
+	num_threads = num_tasks;
 	//WIKI_ARRAY_SIZE = atoi(argv[1]);
 	//num_threads = atoi(argv[2]);
 	int rank, rc, num_tasks;
@@ -44,7 +45,7 @@ int main(int argc, char** argv)
 
        MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-       num_threads = num_tasks;
+       
 		
 	
 	struct timeval time1;
