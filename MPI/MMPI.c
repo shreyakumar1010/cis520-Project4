@@ -7,7 +7,7 @@
 
 #define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
-#define num_threads 32
+//#define num_threads 32
 char * numCores;
 
 //int WIKI_ARRAY_SIZE;
@@ -21,7 +21,7 @@ char **longestSub;
 char** longestSubPointer;
 
 
-//int num_threads;
+int num_threads = 32;
 
 void readToMemory();
 void printResults();
