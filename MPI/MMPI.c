@@ -32,6 +32,7 @@ int main(int argc, char** argv)
 {
 	int rank, rc, num_tasks;
 	num_threads = num_tasks;
+	
 	//WIKI_ARRAY_SIZE = atoi(argv[1]);
 	//num_threads = atoi(argv[2]);
 	
@@ -84,19 +85,28 @@ int main(int argc, char** argv)
 	{
 		//printResults();
 		printToFile();
+		gettimeofday(&time4, NULL);
+	
+		//time to find all longest substrings	
+		e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
+		e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
+		printf("Time find all Substrings: %f\n", e2);
+
+		//total elapsed time between reading and finding all longest substrings	
+		e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
+		e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
+		printf("DATA, %d, %s, %f, %d, %d\n", Version, getenv("NSLOTS"), e3, num_threads, WIKI_ARRAY_SIZE);
 	}
 	
-   	gettimeofday(&time4, NULL);
+   	
+	else
+	  {
+	    MPI_Finalize();
+	    return -1;
+	  }
 	
-   	//time to find all longest substrings	
-   	e2 = (time4.tv_sec - time3.tv_sec) * 1000.0; //sec to ms
-   	e2 += (time4.tv_usec - time3.tv_usec) / 1000.0; // us to ms
-   	printf("Time find all Substrings: %f\n", e2);
-   
-   	//total elapsed time between reading and finding all longest substrings	
-   	e3 = (time4.tv_sec - time1.tv_sec) * 1000.0; //sec to ms
-   	e3 += (time4.tv_usec - time1.tv_usec) / 1000.0; // us to ms
-   	printf("DATA, %d, %s, %f, %d, %d\n", Version, getenv("NSLOTS"), e3, num_threads, WIKI_ARRAY_SIZE);
+	  MPI_Finalize();
+	  return 0;
 }
 void *loopingFunc(void *rank)
 {
