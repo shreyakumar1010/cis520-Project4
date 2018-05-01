@@ -98,19 +98,18 @@ int main(int argc, char* argv[])
 void * findem(void * rank)
 {
 	int myID = *((int *) rank);
-	int startPos = ((long) myID) * (WIKI_ARRAY_SIZE / NumThreads);
-  	int endPos = startPos + (WIKI_ARRAY_SIZE / NumThreads);
-	if(myID == NumThreads - 1)
+	int startPos = ((long) myID) * (WIKI_ARRAY_SIZE / num_threads);
+  	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
+	if(myID == num_threads - 1)
 		endPos = WIKI_ARRAY_SIZE;
     	int i, j;
-    	for(i = 0; i < WIKI_ARRAY_SIZE - 1 ; i++)  
-    	{ 
+    	
 		for(j = startPos; j < endPos; j++)
 		{
-       			lengthOfSubstring[i]= LCS((void*)wiki_array[i], (void*)wiki_array[i+1], longestSub);
-       			longestSub++; 
+       			LCS((void*)wiki_array[i], (void*)wiki_array[i+1], localLongestSub);
+       			localLongestSub++; 
 		}
-    	} 
+    } 
 }
 
 void readToMemory()
