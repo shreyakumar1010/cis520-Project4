@@ -97,10 +97,10 @@ void loopingFunc(void *myID)
 {
 	//start position of the array
 	int startPos = ((int) myID) * (WIKI_ARRAY_SIZE / num_threads);
-	
+	char ** tempPos = longestSub + startPos;
 	//end position of the array
 	int endPos = startPos + (WIKI_ARRAY_SIZE / num_threads);
-	longestSub = longestSub + startPos;
+	//longestSub = longestSub + startPos;
 	
 	if((int)myID == num_threads -1)
 	{
@@ -113,8 +113,8 @@ void loopingFunc(void *myID)
     	//{ 
 	   for(j = startPos; j < endPos; j++)
 	   {
-       		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], longestSub);
-       		longestSub++;    
+       		LCS((void*)wiki_array[j], (void*)wiki_array[j+1], tempPos);
+       		tempPos++;    
 	   }
     	//}  
 	pthread_exit(NULL);
@@ -138,10 +138,10 @@ void readToMemory()
 	//saved results
 	longestSub = (char **) malloc( WIKI_ARRAY_SIZE * sizeof(char *));
 
-	for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
+	/*for (i = 0; i < WIKI_ARRAY_SIZE -1; i++)
 	{
 	  	longestSub[i] = malloc(2001 * sizeof(char));
-	}
+	}*/
 
 	fd = fopen("/homes/dan/625/wiki_dump.txt", "r");
 	nlines = -1;
@@ -166,7 +166,7 @@ void printToFile()
     		exit(1);
 	}
 	
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
 	int i; 
 	for(i = 0; i < WIKI_ARRAY_SIZE - 2; i++)
 	{
@@ -180,7 +180,7 @@ void printToFile()
 void printResults()
 { 
   	int i;
-	longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
+	//longestSub = longestSub - (WIKI_ARRAY_SIZE - 1);
   	for(i = 0; i <= WIKI_ARRAY_SIZE - 2; i++)
   	{ 
       		printf("%d-%d: %s", i , i + 1 ,longestSub[i]); 
