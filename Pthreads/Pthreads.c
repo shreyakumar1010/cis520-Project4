@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <pthread.h>
 
-#define WIKI_ARRAY_SIZE 200000
+#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 
 
@@ -162,7 +162,7 @@ void readToMemory()
 
 void printToFile()
 {
-	FILE *f = fopen("LargestCommonSubstrings.txt", "w");
+	FILE *f = fopen("pthreadsCommonSubstrings.txt", "w");
 	if (f == NULL)
 	{
     		printf("Error opening LargestCommonSubstrings.txt!\n");
