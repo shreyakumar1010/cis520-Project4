@@ -1,0 +1,2 @@
+/var/spool/slurm/d/job840807/slurm_script: line 3: syntax error near unexpected token `1'
+/var/spool/slurm/d/job840807/slurm_script: line 3: `for i 1 2 3 4 5 6 7 8 9 10'
