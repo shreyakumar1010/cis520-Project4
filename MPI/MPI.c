@@ -108,6 +108,8 @@ void * findem(void * rank)
     	
 		for(j = startPos; j < endPos; j++)
 		{
+			printf("%d-%d: %s", j , j + 1 ,"lines submitted to LCS");
+		        printf("\n");
        			LCS((void*)wiki_array[i], (void*)wiki_array[i+1], localLongestSub);
        			localLongestSub++; 
 		}
