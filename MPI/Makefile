@@ -4,4 +4,4 @@ all: MPI.c
 run: mpi
 	./mpi
 	
-	srun -N4 ./mpi
+	#srun -N4 ./mpi
