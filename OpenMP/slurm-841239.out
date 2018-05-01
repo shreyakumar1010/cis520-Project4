@@ -1,0 +1,10 @@
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12206 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12207 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12208 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12209 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12210 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12211 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12212 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12213 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12214 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2
+/var/spool/slurm/d/job841239/slurm_script: line 3: 12215 Segmentation fault      /homes/bristolnmiller/cis520-Project4/OpenMP/OpenMP $1 $2

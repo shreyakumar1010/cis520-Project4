@@ -43,3 +43,8 @@ Time to read full file to Memory: 0.240000
 0-1: lines submitted to LCS
 Time find all Substrings: 152.283000
 DATA, 2, (null), 152.525000, 1000, 2
+Read in 2 lines averaging 420.0 chars/line
+Time to read full file to Memory: 0.232000
+0-1: lines submitted to LCS
+Time find all Substrings: 1461.614000
+DATA, 2, (null), 1461.849000, 1000, 2

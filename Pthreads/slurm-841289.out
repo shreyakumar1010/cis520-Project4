@@ -22,3 +22,9 @@ ERROR; return code from pthread_create() is 11
 Read in 2 lines averaging 420.0 chars/line
 Time to read full file to Memory: 0.121000
 ERROR; return code from pthread_create() is 11
+Read in 2 lines averaging 420.0 chars/line
+Time to read full file to Memory: 0.121000
+ERROR; return code from pthread_create() is 11
+Read in 2 lines averaging 420.0 chars/line
+Time to read full file to Memory: 0.150000
+ERROR; return code from pthread_create() is 11

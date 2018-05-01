@@ -16,3 +16,15 @@ ERROR; return code from pthread_create() is 11
 Read in 8 lines averaging 1483.2 chars/line
 Time to read full file to Memory: 0.301000
 ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.320000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.303000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.133000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.502000
+ERROR; return code from pthread_create() is 11
