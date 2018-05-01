@@ -9,7 +9,7 @@
 #define WIKI_LINE_SIZE 2001
 
 
-int lengthOfSubstring [WIKI_ARRAY_SIZE];
+//int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
 void loopingFunc(void *myID);
 char * numCores = "0";
