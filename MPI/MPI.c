@@ -5,13 +5,13 @@
 #include <stdbool.h>
 #include <mpi.h>
 
-//#define WIKI_ARRAY_SIZE 500
+#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 #define MASTER 0
 
 //int lengthOfSubstring [WIKI_ARRAY_SIZE];
 int LCS (char * s1, char * s2, char ** longest_common_substring);
-int num_threads;
+int num_threads = 2;
 char * numCores = "1";
 int WIKI_ARRAY_SIZE;
 char  ** wiki_array;
@@ -25,8 +25,8 @@ void * findem(void * rank);
 
 int main(int argc, char* argv[])
 {
-	WIKI_ARRAY_SIZE = atoi(argv[1]);
-	num_threads = atoi(argv[2]);
+	//WIKI_ARRAY_SIZE = atoi(argv[1]);
+	//num_threads = atoi(argv[2]);
 	struct timeval time1;
     	struct timeval time2;
     	struct timeval time3;
