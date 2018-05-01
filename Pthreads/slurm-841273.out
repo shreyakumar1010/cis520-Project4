@@ -1,0 +1,33 @@
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.314000
+0-1: lines submitted to LCS
+1-2: lines submitted to LCS
+2-3: lines submitted to LCS
+3-4: lines submitted to LCS
+4-5: lines submitted to LCS
+5-6: lines submitted to LCS
+6-7: lines submitted to LCS
+Time find all Substrings: 2464.625000
+DATA, 2, (null), 2464.941000, 10000, 8
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.315000
+0-1: lines submitted to LCS
+1-2: lines submitted to LCS
+2-3: lines submitted to LCS
+3-4: lines submitted to LCS
+4-5: lines submitted to LCS
+5-6: lines submitted to LCS
+6-7: lines submitted to LCS
+Time find all Substrings: 832.120000
+DATA, 2, (null), 832.437000, 10000, 8
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.333000
+0-1: lines submitted to LCS
+1-2: lines submitted to LCS
+2-3: lines submitted to LCS
+3-4: lines submitted to LCS
+4-5: lines submitted to LCS
+5-6: lines submitted to LCS
+6-7: lines submitted to LCS
+Time find all Substrings: 2183.136000
+DATA, 2, (null), 2183.472000, 10000, 8

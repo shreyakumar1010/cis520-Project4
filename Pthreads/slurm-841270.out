@@ -1,0 +1,16 @@
+Read in 1 lines averaging 592.0 chars/line
+Time to read full file to Memory: 0.207000
+Time find all Substrings: 1856.141000
+DATA, 2, (null), 1856.350000, 10000, 1
+Read in 1 lines averaging 592.0 chars/line
+Time to read full file to Memory: 0.207000
+Time find all Substrings: 821.120000
+DATA, 2, (null), 821.330000, 10000, 1
+Read in 1 lines averaging 592.0 chars/line
+Time to read full file to Memory: 0.205000
+Time find all Substrings: 522.493000
+DATA, 2, (null), 522.700000, 10000, 1
+Read in 1 lines averaging 592.0 chars/line
+Time to read full file to Memory: 0.126000
+Time find all Substrings: 1568.922000
+DATA, 2, (null), 1569.050000, 10000, 1

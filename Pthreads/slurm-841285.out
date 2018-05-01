@@ -1,0 +1,18 @@
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 15.111000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.320000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.210000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.304000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.335000
+ERROR; return code from pthread_create() is 11
+Read in 8 lines averaging 1483.2 chars/line
+Time to read full file to Memory: 0.191000
+ERROR; return code from pthread_create() is 11
