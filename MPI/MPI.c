@@ -25,7 +25,7 @@ void * findem(void * rank);
 
 int main(int argc, char* argv[])
 {
-	printf("first line in main);
+	printf("first line in main");
 	//WIKI_ARRAY_SIZE = atoi(argv[1]);
 	//num_threads = atoi(argv[2]);
 	struct timeval time1;
