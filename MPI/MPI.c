@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
     	//==================READ TO MEMORY==================
     	gettimeofday(&time1, NULL);
 	
-	<<<<<<< HEAD
+	//<<<<<<< HEAD
     	readToMemory(); //reading
 	//=======
     	gettimeofday(&time2, NULL);//time to read to memory	
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
 	
 	MPI_Finalize();
 	return 0;
-=======	
+//=======	
 	MPI_Finalize();
 //>>>>>>> 75b7374bf3009e45a76c1b5ab6a6927162442560	
 }
@@ -109,7 +109,7 @@ void * findem(void * rank)
        			LCS((void*)wiki_array[i], (void*)wiki_array[i+1], localLongestSub);
        			localLongestSub++; 
 		}
-    } 
+     
 }
 
 void readToMemory()
