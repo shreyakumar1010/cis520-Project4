@@ -1,4 +1,4 @@
 all: MPI 
 
 MPI: MPI.c
-	mpicc MMPI.c -o MPI.out
+	mpicc MMPI.c -o MPI
