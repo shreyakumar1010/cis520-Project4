@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <mpi.h>
 
-#define WIKI_ARRAY_SIZE 500
+//#define WIKI_ARRAY_SIZE 500
 #define WIKI_LINE_SIZE 2001
 //#define num_threads 32
 char * numCores;
@@ -21,7 +21,7 @@ char **longestSub;
 char** longestSubPointer;
 
 
-int num_threads = 2;
+//int num_threads = 2;
 
 void readToMemory();
 void printResults();
@@ -32,8 +32,8 @@ int main(int argc, char** argv)
 {
 	int rank, rc, num_tasks;
 	num_threads = num_tasks;
-	//WIKI_ARRAY_SIZE = atoi(argv[1]);
-	//num_threads = atoi(argv[2]);
+	WIKI_ARRAY_SIZE = atoi(argv[1]);
+	num_threads = atoi(argv[2]);
 	
 	rc = MPI_Init(&argc, &argv);
 	
