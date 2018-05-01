@@ -1,5 +1,5 @@
 all: MPI.c
-	gcc -Wall -Wextra -lpthread MPI.c -o mpi
+	mpicc -Wall MPI.c -o mpi
 
 run: mpi
 	./mpi
