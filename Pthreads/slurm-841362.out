@@ -6,3 +6,15 @@ Read in 500000 lines averaging 1707.7 chars/line
 Time to read full file to Memory: 3297.416000
 Time find all Substrings: 1311476.331000
 DATA, 2, (null), 1314773.748000, 8, 500000
+Read in 500000 lines averaging 1707.7 chars/line
+Time to read full file to Memory: 3103.023000
+Time find all Substrings: 1168290.583000
+DATA, 2, (null), 1171393.607000, 8, 500000
+Read in 500000 lines averaging 1707.7 chars/line
+Time to read full file to Memory: 2952.938000
+Time find all Substrings: 1119605.135000
+DATA, 2, (null), 1122558.075000, 8, 500000
+Read in 500000 lines averaging 1707.7 chars/line
+Time to read full file to Memory: 3042.745000
+Time find all Substrings: 1102613.311000
+DATA, 2, (null), 1105656.058000, 8, 500000

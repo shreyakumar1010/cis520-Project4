@@ -6,3 +6,11 @@ Read in 100000 lines averaging 1707.2 chars/line
 Time to read full file to Memory: 677.973000
 Time find all Substrings: 1468280.356000
 DATA, 2, (null), 1468958.330000, 1, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 667.892000
+Time find all Substrings: 1538319.334000
+DATA, 2, (null), 1538987.227000, 1, 100000
+Read in 100000 lines averaging 1707.2 chars/line
+Time to read full file to Memory: 666.424000
+Time find all Substrings: 1434149.365000
+DATA, 2, (null), 1434815.791000, 1, 100000
